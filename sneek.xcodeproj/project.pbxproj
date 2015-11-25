@@ -1,0 +1,540 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		DD3000FA1C067A95002E43C1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = DD3000F91C067A95002E43C1 /* main.m */; };
+		DD3000FD1C067A95002E43C1 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = DD3000FC1C067A95002E43C1 /* AppDelegate.m */; };
+		DD3001001C067A95002E43C1 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DD3000FF1C067A95002E43C1 /* ViewController.m */; };
+		DD3001031C067A95002E43C1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DD3001011C067A95002E43C1 /* Main.storyboard */; };
+		DD3001061C067A95002E43C1 /* sneek.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DD3001041C067A95002E43C1 /* sneek.xcdatamodeld */; };
+		DD3001081C067A95002E43C1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DD3001071C067A95002E43C1 /* Assets.xcassets */; };
+		DD30010B1C067A95002E43C1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DD3001091C067A95002E43C1 /* LaunchScreen.storyboard */; };
+		DD3001161C067A95002E43C1 /* sneekTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DD3001151C067A95002E43C1 /* sneekTests.m */; };
+		DD3001211C067A95002E43C1 /* sneekUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = DD3001201C067A95002E43C1 /* sneekUITests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		DD3001121C067A95002E43C1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DD3000ED1C067A94002E43C1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DD3000F41C067A95002E43C1;
+			remoteInfo = sneek;
+		};
+		DD30011D1C067A95002E43C1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DD3000ED1C067A94002E43C1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DD3000F41C067A95002E43C1;
+			remoteInfo = sneek;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		DD3000F51C067A95002E43C1 /* sneek.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = sneek.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		DD3000F91C067A95002E43C1 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		DD3000FB1C067A95002E43C1 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		DD3000FC1C067A95002E43C1 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		DD3000FE1C067A95002E43C1 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		DD3000FF1C067A95002E43C1 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		DD3001021C067A95002E43C1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		DD3001051C067A95002E43C1 /* sneek.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = sneek.xcdatamodel; sourceTree = "<group>"; };
+		DD3001071C067A95002E43C1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		DD30010A1C067A95002E43C1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		DD30010C1C067A95002E43C1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DD3001111C067A95002E43C1 /* sneekTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = sneekTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		DD3001151C067A95002E43C1 /* sneekTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = sneekTests.m; sourceTree = "<group>"; };
+		DD3001171C067A95002E43C1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DD30011C1C067A95002E43C1 /* sneekUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = sneekUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		DD3001201C067A95002E43C1 /* sneekUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = sneekUITests.m; sourceTree = "<group>"; };
+		DD3001221C067A95002E43C1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		DD3000F21C067A95002E43C1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DD30010E1C067A95002E43C1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DD3001191C067A95002E43C1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		DD3000EC1C067A94002E43C1 = {
+			isa = PBXGroup;
+			children = (
+				DD3000F71C067A95002E43C1 /* sneek */,
+				DD3001141C067A95002E43C1 /* sneekTests */,
+				DD30011F1C067A95002E43C1 /* sneekUITests */,
+				DD3000F61C067A95002E43C1 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		DD3000F61C067A95002E43C1 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				DD3000F51C067A95002E43C1 /* sneek.app */,
+				DD3001111C067A95002E43C1 /* sneekTests.xctest */,
+				DD30011C1C067A95002E43C1 /* sneekUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		DD3000F71C067A95002E43C1 /* sneek */ = {
+			isa = PBXGroup;
+			children = (
+				DD3000FB1C067A95002E43C1 /* AppDelegate.h */,
+				DD3000FC1C067A95002E43C1 /* AppDelegate.m */,
+				DD3000FE1C067A95002E43C1 /* ViewController.h */,
+				DD3000FF1C067A95002E43C1 /* ViewController.m */,
+				DD3001011C067A95002E43C1 /* Main.storyboard */,
+				DD3001071C067A95002E43C1 /* Assets.xcassets */,
+				DD3001091C067A95002E43C1 /* LaunchScreen.storyboard */,
+				DD30010C1C067A95002E43C1 /* Info.plist */,
+				DD3001041C067A95002E43C1 /* sneek.xcdatamodeld */,
+				DD3000F81C067A95002E43C1 /* Supporting Files */,
+			);
+			path = sneek;
+			sourceTree = "<group>";
+		};
+		DD3000F81C067A95002E43C1 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				DD3000F91C067A95002E43C1 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		DD3001141C067A95002E43C1 /* sneekTests */ = {
+			isa = PBXGroup;
+			children = (
+				DD3001151C067A95002E43C1 /* sneekTests.m */,
+				DD3001171C067A95002E43C1 /* Info.plist */,
+			);
+			path = sneekTests;
+			sourceTree = "<group>";
+		};
+		DD30011F1C067A95002E43C1 /* sneekUITests */ = {
+			isa = PBXGroup;
+			children = (
+				DD3001201C067A95002E43C1 /* sneekUITests.m */,
+				DD3001221C067A95002E43C1 /* Info.plist */,
+			);
+			path = sneekUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		DD3000F41C067A95002E43C1 /* sneek */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DD3001251C067A95002E43C1 /* Build configuration list for PBXNativeTarget "sneek" */;
+			buildPhases = (
+				DD3000F11C067A95002E43C1 /* Sources */,
+				DD3000F21C067A95002E43C1 /* Frameworks */,
+				DD3000F31C067A95002E43C1 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = sneek;
+			productName = sneek;
+			productReference = DD3000F51C067A95002E43C1 /* sneek.app */;
+			productType = "com.apple.product-type.application";
+		};
+		DD3001101C067A95002E43C1 /* sneekTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DD3001281C067A95002E43C1 /* Build configuration list for PBXNativeTarget "sneekTests" */;
+			buildPhases = (
+				DD30010D1C067A95002E43C1 /* Sources */,
+				DD30010E1C067A95002E43C1 /* Frameworks */,
+				DD30010F1C067A95002E43C1 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				DD3001131C067A95002E43C1 /* PBXTargetDependency */,
+			);
+			name = sneekTests;
+			productName = sneekTests;
+			productReference = DD3001111C067A95002E43C1 /* sneekTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		DD30011B1C067A95002E43C1 /* sneekUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DD30012B1C067A95002E43C1 /* Build configuration list for PBXNativeTarget "sneekUITests" */;
+			buildPhases = (
+				DD3001181C067A95002E43C1 /* Sources */,
+				DD3001191C067A95002E43C1 /* Frameworks */,
+				DD30011A1C067A95002E43C1 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				DD30011E1C067A95002E43C1 /* PBXTargetDependency */,
+			);
+			name = sneekUITests;
+			productName = sneekUITests;
+			productReference = DD30011C1C067A95002E43C1 /* sneekUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		DD3000ED1C067A94002E43C1 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0710;
+				ORGANIZATIONNAME = "Eamon White";
+				TargetAttributes = {
+					DD3000F41C067A95002E43C1 = {
+						CreatedOnToolsVersion = 7.1;
+					};
+					DD3001101C067A95002E43C1 = {
+						CreatedOnToolsVersion = 7.1;
+						TestTargetID = DD3000F41C067A95002E43C1;
+					};
+					DD30011B1C067A95002E43C1 = {
+						CreatedOnToolsVersion = 7.1;
+						TestTargetID = DD3000F41C067A95002E43C1;
+					};
+				};
+			};
+			buildConfigurationList = DD3000F01C067A94002E43C1 /* Build configuration list for PBXProject "sneek" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = DD3000EC1C067A94002E43C1;
+			productRefGroup = DD3000F61C067A95002E43C1 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				DD3000F41C067A95002E43C1 /* sneek */,
+				DD3001101C067A95002E43C1 /* sneekTests */,
+				DD30011B1C067A95002E43C1 /* sneekUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		DD3000F31C067A95002E43C1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DD30010B1C067A95002E43C1 /* LaunchScreen.storyboard in Resources */,
+				DD3001081C067A95002E43C1 /* Assets.xcassets in Resources */,
+				DD3001031C067A95002E43C1 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DD30010F1C067A95002E43C1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DD30011A1C067A95002E43C1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		DD3000F11C067A95002E43C1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DD3001061C067A95002E43C1 /* sneek.xcdatamodeld in Sources */,
+				DD3001001C067A95002E43C1 /* ViewController.m in Sources */,
+				DD3000FD1C067A95002E43C1 /* AppDelegate.m in Sources */,
+				DD3000FA1C067A95002E43C1 /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DD30010D1C067A95002E43C1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DD3001161C067A95002E43C1 /* sneekTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DD3001181C067A95002E43C1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DD3001211C067A95002E43C1 /* sneekUITests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		DD3001131C067A95002E43C1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DD3000F41C067A95002E43C1 /* sneek */;
+			targetProxy = DD3001121C067A95002E43C1 /* PBXContainerItemProxy */;
+		};
+		DD30011E1C067A95002E43C1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DD3000F41C067A95002E43C1 /* sneek */;
+			targetProxy = DD30011D1C067A95002E43C1 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		DD3001011C067A95002E43C1 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DD3001021C067A95002E43C1 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		DD3001091C067A95002E43C1 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DD30010A1C067A95002E43C1 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		DD3001231C067A95002E43C1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		DD3001241C067A95002E43C1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		DD3001261C067A95002E43C1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = sneek/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.eamon.sneek;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		DD3001271C067A95002E43C1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = sneek/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.eamon.sneek;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		DD3001291C067A95002E43C1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = sneekTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.eamon.sneekTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/sneek.app/sneek";
+			};
+			name = Debug;
+		};
+		DD30012A1C067A95002E43C1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = sneekTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.eamon.sneekTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/sneek.app/sneek";
+			};
+			name = Release;
+		};
+		DD30012C1C067A95002E43C1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = sneekUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.eamon.sneekUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = sneek;
+				USES_XCTRUNNER = YES;
+			};
+			name = Debug;
+		};
+		DD30012D1C067A95002E43C1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = sneekUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.eamon.sneekUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = sneek;
+				USES_XCTRUNNER = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		DD3000F01C067A94002E43C1 /* Build configuration list for PBXProject "sneek" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DD3001231C067A95002E43C1 /* Debug */,
+				DD3001241C067A95002E43C1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DD3001251C067A95002E43C1 /* Build configuration list for PBXNativeTarget "sneek" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DD3001261C067A95002E43C1 /* Debug */,
+				DD3001271C067A95002E43C1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		DD3001281C067A95002E43C1 /* Build configuration list for PBXNativeTarget "sneekTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DD3001291C067A95002E43C1 /* Debug */,
+				DD30012A1C067A95002E43C1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		DD30012B1C067A95002E43C1 /* Build configuration list for PBXNativeTarget "sneekUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DD30012C1C067A95002E43C1 /* Debug */,
+				DD30012D1C067A95002E43C1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		DD3001041C067A95002E43C1 /* sneek.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				DD3001051C067A95002E43C1 /* sneek.xcdatamodel */,
+			);
+			currentVersion = DD3001051C067A95002E43C1 /* sneek.xcdatamodel */;
+			path = sneek.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = DD3000ED1C067A94002E43C1 /* Project object */;
+}
