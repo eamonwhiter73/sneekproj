@@ -7,15 +7,31 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1DA541261F29C0FE90049936 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 03DC6955B5A7B18C58855E2A /* libPods.a */; };
 		DD3000FA1C067A95002E43C1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = DD3000F91C067A95002E43C1 /* main.m */; };
 		DD3000FD1C067A95002E43C1 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = DD3000FC1C067A95002E43C1 /* AppDelegate.m */; };
 		DD3001001C067A95002E43C1 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DD3000FF1C067A95002E43C1 /* ViewController.m */; };
-		DD3001031C067A95002E43C1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DD3001011C067A95002E43C1 /* Main.storyboard */; };
 		DD3001061C067A95002E43C1 /* sneek.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DD3001041C067A95002E43C1 /* sneek.xcdatamodeld */; };
-		DD3001081C067A95002E43C1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DD3001071C067A95002E43C1 /* Assets.xcassets */; };
-		DD30010B1C067A95002E43C1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DD3001091C067A95002E43C1 /* LaunchScreen.storyboard */; };
 		DD3001161C067A95002E43C1 /* sneekTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DD3001151C067A95002E43C1 /* sneekTests.m */; };
 		DD3001211C067A95002E43C1 /* sneekUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = DD3001201C067A95002E43C1 /* sneekUITests.m */; };
+		DD3001301C0683AA002E43C1 /* SignUpController.m in Sources */ = {isa = PBXBuildFile; fileRef = DD30012F1C0683AA002E43C1 /* SignUpController.m */; };
+		DD5537801C068A2A002B52DD /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DD55377F1C068A2A002B52DD /* Images.xcassets */; };
+		DD5537861C0695BF002B52DD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DD5537851C0695BF002B52DD /* LaunchScreen.storyboard */; };
+		DD55378C1C06A330002B52DD /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD55378B1C06A330002B52DD /* AudioToolbox.framework */; };
+		DD55378E1C06A338002B52DD /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD55378D1C06A338002B52DD /* CFNetwork.framework */; };
+		DD5537901C06A341002B52DD /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD55378F1C06A341002B52DD /* CoreGraphics.framework */; };
+		DD5537921C06A34B002B52DD /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD5537911C06A34B002B52DD /* CoreLocation.framework */; };
+		DD5537941C06A353002B52DD /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD5537931C06A353002B52DD /* QuartzCore.framework */; };
+		DD5537961C06A35B002B52DD /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD5537951C06A35B002B52DD /* Security.framework */; };
+		DD5537981C06A363002B52DD /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD5537971C06A363002B52DD /* StoreKit.framework */; };
+		DD55379A1C06A36C002B52DD /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD5537991C06A36C002B52DD /* SystemConfiguration.framework */; };
+		DD55379C1C06A375002B52DD /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = DD55379B1C06A375002B52DD /* libz.tbd */; };
+		DD55379E1C06A384002B52DD /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = DD55379D1C06A384002B52DD /* libsqlite3.tbd */; };
+		DD5537A01C06A3A1002B52DD /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD55379F1C06A3A1002B52DD /* Accounts.framework */; };
+		DD5537A21C06A3A7002B52DD /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD5537A11C06A3A7002B52DD /* Social.framework */; };
+		DD8D199E1C26E84F000E7418 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD8D199C1C26E84F000E7418 /* Bolts.framework */; };
+		DD8D199F1C26E84F000E7418 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD8D199D1C26E84F000E7418 /* Parse.framework */; };
+		DD8D19A21C28C267000E7418 /* LeaderboardController.m in Sources */ = {isa = PBXBuildFile; fileRef = DD8D19A11C28C267000E7418 /* LeaderboardController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,16 +52,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		03DC6955B5A7B18C58855E2A /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		82AA0E6F0F508419E8A9EC88 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		DD3000F51C067A95002E43C1 /* sneek.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = sneek.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD3000F91C067A95002E43C1 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		DD3000FB1C067A95002E43C1 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		DD3000FC1C067A95002E43C1 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		DD3000FE1C067A95002E43C1 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		DD3000FF1C067A95002E43C1 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		DD3001021C067A95002E43C1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		DD3001051C067A95002E43C1 /* sneek.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = sneek.xcdatamodel; sourceTree = "<group>"; };
-		DD3001071C067A95002E43C1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		DD30010A1C067A95002E43C1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DD30010C1C067A95002E43C1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DD3001111C067A95002E43C1 /* sneekTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = sneekTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD3001151C067A95002E43C1 /* sneekTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = sneekTests.m; sourceTree = "<group>"; };
@@ -53,6 +68,27 @@
 		DD30011C1C067A95002E43C1 /* sneekUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = sneekUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD3001201C067A95002E43C1 /* sneekUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = sneekUITests.m; sourceTree = "<group>"; };
 		DD3001221C067A95002E43C1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DD30012E1C06839C002E43C1 /* SignUpController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignUpController.h; sourceTree = "<group>"; };
+		DD30012F1C0683AA002E43C1 /* SignUpController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignUpController.m; sourceTree = "<group>"; };
+		DD55377F1C068A2A002B52DD /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		DD5537851C0695BF002B52DD /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		DD55378B1C06A330002B52DD /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		DD55378D1C06A338002B52DD /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		DD55378F1C06A341002B52DD /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		DD5537911C06A34B002B52DD /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		DD5537931C06A353002B52DD /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		DD5537951C06A35B002B52DD /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		DD5537971C06A363002B52DD /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		DD5537991C06A36C002B52DD /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		DD55379B1C06A375002B52DD /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		DD55379D1C06A384002B52DD /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		DD55379F1C06A3A1002B52DD /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
+		DD5537A11C06A3A7002B52DD /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
+		DD8D199C1C26E84F000E7418 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
+		DD8D199D1C26E84F000E7418 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
+		DD8D19A01C28C257000E7418 /* LeaderboardController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeaderboardController.h; sourceTree = "<group>"; };
+		DD8D19A11C28C267000E7418 /* LeaderboardController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeaderboardController.m; sourceTree = "<group>"; };
+		E83270BE9A79C73786441400 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +96,21 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DD5537A21C06A3A7002B52DD /* Social.framework in Frameworks */,
+				DD5537A01C06A3A1002B52DD /* Accounts.framework in Frameworks */,
+				DD55379E1C06A384002B52DD /* libsqlite3.tbd in Frameworks */,
+				DD55379C1C06A375002B52DD /* libz.tbd in Frameworks */,
+				DD8D199F1C26E84F000E7418 /* Parse.framework in Frameworks */,
+				DD55379A1C06A36C002B52DD /* SystemConfiguration.framework in Frameworks */,
+				DD5537981C06A363002B52DD /* StoreKit.framework in Frameworks */,
+				DD5537961C06A35B002B52DD /* Security.framework in Frameworks */,
+				DD5537941C06A353002B52DD /* QuartzCore.framework in Frameworks */,
+				DD5537921C06A34B002B52DD /* CoreLocation.framework in Frameworks */,
+				DD5537901C06A341002B52DD /* CoreGraphics.framework in Frameworks */,
+				DD55378E1C06A338002B52DD /* CFNetwork.framework in Frameworks */,
+				DD55378C1C06A330002B52DD /* AudioToolbox.framework in Frameworks */,
+				1DA541261F29C0FE90049936 /* libPods.a in Frameworks */,
+				DD8D199E1C26E84F000E7418 /* Bolts.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -80,13 +131,46 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		677D2B8E2FCC6F7973CDE503 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				E83270BE9A79C73786441400 /* Pods.debug.xcconfig */,
+				82AA0E6F0F508419E8A9EC88 /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		8AD42FDEA5078E3678D53274 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				DD5537A11C06A3A7002B52DD /* Social.framework */,
+				DD55379F1C06A3A1002B52DD /* Accounts.framework */,
+				DD55379D1C06A384002B52DD /* libsqlite3.tbd */,
+				DD55379B1C06A375002B52DD /* libz.tbd */,
+				DD5537991C06A36C002B52DD /* SystemConfiguration.framework */,
+				DD5537971C06A363002B52DD /* StoreKit.framework */,
+				DD5537951C06A35B002B52DD /* Security.framework */,
+				DD5537931C06A353002B52DD /* QuartzCore.framework */,
+				DD5537911C06A34B002B52DD /* CoreLocation.framework */,
+				DD55378F1C06A341002B52DD /* CoreGraphics.framework */,
+				DD55378D1C06A338002B52DD /* CFNetwork.framework */,
+				DD55378B1C06A330002B52DD /* AudioToolbox.framework */,
+				03DC6955B5A7B18C58855E2A /* libPods.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		DD3000EC1C067A94002E43C1 = {
 			isa = PBXGroup;
 			children = (
+				DD8D199C1C26E84F000E7418 /* Bolts.framework */,
+				DD8D199D1C26E84F000E7418 /* Parse.framework */,
 				DD3000F71C067A95002E43C1 /* sneek */,
 				DD3001141C067A95002E43C1 /* sneekTests */,
 				DD30011F1C067A95002E43C1 /* sneekUITests */,
 				DD3000F61C067A95002E43C1 /* Products */,
+				677D2B8E2FCC6F7973CDE503 /* Pods */,
+				8AD42FDEA5078E3678D53274 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -107,12 +191,15 @@
 				DD3000FC1C067A95002E43C1 /* AppDelegate.m */,
 				DD3000FE1C067A95002E43C1 /* ViewController.h */,
 				DD3000FF1C067A95002E43C1 /* ViewController.m */,
-				DD3001011C067A95002E43C1 /* Main.storyboard */,
-				DD3001071C067A95002E43C1 /* Assets.xcassets */,
-				DD3001091C067A95002E43C1 /* LaunchScreen.storyboard */,
 				DD30010C1C067A95002E43C1 /* Info.plist */,
 				DD3001041C067A95002E43C1 /* sneek.xcdatamodeld */,
 				DD3000F81C067A95002E43C1 /* Supporting Files */,
+				DD30012E1C06839C002E43C1 /* SignUpController.h */,
+				DD30012F1C0683AA002E43C1 /* SignUpController.m */,
+				DD55377F1C068A2A002B52DD /* Images.xcassets */,
+				DD5537851C0695BF002B52DD /* LaunchScreen.storyboard */,
+				DD8D19A01C28C257000E7418 /* LeaderboardController.h */,
+				DD8D19A11C28C267000E7418 /* LeaderboardController.m */,
 			);
 			path = sneek;
 			sourceTree = "<group>";
@@ -150,9 +237,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = DD3001251C067A95002E43C1 /* Build configuration list for PBXNativeTarget "sneek" */;
 			buildPhases = (
+				5009B1A69B6D3FDBFFA16BA9 /* Check Pods Manifest.lock */,
 				DD3000F11C067A95002E43C1 /* Sources */,
 				DD3000F21C067A95002E43C1 /* Frameworks */,
 				DD3000F31C067A95002E43C1 /* Resources */,
+				76EAA26B02C29BE43BC957C4 /* Embed Pods Frameworks */,
+				0E8EC9D9D12F873358823F36 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -210,6 +300,7 @@
 				TargetAttributes = {
 					DD3000F41C067A95002E43C1 = {
 						CreatedOnToolsVersion = 7.1;
+						DevelopmentTeam = 6U9867H5L6;
 					};
 					DD3001101C067A95002E43C1 = {
 						CreatedOnToolsVersion = 7.1;
@@ -246,9 +337,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DD30010B1C067A95002E43C1 /* LaunchScreen.storyboard in Resources */,
-				DD3001081C067A95002E43C1 /* Assets.xcassets in Resources */,
-				DD3001031C067A95002E43C1 /* Main.storyboard in Resources */,
+				DD5537801C068A2A002B52DD /* Images.xcassets in Resources */,
+				DD5537861C0695BF002B52DD /* LaunchScreen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -268,6 +358,54 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		0E8EC9D9D12F873358823F36 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		5009B1A69B6D3FDBFFA16BA9 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		76EAA26B02C29BE43BC957C4 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		DD3000F11C067A95002E43C1 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -275,6 +413,8 @@
 			files = (
 				DD3001061C067A95002E43C1 /* sneek.xcdatamodeld in Sources */,
 				DD3001001C067A95002E43C1 /* ViewController.m in Sources */,
+				DD3001301C0683AA002E43C1 /* SignUpController.m in Sources */,
+				DD8D19A21C28C267000E7418 /* LeaderboardController.m in Sources */,
 				DD3000FD1C067A95002E43C1 /* AppDelegate.m in Sources */,
 				DD3000FA1C067A95002E43C1 /* main.m in Sources */,
 			);
@@ -310,25 +450,6 @@
 			targetProxy = DD30011D1C067A95002E43C1 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		DD3001011C067A95002E43C1 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				DD3001021C067A95002E43C1 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		DD3001091C067A95002E43C1 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				DD30010A1C067A95002E43C1 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		DD3001231C067A95002E43C1 /* Debug */ = {
@@ -415,25 +536,45 @@
 		};
 		DD3001261C067A95002E43C1 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E83270BE9A79C73786441400 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = sneek/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.eamon.sneek;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
 		DD3001271C067A95002E43C1 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 82AA0E6F0F508419E8A9EC88 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = sneek/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.eamon.sneek;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
@@ -504,6 +645,7 @@
 				DD3001271C067A95002E43C1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		DD3001281C067A95002E43C1 /* Build configuration list for PBXNativeTarget "sneekTests" */ = {
 			isa = XCConfigurationList;
@@ -512,6 +654,7 @@
 				DD30012A1C067A95002E43C1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		DD30012B1C067A95002E43C1 /* Build configuration list for PBXNativeTarget "sneekUITests" */ = {
 			isa = XCConfigurationList;
@@ -520,6 +663,7 @@
 				DD30012D1C067A95002E43C1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

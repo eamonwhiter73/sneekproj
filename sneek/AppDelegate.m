@@ -7,6 +7,10 @@
 //
 
 #import "AppDelegate.h"
+#import "SignUpController.h"
+#import "ViewController.h"
+@import GoogleMaps;
+#import <Parse/Parse.h>
 
 @interface AppDelegate ()
 
@@ -16,7 +20,35 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    self.window = [[UIWindow alloc]initWithFrame:[[UIScreen mainScreen]bounds]];
+    
+    // [Optional] Power your app with Local Datastore. For more info, go to
+    // https://parse.com/docs/ios_guide#localdatastore/iOS
+    [Parse enableLocalDatastore];
+    
+    // Initialize Parse.
+    [Parse setApplicationId:@"MDgESuvjvz1K7l302i90N40A0EZDbwSKzb8k3QzL"
+                  clientKey:@"pC3lhDsBTukDfJO8uR2hS9ZFZGpgQIIOjj05dP4A"];
+    
+    // [Optional] Track statistics around application opens.
+    [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
+    
+    // ...
+    
     // Override point for customization after application launch.
+    [GMSServices provideAPIKey:@"AIzaSyA9gyzAzIjHmwfoLc_V2FCXaeS-SMjclCA"];
+    
+    NSUserDefaults *userdefaults = [NSUserDefaults standardUserDefaults];
+    
+    if([userdefaults objectForKey:@"pfuser"] == nil) {
+        SignUpController *signup = [[SignUpController alloc] init];
+        [self.window setRootViewController:signup];
+    }
+    else {
+        ViewController *map = [[ViewController alloc] init];
+        [self.window setRootViewController:map];
+    }
+
     return YES;
 }
 

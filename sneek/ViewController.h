@@ -7,9 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "AFHTTPRequestOperationManager.h"
+@import GoogleMaps;
 
-@interface ViewController : UIViewController
+@interface ViewController : UIViewController <GMSMapViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
+@property (nonatomic) UIImagePickerController *imagePickerController;
+
+#if TARGET_OS_IPHONE
+@property NSMutableDictionary *completionHandlerDictionary;
+@property (strong, nonatomic) AFHTTPRequestOperationManager *manager;
+#endif
 
 @end
 
