@@ -17,40 +17,37 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Default-667h.png" translatesAutoresizingMaskIntoConstraints="NO" id="hGr-fh-ENy">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LaunchImageTestCon.png" translatesAutoresizingMaskIntoConstraints="NO" id="OLN-9h-2zE">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
-                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="-24" y="1" width="449" height="800"/>
-                                </variation>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="hGr-fh-ENy" secondAttribute="bottom" id="B9a-OA-Fxo"/>
-                            <constraint firstItem="hGr-fh-ENy" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="ByT-MV-a8Y"/>
-                            <constraint firstAttribute="trailing" secondItem="hGr-fh-ENy" secondAttribute="trailing" id="Keh-5n-A6m"/>
-                            <constraint firstItem="hGr-fh-ENy" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="yp2-JT-0fw"/>
+                            <constraint firstItem="OLN-9h-2zE" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="2hC-t2-nZ9"/>
+                            <constraint firstItem="OLN-9h-2zE" firstAttribute="bottom" secondItem="xb3-aO-Qok" secondAttribute="top" constant="89" id="adS-8p-Toi"/>
+                            <constraint firstAttribute="trailing" secondItem="OLN-9h-2zE" secondAttribute="trailing" id="qmi-6Z-DKc"/>
+                            <constraint firstItem="OLN-9h-2zE" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="vTR-VB-qrU"/>
                         </constraints>
                         <variation key="default">
                             <mask key="subviews">
-                                <exclude reference="hGr-fh-ENy"/>
+                                <exclude reference="OLN-9h-2zE"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="ByT-MV-a8Y"/>
-                                <exclude reference="Keh-5n-A6m"/>
-                                <exclude reference="yp2-JT-0fw"/>
-                                <exclude reference="B9a-OA-Fxo"/>
+                                <exclude reference="2hC-t2-nZ9"/>
+                                <exclude reference="adS-8p-Toi"/>
+                                <exclude reference="qmi-6Z-DKc"/>
+                                <exclude reference="vTR-VB-qrU"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
                             <mask key="subviews">
-                                <include reference="hGr-fh-ENy"/>
+                                <include reference="OLN-9h-2zE"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="ByT-MV-a8Y"/>
-                                <include reference="Keh-5n-A6m"/>
-                                <include reference="yp2-JT-0fw"/>
-                                <include reference="B9a-OA-Fxo"/>
+                                <include reference="2hC-t2-nZ9"/>
+                                <include reference="adS-8p-Toi"/>
+                                <include reference="qmi-6Z-DKc"/>
+                                <include reference="vTR-VB-qrU"/>
                             </mask>
                         </variation>
                     </view>
@@ -61,6 +58,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Default-667h.png" width="375" height="667"/>
+        <image name="LaunchImageTestCon.png" width="400" height="800"/>
     </resources>
 </document>

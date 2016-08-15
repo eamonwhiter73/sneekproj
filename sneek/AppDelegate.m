@@ -49,6 +49,7 @@
     NSUserDefaults *userdefaults = [NSUserDefaults standardUserDefaults];
     
     if([userdefaults objectForKey:@"pfuser"] == nil) {
+        NSLog(@"in delegate signup");
         SignUpController *signup = [[SignUpController alloc] init];
         [self.window setRootViewController:signup];
     }
@@ -56,6 +57,7 @@
         ViewController *map = [[ViewController alloc] init];
         [self.window setRootViewController:map];
     }
+    [self.window makeKeyAndVisible];
 
     return YES;
 }

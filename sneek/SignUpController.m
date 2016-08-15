@@ -61,8 +61,25 @@
 }
 
 - (void)viewDidLoad {
+    NSLog(@"in viewdidload");
     //DO BY SCREEN SIZE
-    [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"LaunchImage"]]];
+    NSNumber *screenWidth = @([UIScreen mainScreen].bounds.size.width);
+    //NSLog([[NSString alloc] initWithFormat:@"%@", screenWidth]);
+    
+    if([screenWidth intValue] == 320) {
+        NSLog(@"in block for back320");
+        [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"LaunchImage568"]]];
+    }
+    else if([screenWidth intValue] == 375) {
+        NSLog(@"in block for back");
+        [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"LaunchImage667"]]];
+    }
+    else {
+        NSLog(@"in block for backbig");
+        [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"LaunchImage568"]]];
+    }
+    
+    //[self.view setBackgroundColor:[UIColor blueColor]];//colorWithPatternImage:[UIImage imageNamed:@"LaunchImage568"]]];
 
     [self enableMyLocation];
     
@@ -97,7 +114,7 @@
     passwordTextField.placeholder = @"enter password";
     passwordTextField.backgroundColor = [UIColor whiteColor];
     passwordTextField.textColor = [UIColor blackColor];
-    passwordTextField.font = [UIFont systemFontOfSize:14.0f];
+ 	   passwordTextField.font = [UIFont systemFontOfSize:14.0f];
     passwordTextField.borderStyle = UITextBorderStyleRoundedRect;
     passwordTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
     passwordTextField.returnKeyType = UIReturnKeyDone;
