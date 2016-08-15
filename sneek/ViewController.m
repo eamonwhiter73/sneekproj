@@ -33,6 +33,7 @@ typedef void (^CompletionHandlerType)();
     UIButton *leaderboard;
     UIButton *leadbut;
     UIButton *tome;
+    UIButton *camerabut;
     bool isResponding;
     GMSMarker *staticMarker;
     NSNumber *staticCount;
@@ -40,9 +41,13 @@ typedef void (^CompletionHandlerType)();
     UILabel *myMatches;
     NSNumber *matched;
     NSString *staticObjectId;
+    NSString *newtitle;
     UIProgressView *progBar;
     UIView *menu;
     UIView *statusback;
+    PFUser *user;
+    PFObject *deleteObjectId;
+    //UIActivityIndicatorView *indicator;
 }
 
 - (void)viewDidLoad {
@@ -80,6 +85,7 @@ typedef void (^CompletionHandlerType)();
                 initMarker.title = [object valueForKey:@"title"];
                 initMarker.appearAnimation = kGMSMarkerAnimationPop;
                 initMarker.icon = [UIImage imageNamed:@"marker"];
+                initMarker.userData = @{@"marker_id":[object objectForKey:@"marker_id"]};
                 initMarker.map = mapView_;
             }
             
@@ -88,12 +94,21 @@ typedef void (^CompletionHandlerType)();
         }
     }];
     
+    NSLog([[NSString alloc] initWithFormat:@"%f", [UIScreen mainScreen].scale]);
+    
+    /*indicator = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    indicator.frame = CGRectMake(0.0, 0.0, 40.0, 40.0);
+    indicator.center = self.view.center;
+    [self.view addSubview:indicator];
+    [indicator bringSubviewToFront:self.view];
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = TRUE;*/
+    
     progBar = [[UIProgressView alloc] initWithProgressViewStyle:UIProgressViewStyleBar];
     [progBar setFrame:CGRectMake(60, 264, 200, 20)];
     [self.view addSubview:progBar];
     progBar.hidden = YES;
     
-    UILabel *instructions1;
+    /*UILabel *instructions1;
     instructions1 = [[UILabel alloc] initWithFrame:CGRectMake(19, 150, 300, 40)];
     instructions1.text = @"TAP SCREEN TO LEAVE SNEEK!";
     instructions1.textColor = [UIColor orangeColor];
@@ -109,15 +124,34 @@ typedef void (^CompletionHandlerType)();
     [instructions2 setFont:[UIFont fontWithName:@"Arial-BoldMT" size:18.5]];
     [self.view addSubview:instructions2];
     
-    [self performSelector:@selector(delayForDissapear:) withObject:instructions2 afterDelay:5.0];
+    [self performSelector:@selector(delayForDissapear:) withObject:instructions2 afterDelay:5.0];*/
     
-    image = [[UIImageView alloc] initWithFrame:CGRectMake(10, 30, 300, 426)];
+    NSNumber *screenWidth = @([UIScreen mainScreen].bounds.size.width);
+    NSLog([[NSString alloc] initWithFormat:@"%@", screenWidth]);
+    
+    if([screenWidth intValue] == 320) {
+        image = [[UIImageView alloc] initWithFrame:CGRectMake(10, 30, 300, 426)];
+    }
+    else if([screenWidth intValue] == 375) {
+        image = [[UIImageView alloc] initWithFrame:CGRectMake(10, 30, 355, 500)];
+    }
+    else {
+        
+    }
     [image setHidden:YES];
     image.layer.masksToBounds = true;
     image.layer.cornerRadius = 10.0;
     [self.view addSubview:image];
     
-    respondButton = [[UIButton alloc] initWithFrame:CGRectMake(10, 466, 300, 92)];
+    if([screenWidth intValue] == 320) {
+        respondButton = [[UIButton alloc] initWithFrame:CGRectMake(10, 466, 300, 92)];
+    }
+    else if([screenWidth intValue] == 375) {
+        respondButton = [[UIButton alloc] initWithFrame:CGRectMake(10, 547, 355, 92)];
+    }
+    else {
+        
+    }
     respondButton.backgroundColor = [UIColor colorWithRed:156.0f/255.0f green:214.0f/255.0f blue:215.0f/255.0f alpha:1.0f];
     [respondButton setTitle:@"MATCH IT" forState:UIControlStateNormal];
     respondButton.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:24.0];
@@ -128,13 +162,29 @@ typedef void (^CompletionHandlerType)();
     respondButton.layer.cornerRadius = 10.0;
     [self.view addSubview:respondButton];
     
-    xButton = [[UIButton alloc] initWithFrame:CGRectMake(292, 23, 25, 25)];
+    if([screenWidth intValue] == 320) {
+        xButton = [[UIButton alloc] initWithFrame:CGRectMake(292, 23, 25, 25)];
+    }
+    else if([screenWidth intValue] == 375) {
+        xButton = [[UIButton alloc] initWithFrame:CGRectMake(342, 23, 25, 25)];
+    }
+    else {
+        
+    }
     xButton.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"xbutton"]];
     [xButton addTarget:self action:@selector(close) forControlEvents:UIControlEventTouchUpInside];
     [xButton setHidden:YES];
     [self.view addSubview:xButton];
     
-    menu = [[UIView alloc] initWithFrame:CGRectMake(92.5, 494, 135, 54)];
+    if([screenWidth intValue] == 320) {
+        menu = [[UIView alloc] initWithFrame:CGRectMake(58.75, 494, 202.5, 54)];
+    }
+    else if([screenWidth intValue] == 375) {
+        menu = [[UIView alloc] initWithFrame:CGRectMake(86.25, 593, 202.5, 54)];
+    }
+    else {
+        
+    }
     menu.backgroundColor = [UIColor colorWithRed:156.0f/255.0f green:214.0f/255.0f blue:215.0f/255.0f alpha:0.9f];
     menu.layer.masksToBounds = true;
     menu.layer.cornerRadius = 10.0;
@@ -145,10 +195,33 @@ typedef void (^CompletionHandlerType)();
     [leadbut addTarget:self action:@selector(leaderboardOpen) forControlEvents:UIControlEventTouchUpInside];
     [menu addSubview:leadbut];
     
-    tome = [[UIButton alloc] initWithFrame:CGRectMake(76, 7, 39.5, 39.5)];
+    if([screenWidth intValue] == 320) {
+        tome = [[UIButton alloc] initWithFrame:CGRectMake(141.25, 7, 39.5, 39.5)];
+    }
+    else if([screenWidth intValue] == 375) {
+        tome = [[UIButton alloc] initWithFrame:CGRectMake(141.25, 7, 39.5, 39.5)];
+    }
+    else {
+        
+    }
     tome.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"tome"]];
     [tome addTarget:self action:@selector(centerloc) forControlEvents:UIControlEventTouchUpInside];
     [menu addSubview:tome];
+    
+    
+    if([screenWidth intValue] == 320) {
+        camerabut = [[UIButton alloc] initWithFrame:CGRectMake(78.375, 5.5, 43, 43)];
+    }
+    else if([screenWidth intValue] == 375) {
+        camerabut = [[UIButton alloc] initWithFrame:CGRectMake(78.375, 5.5, 43, 43)];
+    }
+    else {
+        
+    }
+    
+    camerabut.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"camerabut"]];
+    [camerabut addTarget:self action:@selector(dropSneek) forControlEvents:UIControlEventTouchUpInside];
+    [menu addSubview:camerabut];
     
     /*leaderboard = [[UIButton alloc] initWithFrame:CGRectMake(80, 518, 160, 30)];
     leaderboard.backgroundColor = [UIColor colorWithRed:224.0f/255.0f green:100.0f/255.0f blue:82.0f/255.0f alpha:0.9f];
@@ -166,7 +239,15 @@ typedef void (^CompletionHandlerType)();
     
     NSAttributedString *attrText = [[NSAttributedString alloc] initWithString:@"MY MATCHES" attributes:@{ NSParagraphStyleAttributeName : style, NSForegroundColorAttributeName : [UIColor colorWithRed:211.0f/255.0f green:243.0f/255.0f blue:219.0f/255.0f alpha:1.0f], NSFontAttributeName : [UIFont fontWithName:@"HelveticaNeue-Bold" size:16.0]}];
     
-    myMatches = [[UILabel alloc] initWithFrame:CGRectMake(67.5, 40, 185, 30)];
+    if([screenWidth intValue] == 320) {
+        myMatches = [[UILabel alloc] initWithFrame:CGRectMake(67.5, 40, 185, 30)];
+    }
+    else if([screenWidth intValue] == 375) {
+        myMatches = [[UILabel alloc] initWithFrame:CGRectMake(95, 40, 185, 30)];
+    }
+    else {
+        
+    }
     myMatches.backgroundColor = [UIColor colorWithRed:156.0f/255.0f green:214.0f/255.0f blue:215.0f/255.0f alpha:0.9f];
     myMatches.numberOfLines = 0;
     myMatches.layer.masksToBounds = true;
@@ -178,12 +259,23 @@ typedef void (^CompletionHandlerType)();
     matchesNumber.backgroundColor = [UIColor colorWithRed:211.0f/255.0f green:243.0f/255.0f blue:219.0f/255.0f alpha:1.0f];
     matchesNumber.textAlignment = NSTextAlignmentCenter;
     matchesNumber.textColor = [UIColor colorWithRed:156.0f/255.0f green:214.0f/255.0f blue:215.0f/255.0f alpha:1.0f];
+    matchesNumber.layer.masksToBounds = true;
+    matchesNumber.layer.cornerRadius = 3.0f;
+    
     NSUserDefaults *userdefaults = [NSUserDefaults standardUserDefaults];
     NSUInteger matches = [userdefaults integerForKey:@"matches"];
     matchesNumber.text = [[NSString alloc] initWithFormat:@"%lu", (unsigned long)matches];
     [myMatches addSubview:matchesNumber];
     
-    statusback = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 20)];
+    if([screenWidth intValue] == 320) {
+        statusback = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 20)];
+    }
+    else if([screenWidth intValue] == 375) {
+        statusback = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 375, 20)];
+    }
+    else {
+        
+    }
     statusback.backgroundColor = [UIColor colorWithRed:156.0f/255.0f green:214.0f/255.0f blue:215.0f/255.0f alpha:1.0f];
     [self.view addSubview:statusback];
 }
@@ -210,23 +302,61 @@ typedef void (^CompletionHandlerType)();
     
     staticMarker = marker;
     
+    NSLog(@"****gettingtapped****");
+    //NSLog([marker.userData objectForKey:@"marker_id"]);
+    
     PFQuery *query = [PFQuery queryWithClassName:@"MapPoints"];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
             for (PFObject *object in objects) {
                 NSLog(@"%@", object.objectId);
+                deleteObjectId = object;
                 PFGeoPoint *point = [object objectForKey:@"location"];
                 NSLog([object valueForKey:@"title"]);
                 NSLog(marker.title);
                 NSLog([[NSString alloc] initWithFormat:@"%f", marker.position.longitude]);
                 NSLog([[NSString alloc] initWithFormat:@"%f", marker.position.latitude]);
-                NSLog([[NSString alloc] initWithFormat:@"%f", point.longitude]);
-                NSLog([[NSString alloc] initWithFormat:@"%f", point.latitude]);
+                NSLog([[NSString alloc] initWithFormat:@"%@", [object objectForKey:@"marker_id"]]);
+                NSLog([[NSString alloc] initWithFormat:@"%@", [marker.userData objectForKey:@"marker_id"]]);
                 
-                if([object valueForKey:@"title"]==marker.title && marker.position.latitude == point.latitude && marker.position.longitude == point.longitude) {
+                /*float oldlatmark = staticMarker.position.latitude;
+                float markerlat = [[NSString stringWithFormat:@"%.3f",oldlatmark]floatValue];
+                
+                float oldlatpoint = point.latitude;
+                float pointlat = [[NSString stringWithFormat:@"%.3f",oldlatpoint]floatValue];
+                
+                float oldlonmark = staticMarker.position.longitude;
+                float markerlon = [[NSString stringWithFormat:@"%.3f",oldlonmark]floatValue];
+                
+                float oldlonpoint = point.longitude;
+                float pointlon = [[NSString stringWithFormat:@"%.3f",oldlonpoint]floatValue];*/
+                
+                //NSLog([marker.userData valueForKey:@"marker_id"]);
+                //NSLog(marker.title);
+                
+                if([object valueForKey:@"title"] == marker.title && [[[NSString alloc] initWithFormat:@"%@", [marker.userData objectForKey:@"marker_id"]] isEqualToString:[[NSString alloc] initWithFormat:@"%@", [object objectForKey:@"marker_id"]]]) {
                     
-                    staticObjectId = object.objectId;
+                    staticObjectId = [object valueForKey:@"marker_id"];
                     staticCount = [object valueForKey:@"count"];
+                    
+                    PFQuery *query = [PFQuery queryWithClassName:@"MapPoints"];
+                    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+                        if (!error) {
+                            NSLog(@"ran query");
+                            for (PFObject *object in objects) {
+                                if([object valueForKey:@"marker_id"] == staticObjectId) {
+                                    //PFObject *object = [objects firstObject];
+                                    NSLog(@"%@", object.objectId);
+                                    newtitle = [object valueForKey:@"title"];
+                                    NSLog(@"***newtitle****");
+                                    NSLog(newtitle);
+                                }
+                            }
+                            
+                        }else{
+                            NSLog([error description]);
+                        }
+                    }];
                     
                     NSString * downloadURL = @"http://www.eamondev.com/sneekback/getimage.php";
                     NSLog(@"downloadImageURL: %@", downloadURL);
@@ -353,7 +483,7 @@ typedef void (^CompletionHandlerType)();
 
 - (void)mapView:(GMSMapView *)mapView
 didTapAtCoordinate:(CLLocationCoordinate2D)coordinate {
-    NSLog(@"You tapped at %f,%f", coordinate.latitude, coordinate.longitude);
+    /*NSLog(@"You tapped at %f,%f", coordinate.latitude, coordinate.longitude);
     
     if (! [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
         
@@ -371,6 +501,36 @@ didTapAtCoordinate:(CLLocationCoordinate2D)coordinate {
         picker.sourceType = UIImagePickerControllerSourceTypeCamera;
         self.imagePickerController = picker;
         [self presentViewController:self.imagePickerController animated:YES completion:nil];
+    }*/
+}
+
+- (void)dropSneek {
+    if (! [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+        
+        UIAlertController *deviceNotFoundAlertController = [UIAlertController alertControllerWithTitle:@"NO DEVICE" message:@"Camera is not available" preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction* deviceNotFoundAlert = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];
+        
+        [deviceNotFoundAlertController addAction:deviceNotFoundAlert];
+        
+    } else {
+        UIActivityIndicatorView *indicator = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+        indicator.frame = CGRectMake(0.0, 0.0, 40.0, 40.0);
+        indicator.center = self.view.center;
+        [self.view addSubview:indicator];
+        [indicator bringSubviewToFront:self.view];
+        [UIApplication sharedApplication].networkActivityIndicatorVisible = TRUE;
+        
+        [indicator startAnimating];
+    
+        UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+        picker.delegate = self;
+        picker.modalPresentationStyle = UIModalPresentationCurrentContext;
+        picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+        self.imagePickerController = picker;
+        [self presentViewController:self.imagePickerController animated:YES completion:^{
+            [indicator stopAnimating];
+        }];
     }
 }
 
@@ -430,13 +590,20 @@ didTapAtCoordinate:(CLLocationCoordinate2D)coordinate {
                   
                   if(add) {
                       
-                      matched = [[NSNumber alloc] initWithBool:NO];
+                      __block int r;
                       
-                      GMSMarker *marker3 = [[GMSMarker alloc] init];
-                      marker3.position = mapView_.myLocation.coordinate;
-                      marker3.title = [userdefaults objectForKey:@"pfuser"];
-                      marker3.icon = [UIImage imageNamed:@"marker"];
-                      marker3.map = mapView_;
+                      PFQuery *quer = [PFQuery queryWithClassName:@"MapPoints"];
+                      [quer findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+                          if (!error) {
+                              for (PFObject *object in objects) {
+                                  while([[[NSString alloc] initWithFormat:@"%d", r] isEqualToString:[[NSString alloc] initWithFormat:@"%@", [object objectForKey:@"marker_id"]]]) {
+                                      r = arc4random_uniform(99999999);
+                                  }
+                              }
+                          }
+                      }];
+                      
+                      matched = [[NSNumber alloc] initWithBool:NO];
                       
                       PFGeoPoint *point = [PFGeoPoint geoPointWithLatitude:mapView_.myLocation.coordinate.latitude longitude:mapView_.myLocation.coordinate.longitude];
                       
@@ -445,6 +612,7 @@ didTapAtCoordinate:(CLLocationCoordinate2D)coordinate {
                       pointstore[@"location"] = point;
                       pointstore[@"count"] = stored;
                       pointstore[@"matched"] = matched;
+                      pointstore[@"marker_id"] = [NSNumber numberWithInt:r];
                       
                       [pointstore saveEventually:^(BOOL succeeded, NSError *error) {
                           
@@ -455,8 +623,26 @@ didTapAtCoordinate:(CLLocationCoordinate2D)coordinate {
                               /*dispatch_async(dispatch_get_main_queue(), ^(void){
                                   mapView_.settings.myLocationButton = YES;
                               });*/
+                              GMSMarker *marker3 = [[GMSMarker alloc] init];
+                              marker3.position = mapView_.myLocation.coordinate;
+                              marker3.title = [userdefaults objectForKey:@"pfuser"];
+                              marker3.icon = [UIImage imageNamed:@"marker"];
+                              marker3.userData = @{@"marker_id":[NSNumber numberWithInt:r]};
+                              NSLog(@"****markerdata****");
+                              NSLog([[NSNumber numberWithInt:r] description]);
+                              marker3.map = mapView_;
+                              NSLog(@"****markerdataafter****");
+                              NSLog([marker3.userData description]);
                           }
                       }];
+                      
+                      //NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+                      //NSString *use = [userDefaults objectForKey:@"pfuser"];
+                      NSLog(@"****currentuser****");
+                      //NSLog([[PFUser currentUser] description]);
+                      
+                      [[PFInstallation currentInstallation] setObject:[PFUser currentUser] forKey:@"user"];
+                      [[PFInstallation currentInstallation] saveEventually];
                   }
                   else {
                       UIAlertController *match = [UIAlertController alertControllerWithTitle:@"PLEASE MOVE A LITTLE" message:@"Your current location has already been explored!" preferredStyle:UIAlertControllerStyleAlert];
@@ -528,12 +714,27 @@ didTapAtCoordinate:(CLLocationCoordinate2D)coordinate {
         
         [picker dismissViewControllerAnimated:YES completion:NULL];
         
+        UIActivityIndicatorView *indicator = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+        indicator.frame = CGRectMake(0.0, 0.0, 40.0, 40.0);
+        indicator.center = self.view.center;
+        [self.view addSubview:indicator];
+        [indicator bringSubviewToFront:self.view];
+        [UIApplication sharedApplication].networkActivityIndicatorVisible = TRUE;
+        
+        [respondButton setUserInteractionEnabled:NO];
+        NSLog(@"****beforesetenabledno****");
+        [respondButton setEnabled:NO];
+        [xButton setUserInteractionEnabled:NO];
+        NSLog(@"****beforesetenabledno****");
+        [xButton setEnabled:NO];
+        [indicator startAnimating];
+        
         [_manager POST:queryStringss parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
             [formData appendPartWithFileData:imageData name:@"file" fileName:usernameEncoded mimeType:@"image/jpeg"];
         }
                success:^(AFHTTPRequestOperation *operation, id responseObject) {
                    NSLog(@"Success: %@ ***** %@", operation.responseString, responseObject);
-                
+                   
                    //if(operation.response.statusCode == 200) {
                    dispatch_async(dispatch_get_main_queue(), ^(void){
                        [image setHidden:YES];
@@ -544,9 +745,66 @@ didTapAtCoordinate:(CLLocationCoordinate2D)coordinate {
                        [menu setHidden:NO];
                    });
                    
-                   PFObject *object = [PFObject objectWithoutDataWithClassName:@"MapPoints"
-                                                                      objectId:staticObjectId];
-                   [object deleteEventually];
+                   NSLog(@"****staticobject****");
+                   NSLog([[NSString alloc] initWithFormat: @"%@", staticObjectId]);
+                   
+                   
+                   
+                   /*PFQuery *queryy = [PFQuery queryWithClassName:@"MapPoints"];
+                   //[query whereKey:@"marker_id" containedIn:@[[[NSNumber alloc] initWithInt:[staticObjectId intValue]]]];
+                   //[query whereKey:@"marker_id" equalTo:];
+                   [queryy findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+                       if (!error) {
+                           //NSLog(@"performed query");
+                           PFObject *object = [objects firstObject];
+                           NSLog(@"%@", object.objectId);
+                           newtitle = [object valueForKey:@"title"];
+                           NSLog(@"***newtitle****");
+                           NSLog(newtitle);
+                       }
+                       else {
+                           NSLog([error description]);
+                       }
+                   }];*/
+                   
+                   /*PFQuery *query = [PFQuery queryWithClassName:@"MapPoints"];
+                   [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+                       if (!error) {
+                           NSLog(@"ran query");
+                           for (PFObject *object in objects) {
+                               if([object valueForKey:@"marker_id"] == staticObjectId) {
+                                   //PFObject *object = [objects firstObject];
+                                   NSLog(@"%@", object.objectId);
+                                   newtitle = [object valueForKey:@"title"];
+                                   NSLog(@"***newtitle****");
+                                   NSLog(newtitle);
+                               }
+                            }
+                           
+                       }else{
+                           NSLog([error description]);
+                       }
+                   }];*/
+
+                   
+                   //NSPredicate *predicate = [NSPredicate predicateWithFormat:[NSString stringWithFormat: @"objectId = '%@'", staticObjectId]];
+                   /*PFQuery *query = [PFQuery queryWithClassName:@"MapPoints"];
+                   [query whereKey:@"marker_id" equalTo:staticObjectId];
+                   NSLog(@"****staticObjectasnumb****");
+                   //NSLog([[NSString alloc] initWithFormat:@"%@", [NSNumber numberWithInt:(int)staticObjectId]]);
+                   [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+                      
+                        PFObject *obj = [objects firstObject];
+                        NSLog(@"%@", obj.objectId);
+                        NSLog(@"****objectforkey****");
+                        NSLog([obj objectForKey:@"title"]);
+                       
+
+                       
+                   }];*/
+
+                   
+                   //NSLog([object description]);
                    
                    staticMarker.map = nil;
                    
@@ -601,12 +859,58 @@ didTapAtCoordinate:(CLLocationCoordinate2D)coordinate {
                                                            }
                                                        }];
                    }
+                   
+                   [deleteObjectId deleteInBackground];
+                   
+                   // Create our Installation query
+                   //NSString *use = [userDefaults objectForKey:@"pfuser"];
+                   
+                   NSLog(@"****newtitlebeforepush****");
+                   NSLog(newtitle);
+                   
+                   PFQuery *sosQuery = [PFUser query];
+                   [sosQuery whereKey:@"username" equalTo:newtitle];
+                   sosQuery.limit = 1;
+                   
+                   [sosQuery getFirstObjectInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
+                       [PFCloud callFunctionInBackground:@"sendpush"
+                                          withParameters:@{@"user":(PFUser *)object.objectId, @"username":newtitle}
+                                                   block:^(NSNumber *ratings, NSError *error) {
+                                                       if (!error) {
+                                                           // ratings is 4.5
+                                                       }
+                                                   }];
+                   }];
+                   
+                   /*PFQuery *pushQuery = [PFInstallation query];
+                   [pushQuery whereKey:@"user" matchesQuery:sosQuery];*/
+                   
+                   
+                   
+                   // Send push notification to query
+                   /*PFPush *push = [[PFPush alloc] init];
+                   [push setQuery:pushQuery]; // Set our Installation query
+                   [push setMessage:[NSString stringWithFormat:@"One of your sneeks has been matched by %@", [PFUser currentUser].username]];
+                   [push sendPushInBackground];*/
+                   
+                   //[object deleteEventually];
 
                    isResponding = false;
+                   
+                   // Objective-C
+                   
+                   [respondButton setUserInteractionEnabled:YES];
+                   NSLog(@"****beforesetenabledno****");
+                   [respondButton setEnabled:YES];
+                   [xButton setUserInteractionEnabled:YES];
+                   NSLog(@"****beforesetenabledno****");
+                   [xButton setEnabled:YES];
+                   [indicator stopAnimating];
+
                }
                failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                    NSLog(@"Error: %@ ***** %@", operation.responseString, error);
-                   
+
                    UIAlertController *notAMatch = [UIAlertController alertControllerWithTitle:@"NOT A MATCH!" message:@"If at first you don't succeed..." preferredStyle:UIAlertControllerStyleAlert];
                    
                    UIAlertAction* notAMatchAlert = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];
@@ -616,6 +920,14 @@ didTapAtCoordinate:(CLLocationCoordinate2D)coordinate {
                    [self presentViewController:notAMatch animated:NO completion:NULL];
                    
                    isResponding = false;
+                   
+                   [respondButton setUserInteractionEnabled:YES];
+                   NSLog(@"****beforesetenabledno****");
+                   [respondButton setEnabled:YES];
+                   [xButton setUserInteractionEnabled:YES];
+                   NSLog(@"****beforesetenabledno****");
+                   [xButton setEnabled:YES];
+                   [indicator stopAnimating];
                }
          ];
     }

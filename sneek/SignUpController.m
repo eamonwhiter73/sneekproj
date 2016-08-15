@@ -61,8 +61,9 @@
 }
 
 - (void)viewDidLoad {
-    [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"LaunchScreen"]]];
-    
+    //DO BY SCREEN SIZE
+    [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"LaunchImage"]]];
+
     [self enableMyLocation];
     
     textFieldLoc = [[UITextField alloc] initWithFrame:CGRectMake(10, 370, 300, 40)];

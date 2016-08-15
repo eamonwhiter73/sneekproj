@@ -16,7 +16,6 @@
 		DD3001211C067A95002E43C1 /* sneekUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = DD3001201C067A95002E43C1 /* sneekUITests.m */; };
 		DD3001301C0683AA002E43C1 /* SignUpController.m in Sources */ = {isa = PBXBuildFile; fileRef = DD30012F1C0683AA002E43C1 /* SignUpController.m */; };
 		DD5537801C068A2A002B52DD /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DD55377F1C068A2A002B52DD /* Images.xcassets */; };
-		DD5537861C0695BF002B52DD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DD5537851C0695BF002B52DD /* LaunchScreen.storyboard */; };
 		DD55378C1C06A330002B52DD /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD55378B1C06A330002B52DD /* AudioToolbox.framework */; };
 		DD55378E1C06A338002B52DD /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD55378D1C06A338002B52DD /* CFNetwork.framework */; };
 		DD5537901C06A341002B52DD /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD55378F1C06A341002B52DD /* CoreGraphics.framework */; };
@@ -29,6 +28,9 @@
 		DD55379E1C06A384002B52DD /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = DD55379D1C06A384002B52DD /* libsqlite3.tbd */; };
 		DD5537A01C06A3A1002B52DD /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD55379F1C06A3A1002B52DD /* Accounts.framework */; };
 		DD5537A21C06A3A7002B52DD /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD5537A11C06A3A7002B52DD /* Social.framework */; };
+		DD6902711D61316F00C88CB6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DD6902701D61316F00C88CB6 /* LaunchScreen.storyboard */; };
+		DD6902741D6134E600C88CB6 /* LaunchScreen.png in Resources */ = {isa = PBXBuildFile; fileRef = DD6902731D6134E600C88CB6 /* LaunchScreen.png */; };
+		DD6902761D62024300C88CB6 /* Default-667h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DD6902751D62024300C88CB6 /* Default-667h@2x.png */; };
 		DD8D199E1C26E84F000E7418 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD8D199C1C26E84F000E7418 /* Bolts.framework */; };
 		DD8D199F1C26E84F000E7418 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD8D199D1C26E84F000E7418 /* Parse.framework */; };
 		DD8D19A21C28C267000E7418 /* LeaderboardController.m in Sources */ = {isa = PBXBuildFile; fileRef = DD8D19A11C28C267000E7418 /* LeaderboardController.m */; };
@@ -71,7 +73,6 @@
 		DD30012E1C06839C002E43C1 /* SignUpController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignUpController.h; sourceTree = "<group>"; };
 		DD30012F1C0683AA002E43C1 /* SignUpController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignUpController.m; sourceTree = "<group>"; };
 		DD55377F1C068A2A002B52DD /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		DD5537851C0695BF002B52DD /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DD55378B1C06A330002B52DD /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		DD55378D1C06A338002B52DD /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		DD55378F1C06A341002B52DD /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -84,6 +85,9 @@
 		DD55379D1C06A384002B52DD /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		DD55379F1C06A3A1002B52DD /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		DD5537A11C06A3A7002B52DD /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
+		DD6902701D61316F00C88CB6 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		DD6902731D6134E600C88CB6 /* LaunchScreen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = LaunchScreen.png; path = Pods/LaunchScreen.png; sourceTree = "<group>"; };
+		DD6902751D62024300C88CB6 /* Default-667h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-667h@2x.png"; path = "sneek/Images.xcassets/LaunchImage.launchimage/Default-667h@2x.png"; sourceTree = "<group>"; };
 		DD8D199C1C26E84F000E7418 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
 		DD8D199D1C26E84F000E7418 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
 		DD8D19A01C28C257000E7418 /* LeaderboardController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeaderboardController.h; sourceTree = "<group>"; };
@@ -143,6 +147,8 @@
 		8AD42FDEA5078E3678D53274 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				DD6902731D6134E600C88CB6 /* LaunchScreen.png */,
+				DD6902751D62024300C88CB6 /* Default-667h@2x.png */,
 				DD5537A11C06A3A7002B52DD /* Social.framework */,
 				DD55379F1C06A3A1002B52DD /* Accounts.framework */,
 				DD55379D1C06A384002B52DD /* libsqlite3.tbd */,
@@ -197,9 +203,9 @@
 				DD30012E1C06839C002E43C1 /* SignUpController.h */,
 				DD30012F1C0683AA002E43C1 /* SignUpController.m */,
 				DD55377F1C068A2A002B52DD /* Images.xcassets */,
-				DD5537851C0695BF002B52DD /* LaunchScreen.storyboard */,
 				DD8D19A01C28C257000E7418 /* LeaderboardController.h */,
 				DD8D19A11C28C267000E7418 /* LeaderboardController.m */,
+				DD6902701D61316F00C88CB6 /* LaunchScreen.storyboard */,
 			);
 			path = sneek;
 			sourceTree = "<group>";
@@ -337,8 +343,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DD6902741D6134E600C88CB6 /* LaunchScreen.png in Resources */,
+				DD6902761D62024300C88CB6 /* Default-667h@2x.png in Resources */,
 				DD5537801C068A2A002B52DD /* Images.xcassets in Resources */,
-				DD5537861C0695BF002B52DD /* LaunchScreen.storyboard in Resources */,
+				DD6902711D61316F00C88CB6 /* LaunchScreen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -469,7 +477,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "Apple Development IOS Push Services: com.eamon.sneek";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Development IOS Push Services: com.eamon.sneek";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -513,7 +522,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "Apple Development IOS Push Services: com.eamon.sneek";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Development IOS Push Services: com.eamon.sneek";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
