@@ -17,47 +17,25 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LaunchImageTestCon.png" translatesAutoresizingMaskIntoConstraints="NO" id="OLN-9h-2zE">
-                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LaunchScreen.png" translatesAutoresizingMaskIntoConstraints="NO" id="BS3-EP-0QY">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="OLN-9h-2zE" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="2hC-t2-nZ9"/>
-                            <constraint firstItem="OLN-9h-2zE" firstAttribute="bottom" secondItem="xb3-aO-Qok" secondAttribute="top" constant="89" id="adS-8p-Toi"/>
-                            <constraint firstAttribute="trailing" secondItem="OLN-9h-2zE" secondAttribute="trailing" id="qmi-6Z-DKc"/>
-                            <constraint firstItem="OLN-9h-2zE" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="vTR-VB-qrU"/>
+                            <constraint firstAttribute="trailing" secondItem="BS3-EP-0QY" secondAttribute="trailing" id="VLZ-Hs-5Jk"/>
+                            <constraint firstItem="BS3-EP-0QY" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="ZQB-Fh-5GO"/>
+                            <constraint firstItem="BS3-EP-0QY" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="dxE-Pg-mRg"/>
+                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="BS3-EP-0QY" secondAttribute="bottom" id="gSQ-b8-F9S"/>
                         </constraints>
-                        <variation key="default">
-                            <mask key="subviews">
-                                <exclude reference="OLN-9h-2zE"/>
-                            </mask>
-                            <mask key="constraints">
-                                <exclude reference="2hC-t2-nZ9"/>
-                                <exclude reference="adS-8p-Toi"/>
-                                <exclude reference="qmi-6Z-DKc"/>
-                                <exclude reference="vTR-VB-qrU"/>
-                            </mask>
-                        </variation>
-                        <variation key="heightClass=regular-widthClass=compact">
-                            <mask key="subviews">
-                                <include reference="OLN-9h-2zE"/>
-                            </mask>
-                            <mask key="constraints">
-                                <include reference="2hC-t2-nZ9"/>
-                                <include reference="adS-8p-Toi"/>
-                                <include reference="qmi-6Z-DKc"/>
-                                <include reference="vTR-VB-qrU"/>
-                            </mask>
-                        </variation>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="52.5" y="375"/>
+            <point key="canvasLocation" x="53" y="375"/>
         </scene>
     </scenes>
     <resources>
-        <image name="LaunchImageTestCon.png" width="400" height="800"/>
+        <image name="LaunchScreen.png" width="640" height="1136"/>
     </resources>
 </document>
