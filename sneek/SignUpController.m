@@ -76,14 +76,22 @@
     }
     else {
         NSLog(@"in block for backbig");
-        [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"LaunchImage568"]]];
+        [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"LaunchImage1242"]]];
     }
     
     //[self.view setBackgroundColor:[UIColor blueColor]];//colorWithPatternImage:[UIImage imageNamed:@"LaunchImage568"]]];
 
     [self enableMyLocation];
     
-    textFieldLoc = [[UITextField alloc] initWithFrame:CGRectMake(10, 370, 300, 40)];
+    if([screenWidth intValue] == 320) {
+        textFieldLoc = [[UITextField alloc] initWithFrame:CGRectMake(59.5, 310, 201, 40)];
+    }
+    else if([screenWidth intValue] == 375) {
+        textFieldLoc = [[UITextField alloc] initWithFrame:CGRectMake(70, 364, 235.5, 40)];
+    }
+    else {
+        textFieldLoc = [[UITextField alloc] initWithFrame:CGRectMake(77, 402, 260, 40)];
+    }
     textFieldLoc.borderStyle = UITextBorderStyleRoundedRect;
     textFieldLoc.font = [UIFont systemFontOfSize:15];
     textFieldLoc.placeholder = @"enter username";
@@ -96,7 +104,15 @@
     textFieldLoc.tag = 1;
     [self.view addSubview:textFieldLoc];
     
-    emailFieldLoc = [[UITextField alloc] initWithFrame:CGRectMake(10, 470, 300, 40)];
+    if([screenWidth intValue] == 320) {
+        emailFieldLoc = [[UITextField alloc] initWithFrame:CGRectMake(59.5, 410, 201, 40)];
+    }
+    else if([screenWidth intValue] == 375) {
+        emailFieldLoc = [[UITextField alloc] initWithFrame:CGRectMake(70, 481, 235.5, 40)];
+    }
+    else {
+        emailFieldLoc = [[UITextField alloc] initWithFrame:CGRectMake(77, 531, 260, 40)];
+    }
     emailFieldLoc.borderStyle = UITextBorderStyleRoundedRect;
     emailFieldLoc.font = [UIFont systemFontOfSize:15];
     emailFieldLoc.placeholder = @"enter email";
@@ -109,7 +125,16 @@
     emailFieldLoc.tag = 3;
     [self.view addSubview:emailFieldLoc];
 
-    CGRect passwordTextFieldFrame = CGRectMake(10, 420, 300, 40);
+    CGRect passwordTextFieldFrame;
+    if([screenWidth intValue] == 320) {
+        passwordTextFieldFrame = CGRectMake(59.5, 360, 235.5, 40);
+    }
+    else if([screenWidth intValue] == 375) {
+        passwordTextFieldFrame = CGRectMake(70, 423, 235.5, 40);
+    }
+    else {
+        passwordTextFieldFrame = CGRectMake(77, 467, 260, 40);
+    }
     passwordTextField = [[UITextField alloc] initWithFrame:passwordTextFieldFrame];
     passwordTextField.placeholder = @"enter password";
     passwordTextField.backgroundColor = [UIColor whiteColor];
@@ -124,9 +149,22 @@
     passwordTextField.autocapitalizationType = UITextAutocapitalizationTypeNone;
     [self.view addSubview:passwordTextField];
     
-    UIButton *signUpButton = [[UIButton alloc] initWithFrame:CGRectMake(10, 520, 300, 40)];
-    signUpButton.backgroundColor = [UIColor blueColor];
+    UIButton *signUpButton;
+    if([screenWidth intValue] == 320) {
+        signUpButton = [[UIButton alloc] initWithFrame:CGRectMake(59.5, 460, 201, 40)];
+    }
+    else if([screenWidth intValue] == 375) {
+        signUpButton = [[UIButton alloc] initWithFrame:CGRectMake(70, 540, 235.5, 40)];
+    }
+    else {
+        signUpButton = [[UIButton alloc] initWithFrame:CGRectMake(77, 596, 260, 40)];
+    }
+    signUpButton.backgroundColor = [UIColor colorWithRed:218.0f/255.0f green:247.0f/255.0f blue:220.0f/255.0f alpha:1.0f];
+    signUpButton.layer.masksToBounds = true;
+    signUpButton.layer.cornerRadius = 5.0;
     [signUpButton setTitle:@"SIGN UP" forState:UIControlStateNormal];
+    signUpButton.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:24.0];
+    [signUpButton setTitleColor:[UIColor colorWithRed:156.0f/255.0f green:214.0f/255.0f blue:215.0f/255.0f alpha:1.0f] forState:UIControlStateNormal];
     [signUpButton addTarget:self action:@selector(createUser) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:signUpButton];
     

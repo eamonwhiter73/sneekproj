@@ -9,8 +9,7 @@
 #import "ViewController.h"
 #import "SignUpController.h"
 #import <Parse/Parse.h>
-#import "AFHTTPRequestOperation.h"
-#import "AFHTTPRequestOperationManager.h"
+#import "AFHTTPSessionManager.h"
 #import "LeaderboardController.h"
 @import GoogleMaps;
 
@@ -45,7 +44,7 @@ typedef void (^CompletionHandlerType)();
     UIProgressView *progBar;
     UIView *menu;
     UIView *statusback;
-    PFUser *user;
+    //PFUser *user1;
     PFObject *deleteObjectId;
     //UIActivityIndicatorView *indicator;
 }
@@ -136,7 +135,7 @@ typedef void (^CompletionHandlerType)();
         image = [[UIImageView alloc] initWithFrame:CGRectMake(10, 30, 355, 500)];
     }
     else {
-        
+        image = [[UIImageView alloc] initWithFrame:CGRectMake(10, 30, 392, 552)];
     }
     [image setHidden:YES];
     image.layer.masksToBounds = true;
@@ -150,7 +149,7 @@ typedef void (^CompletionHandlerType)();
         respondButton = [[UIButton alloc] initWithFrame:CGRectMake(10, 547, 355, 92)];
     }
     else {
-        
+        respondButton = [[UIButton alloc] initWithFrame:CGRectMake(10, 604, 392, 101.5)];
     }
     respondButton.backgroundColor = [UIColor colorWithRed:156.0f/255.0f green:214.0f/255.0f blue:215.0f/255.0f alpha:1.0f];
     [respondButton setTitle:@"MATCH IT" forState:UIControlStateNormal];
@@ -169,7 +168,7 @@ typedef void (^CompletionHandlerType)();
         xButton = [[UIButton alloc] initWithFrame:CGRectMake(342, 23, 25, 25)];
     }
     else {
-        
+        xButton = [[UIButton alloc] initWithFrame:CGRectMake(377.5, 25, 50, 50)];
     }
     xButton.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"xbutton"]];
     [xButton addTarget:self action:@selector(close) forControlEvents:UIControlEventTouchUpInside];
@@ -183,14 +182,22 @@ typedef void (^CompletionHandlerType)();
         menu = [[UIView alloc] initWithFrame:CGRectMake(86.25, 593, 202.5, 54)];
     }
     else {
-        
+        menu = [[UIView alloc] initWithFrame:CGRectMake(104, 654, 205, 73)];
     }
     menu.backgroundColor = [UIColor colorWithRed:156.0f/255.0f green:214.0f/255.0f blue:215.0f/255.0f alpha:0.9f];
     menu.layer.masksToBounds = true;
     menu.layer.cornerRadius = 10.0;
     [self.view addSubview:menu];
     
-    leadbut = [[UIButton alloc] initWithFrame:CGRectMake(19, 7, 39.5, 39.5)];
+    if([screenWidth intValue] == 320) {
+        leadbut = [[UIButton alloc] initWithFrame:CGRectMake(19, 7, 39.5, 39.5)];
+    }
+    else if([screenWidth intValue] == 375) {
+        leadbut = [[UIButton alloc] initWithFrame:CGRectMake(19, 7, 39.5, 39.5)];
+    }
+    else {
+        leadbut = [[UIButton alloc] initWithFrame:CGRectMake(10, 10, 53, 53)];
+    }
     leadbut.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"leadbut"]];
     [leadbut addTarget:self action:@selector(leaderboardOpen) forControlEvents:UIControlEventTouchUpInside];
     [menu addSubview:leadbut];
@@ -202,7 +209,7 @@ typedef void (^CompletionHandlerType)();
         tome = [[UIButton alloc] initWithFrame:CGRectMake(141.25, 7, 39.5, 39.5)];
     }
     else {
-        
+        tome = [[UIButton alloc] initWithFrame:CGRectMake(142.5, 10, 53, 53)];
     }
     tome.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"tome"]];
     [tome addTarget:self action:@selector(centerloc) forControlEvents:UIControlEventTouchUpInside];
@@ -216,7 +223,7 @@ typedef void (^CompletionHandlerType)();
         camerabut = [[UIButton alloc] initWithFrame:CGRectMake(78.375, 5.5, 43, 43)];
     }
     else {
-        
+        camerabut = [[UIButton alloc] initWithFrame:CGRectMake(72, 5.5, 62, 62)];
     }
     
     camerabut.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"camerabut"]];
@@ -246,7 +253,7 @@ typedef void (^CompletionHandlerType)();
         myMatches = [[UILabel alloc] initWithFrame:CGRectMake(95, 40, 185, 30)];
     }
     else {
-        
+        myMatches = [[UILabel alloc] initWithFrame:CGRectMake(105, 44, 204, 33)];
     }
     myMatches.backgroundColor = [UIColor colorWithRed:156.0f/255.0f green:214.0f/255.0f blue:215.0f/255.0f alpha:0.9f];
     myMatches.numberOfLines = 0;
@@ -255,7 +262,15 @@ typedef void (^CompletionHandlerType)();
     myMatches.attributedText = attrText;
     [self.view addSubview:myMatches];
     
-    matchesNumber = [[UILabel alloc] initWithFrame:CGRectMake(120, 5, 60, 20)];
+    if([screenWidth intValue] == 320) {
+        matchesNumber = [[UILabel alloc] initWithFrame:CGRectMake(120, 5, 60, 20)];
+    }
+    else if([screenWidth intValue] == 375) {
+        matchesNumber = [[UILabel alloc] initWithFrame:CGRectMake(140.5, 5, 70, 20)];
+    }
+    else {
+        matchesNumber = [[UILabel alloc] initWithFrame:CGRectMake(120, 7, 77, 20)];
+    }
     matchesNumber.backgroundColor = [UIColor colorWithRed:211.0f/255.0f green:243.0f/255.0f blue:219.0f/255.0f alpha:1.0f];
     matchesNumber.textAlignment = NSTextAlignmentCenter;
     matchesNumber.textColor = [UIColor colorWithRed:156.0f/255.0f green:214.0f/255.0f blue:215.0f/255.0f alpha:1.0f];
@@ -274,7 +289,7 @@ typedef void (^CompletionHandlerType)();
         statusback = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 375, 20)];
     }
     else {
-        
+        statusback = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 414, 20)];
     }
     statusback.backgroundColor = [UIColor colorWithRed:156.0f/255.0f green:214.0f/255.0f blue:215.0f/255.0f alpha:1.0f];
     [self.view addSubview:statusback];
@@ -361,9 +376,11 @@ typedef void (^CompletionHandlerType)();
                     NSString * downloadURL = @"http://www.eamondev.com/sneekback/getimage.php";
                     NSLog(@"downloadImageURL: %@", downloadURL);
                     
+                    
                     NSString *queryStringss = [NSString stringWithFormat:@"%@", downloadURL];
                     queryStringss = [queryStringss stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
-                    _manager = [AFHTTPRequestOperationManager manager];
+                    
+                    _manager = [AFHTTPSessionManager manager];
                     _manager.responseSerializer=[AFJSONResponseSerializer serializerWithReadingOptions:NSJSONReadingAllowFragments];
                     
                     NSString *usernameEncoded = marker.title;
@@ -372,8 +389,8 @@ typedef void (^CompletionHandlerType)();
                     
                     NSMutableURLRequest *request = [[AFHTTPRequestSerializer serializer] requestWithMethod:@"POST" URLString:downloadURL parameters:params error:&error];
                     
-                    AFHTTPRequestOperation *requestOperation = [_manager HTTPRequestOperationWithRequest:request success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                        NSLog(@"operation success: %@\n %@", operation, responseObject);
+                    [_manager POST:@"http://www.eamondev.com/sneekback/getimage.php" parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+                        //NSLog(@"operation success: %@\n %@", operation, responseObject);
                         
                         NSData *decodedData = [[NSData alloc] initWithBase64EncodedString:responseObject[@"image"] options:0];
                         image.image = [UIImage imageWithData:decodedData scale:300/2448];
@@ -383,18 +400,10 @@ typedef void (^CompletionHandlerType)();
                             [respondButton setHidden:NO];
                             [xButton setHidden:NO];
                         });
-                    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+
+                    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
                         NSLog(@"Error: %@", error);
                     }];
-                    
-                    [requestOperation setDownloadProgressBlock:^(NSUInteger bytesRead, long long totalBytesRead, long long totalBytesExpectedToRead) {
-                            progBar.hidden = NO;
-                            double percentDone = ((double)totalBytesRead / (double)totalBytesExpectedToRead) * -.000001;
-                            NSLog(@"progress updated(percentDone) : %f", percentDone);
-                            [progBar setProgress:percentDone];
-                    }];
-                    
-                    [requestOperation start];
                     
                     /*[_manager POST:queryStringss parameters:params success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
                         
@@ -546,7 +555,9 @@ didTapAtCoordinate:(CLLocationCoordinate2D)coordinate {
     
         NSString *queryStringss = [NSString stringWithFormat:@"%@",uploadURL];
         queryStringss = [queryStringss stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
-        _manager = [AFHTTPRequestOperationManager manager];
+        
+        _manager = [AFHTTPSessionManager manager];
+
         //manager.responseSerializer.acceptableContentTypes = nil;
         _manager.responseSerializer=[AFJSONResponseSerializer serializerWithReadingOptions:NSJSONReadingAllowFragments];
         _manager.responseSerializer.acceptableContentTypes = [_manager.responseSerializer.acceptableContentTypes setByAddingObject:@"text/html"];
@@ -560,107 +571,105 @@ didTapAtCoordinate:(CLLocationCoordinate2D)coordinate {
         
         [picker dismissViewControllerAnimated:YES completion:NULL];
         
-        [_manager POST:queryStringss parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+        [_manager POST:@"http://www.eamondev.com/sneekback/upload.php" parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
             [formData appendPartWithFileData:imageData name:@"file" fileName:@"file.jpeg" mimeType:@"image/jpeg"];
+        } progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+            NSLog(@"Success: ***** %@", responseObject);
+            NSUInteger count = [userdefaults integerForKey:@"count"];
+            NSNumber *stored = [NSNumber numberWithInteger:count];
+            count++;
+            [userdefaults setInteger:count forKey:@"count"];
+            
+            add = true;
+            
+            PFQuery *query = [PFQuery queryWithClassName:@"MapPoints"];
+            [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+                if (!error) {
+                    for (PFObject *object in objects) {
+                        NSLog(@"%@", object.objectId);
+                        if(mapView_.myLocation.coordinate.latitude == [[object objectForKey:@"location"] latitude] && mapView_.myLocation.coordinate.longitude == [[object objectForKey:@"location"] longitude]) {
+                            
+                            add = false;
+                        }
+                    }
+                    
+                }else{
+                    NSLog([error description]);
+                }
+            }];
+            
+            if(add) {
+                
+                __block int r;
+                
+                PFQuery *quer = [PFQuery queryWithClassName:@"MapPoints"];
+                [quer findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+                    if (!error) {
+                        for (PFObject *object in objects) {
+                            while([[[NSString alloc] initWithFormat:@"%d", r] isEqualToString:[[NSString alloc] initWithFormat:@"%@", [object objectForKey:@"marker_id"]]]) {
+                                r = arc4random_uniform(99999999);
+                            }
+                        }
+                    }
+                }];
+                
+                matched = [[NSNumber alloc] initWithBool:NO];
+                
+                PFGeoPoint *point = [PFGeoPoint geoPointWithLatitude:mapView_.myLocation.coordinate.latitude longitude:mapView_.myLocation.coordinate.longitude];
+                
+                PFObject *pointstore = [PFObject objectWithClassName:@"MapPoints"];
+                pointstore[@"title"] = [userdefaults objectForKey:@"pfuser"];
+                pointstore[@"location"] = point;
+                pointstore[@"count"] = stored;
+                pointstore[@"matched"] = matched;
+                pointstore[@"marker_id"] = [NSNumber numberWithInt:r];
+                
+                [pointstore saveEventually:^(BOOL succeeded, NSError *error) {
+                    
+                    if (error) {
+                        NSLog(@"Error");
+                    }
+                    else {
+                        /*dispatch_async(dispatch_get_main_queue(), ^(void){
+                         mapView_.settings.myLocationButton = YES;
+                         });*/
+                        GMSMarker *marker3 = [[GMSMarker alloc] init];
+                        marker3.position = mapView_.myLocation.coordinate;
+                        marker3.title = [userdefaults objectForKey:@"pfuser"];
+                        marker3.icon = [UIImage imageNamed:@"marker"];
+                        marker3.userData = @{@"marker_id":[NSNumber numberWithInt:r]};
+                        NSLog(@"****markerdata****");
+                        NSLog([[NSNumber numberWithInt:r] description]);
+                        marker3.map = mapView_;
+                        NSLog(@"****markerdataafter****");
+                        NSLog([marker3.userData description]);
+                    }
+                }];
+                
+                //NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+                //NSString *use = [userDefaults objectForKey:@"pfuser"];
+                NSLog(@"****currentuser****");
+                //NSLog([[PFUser currentUser] description]);
+                
+                [[PFInstallation currentInstallation] setObject:[PFUser currentUser] forKey:@"user"];
+                [[PFInstallation currentInstallation] saveEventually];
             }
-              success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                  NSLog(@"Success: %@ ***** %@", operation.responseString, responseObject);
-                  NSUInteger count = [userdefaults integerForKey:@"count"];
-                  NSNumber *stored = [NSNumber numberWithInteger:count];
-                  count++;
-                  [userdefaults setInteger:count forKey:@"count"];
-                  
-                  add = true;
-                  
-                  PFQuery *query = [PFQuery queryWithClassName:@"MapPoints"];
-                  [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-                      if (!error) {
-                          for (PFObject *object in objects) {
-                              NSLog(@"%@", object.objectId);
-                              if(mapView_.myLocation.coordinate.latitude == [[object objectForKey:@"location"] latitude] && mapView_.myLocation.coordinate.longitude == [[object objectForKey:@"location"] longitude]) {
-                                  
-                                  add = false;
-                              }
-                          }
-                          
-                      }else{
-                          NSLog([error description]);
-                      }
-                  }];
-                  
-                  if(add) {
-                      
-                      __block int r;
-                      
-                      PFQuery *quer = [PFQuery queryWithClassName:@"MapPoints"];
-                      [quer findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-                          if (!error) {
-                              for (PFObject *object in objects) {
-                                  while([[[NSString alloc] initWithFormat:@"%d", r] isEqualToString:[[NSString alloc] initWithFormat:@"%@", [object objectForKey:@"marker_id"]]]) {
-                                      r = arc4random_uniform(99999999);
-                                  }
-                              }
-                          }
-                      }];
-                      
-                      matched = [[NSNumber alloc] initWithBool:NO];
-                      
-                      PFGeoPoint *point = [PFGeoPoint geoPointWithLatitude:mapView_.myLocation.coordinate.latitude longitude:mapView_.myLocation.coordinate.longitude];
-                      
-                      PFObject *pointstore = [PFObject objectWithClassName:@"MapPoints"];
-                      pointstore[@"title"] = [userdefaults objectForKey:@"pfuser"];
-                      pointstore[@"location"] = point;
-                      pointstore[@"count"] = stored;
-                      pointstore[@"matched"] = matched;
-                      pointstore[@"marker_id"] = [NSNumber numberWithInt:r];
-                      
-                      [pointstore saveEventually:^(BOOL succeeded, NSError *error) {
-                          
-                          if (error) {
-                              NSLog(@"Error");
-                          }
-                          else {
-                              /*dispatch_async(dispatch_get_main_queue(), ^(void){
-                                  mapView_.settings.myLocationButton = YES;
-                              });*/
-                              GMSMarker *marker3 = [[GMSMarker alloc] init];
-                              marker3.position = mapView_.myLocation.coordinate;
-                              marker3.title = [userdefaults objectForKey:@"pfuser"];
-                              marker3.icon = [UIImage imageNamed:@"marker"];
-                              marker3.userData = @{@"marker_id":[NSNumber numberWithInt:r]};
-                              NSLog(@"****markerdata****");
-                              NSLog([[NSNumber numberWithInt:r] description]);
-                              marker3.map = mapView_;
-                              NSLog(@"****markerdataafter****");
-                              NSLog([marker3.userData description]);
-                          }
-                      }];
-                      
-                      //NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-                      //NSString *use = [userDefaults objectForKey:@"pfuser"];
-                      NSLog(@"****currentuser****");
-                      //NSLog([[PFUser currentUser] description]);
-                      
-                      [[PFInstallation currentInstallation] setObject:[PFUser currentUser] forKey:@"user"];
-                      [[PFInstallation currentInstallation] saveEventually];
-                  }
-                  else {
-                      UIAlertController *match = [UIAlertController alertControllerWithTitle:@"PLEASE MOVE A LITTLE" message:@"Your current location has already been explored!" preferredStyle:UIAlertControllerStyleAlert];
-                      
-                      UIAlertAction* matchAlert = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];
-                      
-                      [match addAction:matchAlert];
-                      
-                      [self presentViewController:match animated:NO completion:NULL];
-                      add = true;
-                  }
-                  
-                  isResponding = false;
-              }
-              failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                  NSLog(@"Error: %@ ***** %@", operation.responseString, error);
-                  isResponding = false;
-              }];
+            else {
+                UIAlertController *match = [UIAlertController alertControllerWithTitle:@"PLEASE MOVE A LITTLE" message:@"Your current location has already been explored!" preferredStyle:UIAlertControllerStyleAlert];
+                
+                UIAlertAction* matchAlert = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];
+                
+                [match addAction:matchAlert];
+                
+                [self presentViewController:match animated:NO completion:NULL];
+                add = true;
+            }
+            
+            isResponding = false;
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            NSLog(@"Error: %@ *****", error);
+            isResponding = false;
+        }];
     }
     else {
         
@@ -700,7 +709,9 @@ didTapAtCoordinate:(CLLocationCoordinate2D)coordinate {
         
         NSString *queryStringss = [NSString stringWithFormat:@"%@",uploadURL];
         queryStringss = [queryStringss stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
-        _manager = [AFHTTPRequestOperationManager manager];
+        
+        _manager = [AFHTTPSessionManager manager];
+        
         //manager.responseSerializer.acceptableContentTypes = nil;
         _manager.responseSerializer=[AFJSONResponseSerializer serializerWithReadingOptions:NSJSONReadingAllowFragments];
         _manager.responseSerializer.acceptableContentTypes = [_manager.responseSerializer.acceptableContentTypes setByAddingObject:@"text/html"];
@@ -729,207 +740,204 @@ didTapAtCoordinate:(CLLocationCoordinate2D)coordinate {
         [xButton setEnabled:NO];
         [indicator startAnimating];
         
-        [_manager POST:queryStringss parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
-            [formData appendPartWithFileData:imageData name:@"file" fileName:usernameEncoded mimeType:@"image/jpeg"];
-        }
-               success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                   NSLog(@"Success: %@ ***** %@", operation.responseString, responseObject);
-                   
-                   //if(operation.response.statusCode == 200) {
-                   dispatch_async(dispatch_get_main_queue(), ^(void){
-                       [image setHidden:YES];
-                       [respondButton setHidden:YES];
-                       [xButton setHidden:YES];
-                       [myMatches setHidden:NO];
-                       [matchesNumber setHidden:NO];
-                       [menu setHidden:NO];
-                   });
-                   
-                   NSLog(@"****staticobject****");
-                   NSLog([[NSString alloc] initWithFormat: @"%@", staticObjectId]);
-                   
-                   
-                   
-                   /*PFQuery *queryy = [PFQuery queryWithClassName:@"MapPoints"];
-                   //[query whereKey:@"marker_id" containedIn:@[[[NSNumber alloc] initWithInt:[staticObjectId intValue]]]];
-                   //[query whereKey:@"marker_id" equalTo:];
-                   [queryy findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-                       if (!error) {
-                           //NSLog(@"performed query");
-                           PFObject *object = [objects firstObject];
-                           NSLog(@"%@", object.objectId);
-                           newtitle = [object valueForKey:@"title"];
-                           NSLog(@"***newtitle****");
-                           NSLog(newtitle);
-                       }
-                       else {
-                           NSLog([error description]);
-                       }
-                   }];*/
-                   
-                   /*PFQuery *query = [PFQuery queryWithClassName:@"MapPoints"];
-                   [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-                       if (!error) {
-                           NSLog(@"ran query");
-                           for (PFObject *object in objects) {
-                               if([object valueForKey:@"marker_id"] == staticObjectId) {
-                                   //PFObject *object = [objects firstObject];
-                                   NSLog(@"%@", object.objectId);
-                                   newtitle = [object valueForKey:@"title"];
-                                   NSLog(@"***newtitle****");
-                                   NSLog(newtitle);
-                               }
-                            }
-                           
-                       }else{
-                           NSLog([error description]);
-                       }
-                   }];*/
+        [_manager POST:@"http://www.eamondev.com/sneekback/respond.php" parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+            [formData appendPartWithFileData:imageData name:@"file" fileName:@"file.jpeg" mimeType:@"image/jpeg"];
+        } progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+            
+            dispatch_async(dispatch_get_main_queue(), ^(void){
+                [image setHidden:YES];
+                [respondButton setHidden:YES];
+                [xButton setHidden:YES];
+                [myMatches setHidden:NO];
+                [matchesNumber setHidden:NO];
+                [menu setHidden:NO];
+            });
+            
+            NSLog(@"****staticobject****");
+            NSLog([[NSString alloc] initWithFormat: @"%@", staticObjectId]);
+            
+            
+            
+            /*PFQuery *queryy = [PFQuery queryWithClassName:@"MapPoints"];
+             //[query whereKey:@"marker_id" containedIn:@[[[NSNumber alloc] initWithInt:[staticObjectId intValue]]]];
+             //[query whereKey:@"marker_id" equalTo:];
+             [queryy findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+             if (!error) {
+             //NSLog(@"performed query");
+             PFObject *object = [objects firstObject];
+             NSLog(@"%@", object.objectId);
+             newtitle = [object valueForKey:@"title"];
+             NSLog(@"***newtitle****");
+             NSLog(newtitle);
+             }
+             else {
+             NSLog([error description]);
+             }
+             }];*/
+            
+            /*PFQuery *query = [PFQuery queryWithClassName:@"MapPoints"];
+             [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+             if (!error) {
+             NSLog(@"ran query");
+             for (PFObject *object in objects) {
+             if([object valueForKey:@"marker_id"] == staticObjectId) {
+             //PFObject *object = [objects firstObject];
+             NSLog(@"%@", object.objectId);
+             newtitle = [object valueForKey:@"title"];
+             NSLog(@"***newtitle****");
+             NSLog(newtitle);
+             }
+             }
+             
+             }else{
+             NSLog([error description]);
+             }
+             }];*/
+            
+            
+            //NSPredicate *predicate = [NSPredicate predicateWithFormat:[NSString stringWithFormat: @"objectId = '%@'", staticObjectId]];
+            /*PFQuery *query = [PFQuery queryWithClassName:@"MapPoints"];
+             [query whereKey:@"marker_id" equalTo:staticObjectId];
+             NSLog(@"****staticObjectasnumb****");
+             //NSLog([[NSString alloc] initWithFormat:@"%@", [NSNumber numberWithInt:(int)staticObjectId]]);
+             [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+             
+             PFObject *obj = [objects firstObject];
+             NSLog(@"%@", obj.objectId);
+             NSLog(@"****objectforkey****");
+             NSLog([obj objectForKey:@"title"]);
+             
+             
+             
+             }];*/
+            
+            
+            //NSLog([object description]);
+            
+            staticMarker.map = nil;
+            
+            UIAlertController *match = [UIAlertController alertControllerWithTitle:@"A MATCH!" message:@"This perspective is no longer, because you matched it!" preferredStyle:UIAlertControllerStyleAlert];
+            
+            UIAlertAction* matchAlert = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];
+            
+            [match addAction:matchAlert];
+            
+            [self presentViewController:match animated:NO completion:NULL];
+            
+            NSUInteger matches = [userdefaults integerForKey:@"matches"];
+            matches++;
+            [userdefaults setInteger:matches forKey:@"matches"];
+            
+            matchesNumber.text = [[NSString alloc] initWithFormat:@"%lu", (unsigned long)matches];
+            
+            NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+            
+            PFUser *currentUser = [PFUser currentUser];
+            if (currentUser) {
+                NSLog(@"there is a current user");
+                
+                [currentUser setValue:matchesNumber.text forKey:@"matches"];
+                
+                [currentUser saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                    if (!error) {
+                        // The currentUser saved successfully.
+                    } else {
+                        // There was an error saving the currentUser.
+                    }
+                }];
+            } else {
+                [PFUser logInWithUsernameInBackground:[userDefaults objectForKey:@"pfuser"] password:[userDefaults objectForKey:@"pfpass"]
+                                                block:^(PFUser *user, NSError *error) {
+                                                    if (user) {
+                                                        NSLog(@"user logged in");
+                                                        
+                                                        [user setObject:matchesNumber.text forKey:@"matches"];
+                                                        
+                                                        [user saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                                                            if (!error) {
+                                                                // The currentUser saved successfully.
+                                                            } else {
+                                                                // There was an error saving the currentUser.
+                                                            }
+                                                        }];
+                                                        // Do stuff after successful login.
+                                                    } else {
+                                                        NSLog(@"login failed");
+                                                        // The login failed. Check error to see why.
+                                                    }
+                                                }];
+            }
+            
+            [deleteObjectId deleteInBackground];
+            
+            // Create our Installation query
+            //NSString *use = [userDefaults objectForKey:@"pfuser"];
+            
+            NSLog(@"****newtitlebeforepush****");
+            NSLog(newtitle);
+            
+            PFQuery *sosQuery = [PFUser query];
+            [sosQuery whereKey:@"username" equalTo:newtitle];
+            sosQuery.limit = 1;
+            
+            [sosQuery getFirstObjectInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
+                [PFCloud callFunctionInBackground:@"sendpush"
+                                   withParameters:@{@"user":(PFUser *)object.objectId, @"username":newtitle}
+                                            block:^(NSNumber *ratings, NSError *error) {
+                                                if (!error) {
+                                                    // ratings is 4.5
+                                                }
+                                            }];
+            }];
+            
+            /*PFQuery *pushQuery = [PFInstallation query];
+             [pushQuery whereKey:@"user" matchesQuery:sosQuery];*/
+            
+            
+            
+            // Send push notification to query
+            /*PFPush *push = [[PFPush alloc] init];
+             [push setQuery:pushQuery]; // Set our Installation query
+             [push setMessage:[NSString stringWithFormat:@"One of your sneeks has been matched by %@", [PFUser currentUser].username]];
+             [push sendPushInBackground];*/
+            
+            //[object deleteEventually];
+            
+            isResponding = false;
+            
+            // Objective-C
+            
+            [respondButton setUserInteractionEnabled:YES];
+            NSLog(@"****beforesetenabledno****");
+            [respondButton setEnabled:YES];
+            [xButton setUserInteractionEnabled:YES];
+            NSLog(@"****beforesetenabledno****");
+            [xButton setEnabled:YES];
+            [indicator stopAnimating];
+            
+            
+            
 
-                   
-                   //NSPredicate *predicate = [NSPredicate predicateWithFormat:[NSString stringWithFormat: @"objectId = '%@'", staticObjectId]];
-                   /*PFQuery *query = [PFQuery queryWithClassName:@"MapPoints"];
-                   [query whereKey:@"marker_id" equalTo:staticObjectId];
-                   NSLog(@"****staticObjectasnumb****");
-                   //NSLog([[NSString alloc] initWithFormat:@"%@", [NSNumber numberWithInt:(int)staticObjectId]]);
-                   [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-                      
-                        PFObject *obj = [objects firstObject];
-                        NSLog(@"%@", obj.objectId);
-                        NSLog(@"****objectforkey****");
-                        NSLog([obj objectForKey:@"title"]);
-                       
-
-                       
-                   }];*/
-
-                   
-                   //NSLog([object description]);
-                   
-                   staticMarker.map = nil;
-                   
-                   UIAlertController *match = [UIAlertController alertControllerWithTitle:@"A MATCH!" message:@"This perspective is no longer, because you matched it!" preferredStyle:UIAlertControllerStyleAlert];
-                   
-                   UIAlertAction* matchAlert = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];
-                   
-                   [match addAction:matchAlert];
-                   
-                   [self presentViewController:match animated:NO completion:NULL];
-                   
-                   NSUInteger matches = [userdefaults integerForKey:@"matches"];
-                   matches++;
-                   [userdefaults setInteger:matches forKey:@"matches"];
-                   
-                   matchesNumber.text = [[NSString alloc] initWithFormat:@"%lu", (unsigned long)matches];
-                   
-                   NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-                   
-                   PFUser *currentUser = [PFUser currentUser];
-                   if (currentUser) {
-                       NSLog(@"there is a current user");
-                       
-                       [currentUser setValue:matchesNumber.text forKey:@"matches"];
-                       
-                       [currentUser saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-                           if (!error) {
-                               // The currentUser saved successfully.
-                           } else {
-                               // There was an error saving the currentUser.
-                           }
-                       }];
-                   } else {
-                       [PFUser logInWithUsernameInBackground:[userDefaults objectForKey:@"pfuser"] password:[userDefaults objectForKey:@"pfpass"]
-                                                       block:^(PFUser *user, NSError *error) {
-                                                           if (user) {
-                                                               NSLog(@"user logged in");
-                                                               
-                                                               [user setObject:matchesNumber.text forKey:@"matches"];
-                                                               
-                                                               [user saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-                                                                   if (!error) {
-                                                                       // The currentUser saved successfully.
-                                                                   } else {
-                                                                       // There was an error saving the currentUser.
-                                                                   }
-                                                               }];
-                                                               // Do stuff after successful login.
-                                                           } else {
-                                                               NSLog(@"login failed");
-                                                               // The login failed. Check error to see why.
-                                                           }
-                                                       }];
-                   }
-                   
-                   [deleteObjectId deleteInBackground];
-                   
-                   // Create our Installation query
-                   //NSString *use = [userDefaults objectForKey:@"pfuser"];
-                   
-                   NSLog(@"****newtitlebeforepush****");
-                   NSLog(newtitle);
-                   
-                   PFQuery *sosQuery = [PFUser query];
-                   [sosQuery whereKey:@"username" equalTo:newtitle];
-                   sosQuery.limit = 1;
-                   
-                   [sosQuery getFirstObjectInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
-                       [PFCloud callFunctionInBackground:@"sendpush"
-                                          withParameters:@{@"user":(PFUser *)object.objectId, @"username":newtitle}
-                                                   block:^(NSNumber *ratings, NSError *error) {
-                                                       if (!error) {
-                                                           // ratings is 4.5
-                                                       }
-                                                   }];
-                   }];
-                   
-                   /*PFQuery *pushQuery = [PFInstallation query];
-                   [pushQuery whereKey:@"user" matchesQuery:sosQuery];*/
-                   
-                   
-                   
-                   // Send push notification to query
-                   /*PFPush *push = [[PFPush alloc] init];
-                   [push setQuery:pushQuery]; // Set our Installation query
-                   [push setMessage:[NSString stringWithFormat:@"One of your sneeks has been matched by %@", [PFUser currentUser].username]];
-                   [push sendPushInBackground];*/
-                   
-                   //[object deleteEventually];
-
-                   isResponding = false;
-                   
-                   // Objective-C
-                   
-                   [respondButton setUserInteractionEnabled:YES];
-                   NSLog(@"****beforesetenabledno****");
-                   [respondButton setEnabled:YES];
-                   [xButton setUserInteractionEnabled:YES];
-                   NSLog(@"****beforesetenabledno****");
-                   [xButton setEnabled:YES];
-                   [indicator stopAnimating];
-
-               }
-               failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                   NSLog(@"Error: %@ ***** %@", operation.responseString, error);
-
-                   UIAlertController *notAMatch = [UIAlertController alertControllerWithTitle:@"NOT A MATCH!" message:@"If at first you don't succeed..." preferredStyle:UIAlertControllerStyleAlert];
-                   
-                   UIAlertAction* notAMatchAlert = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];
-                   
-                   [notAMatch addAction:notAMatchAlert];
-                   
-                   [self presentViewController:notAMatch animated:NO completion:NULL];
-                   
-                   isResponding = false;
-                   
-                   [respondButton setUserInteractionEnabled:YES];
-                   NSLog(@"****beforesetenabledno****");
-                   [respondButton setEnabled:YES];
-                   [xButton setUserInteractionEnabled:YES];
-                   NSLog(@"****beforesetenabledno****");
-                   [xButton setEnabled:YES];
-                   [indicator stopAnimating];
-               }
-         ];
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            NSLog(@"Error: %@", error);
+            UIAlertController *notAMatch = [UIAlertController alertControllerWithTitle:@"NOT A MATCH!" message:@"If at first you don't succeed..." preferredStyle:UIAlertControllerStyleAlert];
+            
+            UIAlertAction* notAMatchAlert = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];
+            
+            [notAMatch addAction:notAMatchAlert];
+            
+            [self presentViewController:notAMatch animated:NO completion:NULL];
+            
+            isResponding = false;
+            
+            [respondButton setUserInteractionEnabled:YES];
+            NSLog(@"****beforesetenabledno****");
+            [respondButton setEnabled:YES];
+            [xButton setUserInteractionEnabled:YES];
+            NSLog(@"****beforesetenabledno****");
+            [xButton setEnabled:YES];
+            [indicator stopAnimating];
+        }];
     }
 }
 

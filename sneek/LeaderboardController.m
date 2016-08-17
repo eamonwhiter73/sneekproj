@@ -48,7 +48,7 @@
         tableHolder = [[UIView alloc] initWithFrame:CGRectMake(10, 140, 270, 432)];
     }
     else {
-        
+        tableHolder = [[UIView alloc] initWithFrame:CGRectMake(10, 154, 298, 477)];
     }
     tableHolder.layoutMargins = UIEdgeInsetsZero;
     [self.view addSubview:tableHolder];
@@ -60,7 +60,7 @@
         _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 270, 432) style:UITableViewStylePlain];
     }
     else {
-        
+        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 298, 477) style:UITableViewStylePlain];
     }
     _tableView.delegate = self;
     _tableView.dataSource = self;
@@ -85,7 +85,7 @@
         _tableViewScore = [[UITableView alloc] initWithFrame:CGRectMake(295, 140, 70, 432) style:UITableViewStylePlain];
     }
     else {
-        
+        _tableViewScore = [[UITableView alloc] initWithFrame:CGRectMake(327, 154, 77, 477) style:UITableViewStylePlain];
     }
     _tableViewScore.delegate = self;
     _tableViewScore.dataSource = self;
@@ -110,7 +110,7 @@
         leaderboardtit = [[UILabel alloc] initWithFrame:CGRectMake(0, 20, 375, 60)];
     }
     else {
-        
+        leaderboardtit = [[UILabel alloc] initWithFrame:CGRectMake(0, 22, 414, 80)];
     }
     leaderboardtit.backgroundColor = [UIColor colorWithRed:218.0f/255.0f green:247.0f/255.0f blue:220.0f/255.0f alpha:1.0f];
     leaderboardtit.numberOfLines = 0;
@@ -124,7 +124,7 @@
         username = [[UILabel alloc] initWithFrame:CGRectMake(10, 105, 140, 20)];
     }
     else {
-        
+        username = [[UILabel alloc] initWithFrame:CGRectMake(10, 116, 154, 22)];
     }
     username.backgroundColor = [UIColor colorWithRed:153.0f/255.0f green:211.0f/255.0f blue:212.0f/255.0f alpha:1.0f];
     username.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:14.0];
@@ -142,7 +142,7 @@
         matches = [[UILabel alloc] initWithFrame:CGRectMake(224, 105, 140, 20)];
     }
     else {
-        
+        matches = [[UILabel alloc] initWithFrame:CGRectMake(247, 116, 154, 22)];
     }
     matches.backgroundColor = [UIColor colorWithRed:153.0f/255.0f green:211.0f/255.0f blue:212.0f/255.0f alpha:1.0f];
     matches.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:14.0];
@@ -216,7 +216,7 @@
         backToMap = [[UIButton alloc] initWithFrame:CGRectMake(10, 585, 355, 60)];
     }
     else {
-        
+        backToMap = [[UIButton alloc] initWithFrame:CGRectMake(10, 645.5, 394, 80)];
     }
     backToMap.backgroundColor = [UIColor colorWithRed:218.0f/255.0f green:247.0f/255.0f blue:220.0f/255.0f alpha:1.0f];
     backToMap.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:20.0];
