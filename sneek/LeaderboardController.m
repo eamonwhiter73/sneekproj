@@ -179,6 +179,7 @@
                 NSSortDescriptor * descriptor = [[NSSortDescriptor alloc] initWithKey:@"matches" ascending:NO selector:@selector(localizedStandardCompare:)];
                 NSArray *entrieshold = [entries sortedArrayUsingDescriptors:@[descriptor]];
                 transfer = [entrieshold copy];
+                NSLog([transfer description]);
                 
                 /*transfer = [entries sortedArrayUsingComparator:^NSComparisonResult(NSDictionary* a, NSDictionary* b) {
                     NSDate *first  = [a objectForKey:@"matches"];

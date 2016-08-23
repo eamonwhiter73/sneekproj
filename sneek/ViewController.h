@@ -17,6 +17,9 @@
 #if TARGET_OS_IPHONE
 @property NSMutableDictionary *completionHandlerDictionary;
 @property (strong, nonatomic) AFHTTPSessionManager *manager;
+
+-(NSString *) randomStringWithLength: (int) len;
+
 #endif
 
 @end

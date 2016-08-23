@@ -19,9 +19,11 @@ Parse.Cloud.define("sendpush", function(request, response) {
         }
     }, {
     success: function() {
+        response.success();
         console.log("success: Parse.Push.send did send push");
     },
     error: function(e) {
+        response.error(err);
         console.log("error: Parse.Push.send code: " + e.code + " msg: " + e.message);
     }
     });

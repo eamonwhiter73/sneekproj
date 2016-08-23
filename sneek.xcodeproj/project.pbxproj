@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		DD3000FA1C067A95002E43C1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = DD3000F91C067A95002E43C1 /* main.m */; };
+		DD1F1CB41D6647FF00D55484 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = DD1F1CB31D6647FF00D55484 /* main.m */; };
 		DD3000FD1C067A95002E43C1 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = DD3000FC1C067A95002E43C1 /* AppDelegate.m */; };
 		DD3001001C067A95002E43C1 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DD3000FF1C067A95002E43C1 /* ViewController.m */; };
 		DD3001061C067A95002E43C1 /* sneek.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DD3001041C067A95002E43C1 /* sneek.xcdatamodeld */; };
@@ -70,6 +70,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		DD1F1CB31D6647FF00D55484 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = main.m; path = sneek/main.m; sourceTree = "<group>"; };
 		DD3000F51C067A95002E43C1 /* sneek.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = sneek.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD3000F91C067A95002E43C1 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		DD3000FB1C067A95002E43C1 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -212,6 +213,7 @@
 		DD3000EC1C067A94002E43C1 = {
 			isa = PBXGroup;
 			children = (
+				DD1F1CB31D6647FF00D55484 /* main.m */,
 				DD8D199C1C26E84F000E7418 /* Bolts.framework */,
 				DD8D199D1C26E84F000E7418 /* Parse.framework */,
 				DD3000F71C067A95002E43C1 /* sneek */,
@@ -443,11 +445,11 @@
 				DDA63C091D63BC5C00A9E878 /* AFURLResponseSerialization.m in Sources */,
 				DD8D19A21C28C267000E7418 /* LeaderboardController.m in Sources */,
 				DD3000FD1C067A95002E43C1 /* AppDelegate.m in Sources */,
+				DD1F1CB41D6647FF00D55484 /* main.m in Sources */,
 				DDA63C051D63BC5C00A9E878 /* AFHTTPSessionManager.m in Sources */,
 				DDA63C081D63BC5C00A9E878 /* AFURLRequestSerialization.m in Sources */,
 				DDA63C0A1D63BC5C00A9E878 /* AFURLSessionManager.m in Sources */,
 				DDA63C061D63BC5C00A9E878 /* AFNetworkReachabilityManager.m in Sources */,
-				DD3000FA1C067A95002E43C1 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

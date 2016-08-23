@@ -10,6 +10,23 @@
 #import "ViewController.h"
 #import <Parse/Parse.h>
 
+@interface NSString (emailValidation)
+- (BOOL)isValidEmail;
+@end
+
+@implementation NSString (emailValidation)
+-(BOOL)isValidEmail
+{
+    BOOL stricterFilter = NO; // Discussion http://blog.logichigh.com/2010/09/02/validating-an-e-mail-address/
+    NSString *stricterFilterString = @"^[A-Z0-9a-z\\._%+-]+@([A-Za-z0-9-]+\\.)+[A-Za-z]{2,4}$";
+    NSString *laxString = @"^.+@([A-Za-z0-9-]+\\.)+[A-Za-z]{2}[A-Za-z]*$";
+    NSString *emailRegex = stricterFilter ? stricterFilterString : laxString;
+    NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegex];
+    return [emailTest evaluateWithObject:self];
+}
+@end
+
+
 @interface SignUpController () {
     UITextField *textFieldLoc;
     UITextField *passwordTextField;
@@ -18,7 +35,6 @@
 }
 
 @end
-
 
 @implementation SignUpController {
 }
@@ -127,7 +143,7 @@
 
     CGRect passwordTextFieldFrame;
     if([screenWidth intValue] == 320) {
-        passwordTextFieldFrame = CGRectMake(59.5, 360, 235.5, 40);
+        passwordTextFieldFrame = CGRectMake(59.5, 360, 201, 40);
     }
     else if([screenWidth intValue] == 375) {
         passwordTextFieldFrame = CGRectMake(70, 423, 235.5, 40);
@@ -136,10 +152,11 @@
         passwordTextFieldFrame = CGRectMake(77, 467, 260, 40);
     }
     passwordTextField = [[UITextField alloc] initWithFrame:passwordTextFieldFrame];
+    passwordTextField.secureTextEntry = YES;
     passwordTextField.placeholder = @"enter password";
     passwordTextField.backgroundColor = [UIColor whiteColor];
     passwordTextField.textColor = [UIColor blackColor];
- 	   passwordTextField.font = [UIFont systemFontOfSize:14.0f];
+    passwordTextField.font = [UIFont systemFontOfSize:14.0f];
     passwordTextField.borderStyle = UITextBorderStyleRoundedRect;
     passwordTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
     passwordTextField.returnKeyType = UIReturnKeyDone;
@@ -177,7 +194,20 @@
     PFUser *user = [PFUser user];
     user.username = textFieldLoc.text;
     user.password = passwordTextField.text;
-    user.email = emailFieldLoc.text;
+    if([emailFieldLoc.text isValidEmail]) {
+        user.email = emailFieldLoc.text;
+    }
+    else {
+        UIAlertController *match = [UIAlertController alertControllerWithTitle:@"SORRY" message:@"You didn't enter a valid email." preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction* matchAlert = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];
+        
+        [match addAction:matchAlert];
+        
+        [self presentViewController:match animated:NO completion:NULL];
+        
+        return;
+    }
     [user setObject:@"0" forKey:@"matches"];
     
     // other fields can be set just like with PFObject
