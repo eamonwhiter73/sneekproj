@@ -9,12 +9,7 @@
 #import "LeaderboardController.h"
 #import <Parse/Parse.h>
 
-@interface LeaderboardController ()
-
-@end
-
-
-@implementation LeaderboardController {
+@interface LeaderboardController () {
     NSMutableArray *tableData;
     NSMutableArray *matchesForUser;
     NSMutableArray *entries;
@@ -29,6 +24,10 @@
     UILabel *matches;
     UIView *tableHolder;
 }
+@end
+
+
+@implementation LeaderboardController {}
 
 - (void)viewDidLoad {
 
@@ -40,7 +39,6 @@
     
     NSNumber *screenWidth = @([UIScreen mainScreen].bounds.size.width);
 
-    
     if([screenWidth intValue] == 320) {
         tableHolder = [[UIView alloc] initWithFrame:CGRectMake(10, 120, 230, 368)];
     }
@@ -73,8 +71,6 @@
     {
         _tableView.cellLayoutMarginsFollowReadableWidth = NO;
     }
-    //_tableView.layer.masksToBounds = true;
-    //_tableView.layer.cornerRadius = 8.0;
     [tableHolder addSubview:_tableView];
     
     

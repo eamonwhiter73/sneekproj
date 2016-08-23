@@ -32,12 +32,12 @@
     UITextField *passwordTextField;
     UITextField *emailFieldLoc;
     CLLocationManager *locationManager;
+    NSUserDefaults *userdefaults;
 }
 
 @end
 
-@implementation SignUpController {
-}
+@implementation SignUpController {}
 
 - (void)enableMyLocation
 {
@@ -77,25 +77,17 @@
 }
 
 - (void)viewDidLoad {
-    NSLog(@"in viewdidload");
-    //DO BY SCREEN SIZE
     NSNumber *screenWidth = @([UIScreen mainScreen].bounds.size.width);
-    //NSLog([[NSString alloc] initWithFormat:@"%@", screenWidth]);
     
     if([screenWidth intValue] == 320) {
-        NSLog(@"in block for back320");
         [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"LaunchImage568"]]];
     }
     else if([screenWidth intValue] == 375) {
-        NSLog(@"in block for back");
         [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"LaunchImage667"]]];
     }
     else {
-        NSLog(@"in block for backbig");
         [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"LaunchImage1242"]]];
     }
-    
-    //[self.view setBackgroundColor:[UIColor blueColor]];//colorWithPatternImage:[UIImage imageNamed:@"LaunchImage568"]]];
 
     [self enableMyLocation];
     
@@ -185,7 +177,7 @@
     [signUpButton addTarget:self action:@selector(createUser) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:signUpButton];
     
-    NSUserDefaults *userdefaults = [NSUserDefaults standardUserDefaults];
+    userdefaults = [NSUserDefaults standardUserDefaults];
     [userdefaults setInteger:0 forKey:@"matches"];
     
 }
@@ -214,18 +206,17 @@
     
     [user signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (!error) {   // Hooray! Let them use the app now.
-            NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-            [userDefaults setObject:user.username forKey:@"pfuser"];
-            [userDefaults setObject:user.password forKey:@"pfpass"];
-            [userDefaults setObject:user.email forKey:@"pfemail"];
-            [userDefaults setInteger:0 forKey:@"count"];
-            [userDefaults synchronize];
+            [userdefaults setObject:user.username forKey:@"pfuser"];
+            [userdefaults setObject:user.password forKey:@"pfpass"];
+            [userdefaults setObject:user.email forKey:@"pfemail"];
+            [userdefaults setInteger:0 forKey:@"count"];
+            [userdefaults synchronize];
             
             [self dismissViewControllerAnimated:YES completion:nil];
             
             ViewController* map = [[ViewController alloc] init];
             [[[[UIApplication sharedApplication] delegate] window] setRootViewController:map];
-        } else {   NSString *errorString = [error userInfo][@"error"];   // Show the errorString somewhere and let the user try again.
+        } else {   NSString *errorString = [error userInfo][@"error"];
             NSLog(errorString);
         }
     }];
@@ -233,18 +224,15 @@
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    NSLog(@"*** memory warning ***");
     // Dispose of any resources that can be recreated.
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
-    NSLog(@"touchesBegan:withEvent:");
     [self.view endEditing:YES];
     [super touchesBegan:touches withEvent:event];
 }
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
-    NSLog(@"textFieldShouldBeginEditing");
     textField.backgroundColor = [UIColor colorWithRed:220.0f/255.0f green:220.0f/255.0f blue:220.0f/255.0f alpha:1.0f];
     return YES;
 }

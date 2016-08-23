@@ -44,6 +44,8 @@ typedef void (^CompletionHandlerType)();
     UIAlertController *deviceNotFoundAlertController;
     UIAlertAction *deviceNotFoundAlert;
     UIImagePickerController *picker;
+    NSUserDefaults *userdefaults;
+    NSArray* placesObjects;
 }
 
 @end
@@ -253,7 +255,8 @@ typedef void (^CompletionHandlerType)();
     matchesNumber.layer.masksToBounds = true;
     matchesNumber.layer.cornerRadius = 3.0f;
     
-    NSUserDefaults *userdefaults = [NSUserDefaults standardUserDefaults];
+    userdefaults = [NSUserDefaults standardUserDefaults];
+    
     NSUInteger matches = [userdefaults integerForKey:@"matches"];
     matchesNumber.text = [[NSString alloc] initWithFormat:@"%lu", (unsigned long)matches];
     [myMatches addSubview:matchesNumber];
@@ -306,98 +309,103 @@ typedef void (^CompletionHandlerType)();
     // Limit what could be a lot of points.
     querygeo.limit = 10;
     // Final list of objects
-    NSArray* placesObjects = [querygeo findObjects];
     
-    for(PFGeoPoint* object in placesObjects) {
-        NSLog (@"**** location location ****");
-        NSLog ([[object valueForKey:@"location"] description]);
-        
-        PFGeoPoint *storin = [object valueForKey:@"location"];
-        NSLog(@"****storin****");
-        NSLog([[NSString alloc] initWithFormat:@"%f", storin.latitude]);
-        NSLog([[NSString alloc] initWithFormat:@"%f", storin.longitude]);
+    [querygeo findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
+       //placesObjects = [[NSArray alloc] initWithArray:objects];
 
-        if((float)storin.latitude == (float)marker.position.latitude && (float)storin.longitude == (float)marker.position.longitude) {
+        for(PFGeoPoint* object in objects) {
+            NSLog (@"**** location location ****");
+            NSLog ([[object valueForKey:@"location"] description]);
             
-            PFQuery *query = [PFQuery queryWithClassName:@"MapPoints"];
-            [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-                if (!error) {
-                    for (PFObject *object in objects) {
-                        NSLog(@"%@", object.objectId);
-                        deleteObjectId = object;
-
-                        if([[object valueForKey:@"title"] isEqualToString:marker.title] && [[[NSString alloc] initWithFormat:@"%@", [marker.userData objectForKey:@"marker_id"]] isEqualToString:[[NSString alloc] initWithFormat:@"%@", [object objectForKey:@"marker_id"]]]) {
+            PFGeoPoint *storin = [object valueForKey:@"location"];
+            NSLog(@"****storin****");
+            NSLog([[NSString alloc] initWithFormat:@"%f", storin.latitude]);
+            NSLog([[NSString alloc] initWithFormat:@"%f", storin.longitude]);
+            
+            #define fequal(a,b) (fabs((a) - (b)) < FLT_EPSILON)
+            
+            if(fequal((float)storin.latitude, (float)marker.position.latitude) && fequal((float)storin.longitude, (float)marker.position.longitude))  {
+                
+                PFQuery *query = [PFQuery queryWithClassName:@"MapPoints"];
+                [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+                    if (!error) {
+                        for (PFObject *object in objects) {
+                            NSLog(@"%@", object.objectId);
+                            deleteObjectId = object;
                             
-                            staticObjectId = [object valueForKey:@"marker_id"];
-                            staticCount = [object valueForKey:@"count"];
-                            
-                            PFQuery *query = [PFQuery queryWithClassName:@"MapPoints"];
-                            [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-                                if (!error) {
-                                    NSLog(@"ran query");
-                                    for (PFObject *object in objects) {
-                                        if([[object valueForKey:@"marker_id"] isEqualToString:staticObjectId]) {
-                                            //PFObject *object = [objects firstObject];
-                                            NSLog(@"%@ ***** OBJECT ID", object.objectId);
-                                            newtitle = [object valueForKey:@"title"];
-                                            NSLog(@"***newtitle****");
-                                            NSLog(newtitle);
+                            if([[object valueForKey:@"title"] isEqualToString:marker.title] && [[[NSString alloc] initWithFormat:@"%@", [marker.userData objectForKey:@"marker_id"]] isEqualToString:[[NSString alloc] initWithFormat:@"%@", [object objectForKey:@"marker_id"]]]) {
+                                
+                                staticObjectId = [object valueForKey:@"marker_id"];
+                                staticCount = [object valueForKey:@"count"];
+                                
+                                PFQuery *query = [PFQuery queryWithClassName:@"MapPoints"];
+                                [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+                                    if (!error) {
+                                        NSLog(@"ran query");
+                                        for (PFObject *object in objects) {
+                                            if([[object valueForKey:@"marker_id"] isEqualToString:staticObjectId]) {
+                                                //PFObject *object = [objects firstObject];
+                                                NSLog(@"%@ ***** OBJECT ID", object.objectId);
+                                                newtitle = [object valueForKey:@"title"];
+                                                NSLog(@"***newtitle****");
+                                                NSLog(newtitle);
+                                            }
                                         }
+                                        
+                                    }else{
+                                        NSLog([error description]);
                                     }
+                                }];
+                                
+                                NSString * downloadURL = @"http://www.eamondev.com/sneekback/getimage.php";
+                                NSLog(@"downloadImageURL: %@", downloadURL);
+                                
+                                NSString *queryStringss = [NSString stringWithFormat:@"%@", downloadURL];
+                                queryStringss = [queryStringss stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+                                
+                                _manager = [AFHTTPSessionManager manager];
+                                _manager.responseSerializer=[AFJSONResponseSerializer serializerWithReadingOptions:NSJSONReadingAllowFragments];
+                                
+                                NSString *usernameEncoded = marker.title;
+                                
+                                NSDictionary *params = @{@"username": usernameEncoded, @"count": [object valueForKey:@"count"]};
+                                
+                                [indicator startAnimating];
+                                
+                                [_manager POST:@"http://www.eamondev.com/sneekback/getimage.php" parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
                                     
-                                }else{
-                                    NSLog([error description]);
-                                }
-                            }];
-                            
-                            NSString * downloadURL = @"http://www.eamondev.com/sneekback/getimage.php";
-                            NSLog(@"downloadImageURL: %@", downloadURL);
-                            
-                            NSString *queryStringss = [NSString stringWithFormat:@"%@", downloadURL];
-                            queryStringss = [queryStringss stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
-                            
-                            _manager = [AFHTTPSessionManager manager];
-                            _manager.responseSerializer=[AFJSONResponseSerializer serializerWithReadingOptions:NSJSONReadingAllowFragments];
-                            
-                            NSString *usernameEncoded = marker.title;
-                            
-                            NSDictionary *params = @{@"username": usernameEncoded, @"count": [object valueForKey:@"count"]};
-                            
-                            [indicator startAnimating];
-
-                            [_manager POST:@"http://www.eamondev.com/sneekback/getimage.php" parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-                                
-                                NSData *decodedData = [[NSData alloc] initWithBase64EncodedString:responseObject[@"image"] options:0];
-                                image.image = [UIImage imageWithData:decodedData scale:300/2448];
-                                dispatch_async(dispatch_get_main_queue(), ^(void){
-                                    [image setHidden:NO];
-                                    [respondButton setHidden:NO];
-                                    [xButton setHidden:NO];
-                                });
-                                
-                                [indicator stopAnimating];
-                                
-                            } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-                                NSLog(@"Error: %@", error);
-                                [indicator stopAnimating];
-                            }];
+                                    NSData *decodedData = [[NSData alloc] initWithBase64EncodedString:responseObject[@"image"] options:0];
+                                    image.image = [UIImage imageWithData:decodedData scale:300/2448];
+                                    dispatch_async(dispatch_get_main_queue(), ^(void){
+                                        [image setHidden:NO];
+                                        [respondButton setHidden:NO];
+                                        [xButton setHidden:NO];
+                                    });
+                                    
+                                    [indicator stopAnimating];
+                                    
+                                } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+                                    NSLog(@"Error: %@", error);
+                                    [indicator stopAnimating];
+                                }];
+                            }
+                            else {
+                                NSLog(@"*** something not matching  ***");
+                            }
                         }
-                        else {
-                            NSLog(@"*** something not matching  ***");
-                        }
+                    }else{
+                        NSLog([error description]);
                     }
-                }else{
-                    NSLog([error description]);
-                }
-            }];
-
+                }];
+                
+            }
+            else {
+                NSLog(@"**** IN ELSE IN ELSE ****");
+                deviceNotFoundAlertController = [UIAlertController alertControllerWithTitle:@"ALMOST THERE" message:@"You need to get closer." preferredStyle:UIAlertControllerStyleAlert];
+                [deviceNotFoundAlertController addAction:deviceNotFoundAlert];
+            }
         }
-        else {
-            NSLog(@"**** IN ELSE IN ELSE ****");
-            deviceNotFoundAlertController = [UIAlertController alertControllerWithTitle:@"ALMOST THERE" message:@"You need to get closer." preferredStyle:UIAlertControllerStyleAlert];
-            [deviceNotFoundAlertController addAction:deviceNotFoundAlert];
-        }
-    }
+    }];
 }
 
 - (void)delayForDissapear:(UILabel*)label {
@@ -487,8 +495,6 @@ typedef void (^CompletionHandlerType)();
         _manager.responseSerializer=[AFJSONResponseSerializer serializerWithReadingOptions:NSJSONReadingAllowFragments];
         _manager.responseSerializer.acceptableContentTypes = [_manager.responseSerializer.acceptableContentTypes setByAddingObject:@"text/html"];
         _manager.responseSerializer.acceptableContentTypes = [_manager.responseSerializer.acceptableContentTypes setByAddingObject:@"text/plain"];
-        
-        NSUserDefaults *userdefaults = [NSUserDefaults standardUserDefaults];
         
         NSString *usernameEncoded = [[userdefaults objectForKey:@"pfuser"] stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
         
@@ -611,8 +617,6 @@ typedef void (^CompletionHandlerType)();
         _manager.responseSerializer.acceptableContentTypes = [_manager.responseSerializer.acceptableContentTypes setByAddingObject:@"text/html"];
         _manager.responseSerializer.acceptableContentTypes = [_manager.responseSerializer.acceptableContentTypes setByAddingObject:@"text/plain"];
         
-        NSUserDefaults *userdefaults = [NSUserDefaults standardUserDefaults];
-        
         NSString *usernameEncoded = [[userdefaults objectForKey:@"pfuser"] stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
         
         NSDictionary *params = @{@"username": staticMarker.title, @"challenger": usernameEncoded, @"count": staticCount};
@@ -646,7 +650,7 @@ typedef void (^CompletionHandlerType)();
             
             [deviceNotFoundAlertController addAction:deviceNotFoundAlert];
             
-            [self presentViewController:match animated:NO completion:NULL];
+            [self presentViewController:deviceNotFoundAlertController animated:NO completion:NULL];
             
             NSUInteger matches = [userdefaults integerForKey:@"matches"];
             matches++;
@@ -654,37 +658,22 @@ typedef void (^CompletionHandlerType)();
             
             matchesNumber.text = [[NSString alloc] initWithFormat:@"%lu", (unsigned long)matches];
             
-            NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-            
             PFUser *currentUser = [PFUser currentUser];
             if (currentUser) {
                 NSLog(@"there is a current user");
                 
                 [currentUser setValue:matchesNumber.text forKey:@"matches"];
                 
-                [currentUser saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-                    if (!error) {
-                        // The currentUser saved successfully.
-                    } else {
-                        // There was an error saving the currentUser.
-                    }
-                }];
+                [currentUser saveInBackground];
             } else {
-                [PFUser logInWithUsernameInBackground:[userDefaults objectForKey:@"pfuser"] password:[userDefaults objectForKey:@"pfpass"]
+                [PFUser logInWithUsernameInBackground:[userdefaults objectForKey:@"pfuser"] password:[userdefaults objectForKey:@"pfpass"]
                                                 block:^(PFUser *user, NSError *error) {
                                                     if (user) {
                                                         NSLog(@"user logged in");
                                                         
                                                         [user setObject:matchesNumber.text forKey:@"matches"];
                                                         
-                                                        [user saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-                                                            if (!error) {
-                                                                // The currentUser saved successfully.
-                                                            } else {
-                                                                // There was an error saving the currentUser.
-                                                            }
-                                                        }];
-                                                        // Do stuff after successful login.
+                                                        [user saveInBackground];
                                                     } else {
                                                         NSLog(@"login failed");
                                                         // The login failed. Check error to see why.
@@ -694,48 +683,20 @@ typedef void (^CompletionHandlerType)();
             
             [deleteObjectId deleteInBackground];
             
-            // Create our Installation query
-            //NSString *use = [userDefaults objectForKey:@"pfuser"];
-            
-            NSLog(@"****newtitlebeforepush****");
-            NSLog(newtitle);
-            
             PFQuery *sosQuery = [PFUser query];
             [sosQuery whereKey:@"username" equalTo:newtitle];
             sosQuery.limit = 1;
             
             [sosQuery getFirstObjectInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
                 [PFCloud callFunctionInBackground:@"sendpush"
-                                   withParameters:@{@"user":(PFUser *)object.objectId, @"username":newtitle}
-                                            block:^(NSNumber *ratings, NSError *error) {
-                                                if (!error) {
-                                                    // ratings is 4.5
-                                                }
-                                            }];
+                                   withParameters:@{@"user":(PFUser *)object.objectId, @"username":newtitle}];
             }];
-            
-            /*PFQuery *pushQuery = [PFInstallation query];
-             [pushQuery whereKey:@"user" matchesQuery:sosQuery];*/
-            
-            
-            
-            // Send push notification to query
-            /*PFPush *push = [[PFPush alloc] init];
-             [push setQuery:pushQuery]; // Set our Installation query
-             [push setMessage:[NSString stringWithFormat:@"One of your sneeks has been matched by %@", [PFUser currentUser].username]];
-             [push sendPushInBackground];*/
-            
-            //[object deleteEventually];
             
             isResponding = false;
             
-            // Objective-C
-            
             [respondButton setUserInteractionEnabled:YES];
-            NSLog(@"****beforesetenabledno****");
             [respondButton setEnabled:YES];
             [xButton setUserInteractionEnabled:YES];
-            NSLog(@"****beforesetenabledno****");
             [xButton setEnabled:YES];
             [indicator stopAnimating];
             
@@ -744,21 +705,15 @@ typedef void (^CompletionHandlerType)();
 
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
             NSLog(@"Error: %@", error);
-            UIAlertController *notAMatch = [UIAlertController alertControllerWithTitle:@"NOT A MATCH!" message:@"If at first you don't succeed..." preferredStyle:UIAlertControllerStyleAlert];
-            
-            UIAlertAction* notAMatchAlert = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];
-            
-            [notAMatch addAction:notAMatchAlert];
-            
-            [self presentViewController:notAMatch animated:NO completion:NULL];
+            deviceNotFoundAlertController = [UIAlertController alertControllerWithTitle:@"NOT A MATCH!" message:@"If at first you don't succeed..." preferredStyle:UIAlertControllerStyleAlert];
+            [deviceNotFoundAlertController addAction:deviceNotFoundAlert];
+            [self presentViewController:deviceNotFoundAlertController animated:NO completion:NULL];
             
             isResponding = false;
             
             [respondButton setUserInteractionEnabled:YES];
-            NSLog(@"****beforesetenabledno****");
             [respondButton setEnabled:YES];
             [xButton setUserInteractionEnabled:YES];
-            NSLog(@"****beforesetenabledno****");
             [xButton setEnabled:YES];
             [indicator stopAnimating];
         }];
@@ -766,7 +721,7 @@ typedef void (^CompletionHandlerType)();
 }
 
 
-- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)pickery {
     if(!isResponding) {
         dispatch_async(dispatch_get_main_queue(), ^(void){
             [matchesNumber setHidden:NO];
@@ -777,7 +732,7 @@ typedef void (^CompletionHandlerType)();
         //
     }
     
-    [picker dismissViewControllerAnimated:YES completion:NULL];
+    [pickery dismissViewControllerAnimated:YES completion:NULL];
     
 }
 
