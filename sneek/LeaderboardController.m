@@ -31,7 +31,7 @@
 
 - (void)viewDidLoad {
 
-    [self.view setBackgroundColor:[UIColor colorWithRed:153.0f/255.0f green:211.0f/255.0f blue:212.0f/255.0f alpha:1.0f]];
+    [self.view setBackgroundColor:[UIColor colorWithRed:156.0f/255.0f green:214.0f/255.0f blue:215.0f/255.0f alpha:1.0f]];
     tableData = [[NSMutableArray alloc] init];
     matchesForUser = [[NSMutableArray alloc] init];
     sortedFirstArray = [[NSArray alloc] init];
@@ -40,13 +40,13 @@
     NSNumber *screenWidth = @([UIScreen mainScreen].bounds.size.width);
 
     if([screenWidth intValue] == 320) {
-        tableHolder = [[UIView alloc] initWithFrame:CGRectMake(10, 120, 230, 368)];
+        tableHolder = [[UIView alloc] initWithFrame:CGRectMake(10, 120, 300, 368)];
     }
     else if([screenWidth intValue] == 375) {
-        tableHolder = [[UIView alloc] initWithFrame:CGRectMake(10, 140, 270, 432)];
+        tableHolder = [[UIView alloc] initWithFrame:CGRectMake(10, 140, 355, 432)];
     }
     else {
-        tableHolder = [[UIView alloc] initWithFrame:CGRectMake(10, 154, 298, 477)];
+        tableHolder = [[UIView alloc] initWithFrame:CGRectMake(10, 154, 394, 477)];
     }
     tableHolder.layoutMargins = UIEdgeInsetsZero;
     [self.view addSubview:tableHolder];
@@ -64,7 +64,7 @@
     _tableView.dataSource = self;
     _tableView.tag = 1;
     _tableView.separatorColor = [UIColor colorWithRed:218.0f/255.0f green:247.0f/255.0f blue:220.0f/255.0f alpha:1.0f];
-    _tableView.backgroundColor = [UIColor colorWithRed:153.0f/255.0f green:211.0f/255.0f blue:212.0f/255.0f alpha:1.0f];
+    _tableView.backgroundColor = [UIColor clearColor];
     _tableView.separatorInset = UIEdgeInsetsZero;
     _tableView.layoutMargins = UIEdgeInsetsZero;
     if([_tableView respondsToSelector:@selector(setCellLayoutMarginsFollowReadableWidth:)])
@@ -75,29 +75,29 @@
     
     
     if([screenWidth intValue] == 320) {
-        _tableViewScore = [[UITableView alloc] initWithFrame:CGRectMake(250, 120, 60, 368) style:UITableViewStylePlain];
+        _tableViewScore = [[UITableView alloc] initWithFrame:CGRectMake(240, 0, 60, 368) style:UITableViewStylePlain];
     }
     else if([screenWidth intValue] == 375) {
-        _tableViewScore = [[UITableView alloc] initWithFrame:CGRectMake(295, 140, 70, 432) style:UITableViewStylePlain];
+        _tableViewScore = [[UITableView alloc] initWithFrame:CGRectMake(285, 0, 70, 432) style:UITableViewStylePlain];
     }
     else {
-        _tableViewScore = [[UITableView alloc] initWithFrame:CGRectMake(327, 154, 77, 477) style:UITableViewStylePlain];
+        _tableViewScore = [[UITableView alloc] initWithFrame:CGRectMake(317, 0, 77, 477) style:UITableViewStylePlain];
     }
     _tableViewScore.delegate = self;
     _tableViewScore.dataSource = self;
     _tableViewScore.tag = 2;
     _tableViewScore.separatorColor = [UIColor clearColor];
     _tableViewScore.backgroundColor = [UIColor colorWithRed:218.0f/255.0f green:247.0f/255.0f blue:220.0f/255.0f alpha:1.0f];
-    //_tableViewScore.layer.masksToBounds = true;
-    //_tableViewScore.layer.cornerRadius = 8.0;
+    _tableViewScore.layer.masksToBounds = true;
+    _tableViewScore.layer.cornerRadius = 5.0;
     CGSize scrollableSize = CGSizeMake(60, 368);
     [_tableViewScore setContentSize:scrollableSize];
-    [self.view addSubview:_tableViewScore];
+    [tableHolder addSubview:_tableViewScore];
     
     NSMutableParagraphStyle *style =  [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
     style.alignment = NSTextAlignmentCenter;
     
-    NSAttributedString *attrString = [[NSAttributedString alloc] initWithString:@"LEADERBOARD" attributes:@{ NSParagraphStyleAttributeName : style, NSForegroundColorAttributeName : [UIColor colorWithRed:153.0f/255.0f green:211.0f/255.0f blue:212.0f/255.0f alpha:1.0f], NSFontAttributeName : [UIFont fontWithName:@"HelveticaNeue-Bold" size:20.0]}];
+    NSAttributedString *attrString = [[NSAttributedString alloc] initWithString:@"LEADERBOARD" attributes:@{ NSParagraphStyleAttributeName : style, NSForegroundColorAttributeName : [UIColor colorWithRed:156.0f/255.0f green:214.0f/255.0f blue:215.0f/255.0f alpha:1.0f], NSFontAttributeName : [UIFont fontWithName:@"HelveticaNeue-Bold" size:20.0]}];
     
     if([screenWidth intValue] == 320) {
         leaderboardtit = [[UILabel alloc] initWithFrame:CGRectMake(0, 20, 320, 60)];
@@ -122,7 +122,7 @@
     else {
         username = [[UILabel alloc] initWithFrame:CGRectMake(10, 116, 154, 22)];
     }
-    username.backgroundColor = [UIColor colorWithRed:153.0f/255.0f green:211.0f/255.0f blue:212.0f/255.0f alpha:1.0f];
+    username.backgroundColor = [UIColor clearColor];
     username.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:14.0];
     username.textColor = [UIColor colorWithRed:218.0f/255.0f green:247.0f/255.0f blue:220.0f/255.0f alpha:1.0f];
     NSDictionary *underlineAttribute = @{NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle)};
@@ -140,7 +140,7 @@
     else {
         matches = [[UILabel alloc] initWithFrame:CGRectMake(247, 116, 154, 22)];
     }
-    matches.backgroundColor = [UIColor colorWithRed:153.0f/255.0f green:211.0f/255.0f blue:212.0f/255.0f alpha:1.0f];
+    matches.backgroundColor = [UIColor clearColor];
     matches.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:14.0];
     NSDictionary *underlineAttribute2 = @{NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle)};
     matches.attributedText = [[NSAttributedString alloc] initWithString:@"MATCHES"
@@ -169,59 +169,36 @@
                     entry[@"matches"] = [object valueForKey:@"matches"];
                     
                     [entries addObject:entry];
-                    
-                    //transfer = entries;
                 }
                 NSSortDescriptor * descriptor = [[NSSortDescriptor alloc] initWithKey:@"matches" ascending:NO selector:@selector(localizedStandardCompare:)];
                 NSArray *entrieshold = [entries sortedArrayUsingDescriptors:@[descriptor]];
                 transfer = [entrieshold copy];
-                NSLog([transfer description]);
-                
-                /*transfer = [entries sortedArrayUsingComparator:^NSComparisonResult(NSDictionary* a, NSDictionary* b) {
-                    NSDate *first  = [a objectForKey:@"matches"];
-                    NSDate *second = [b objectForKey:@"matches"];
-                    NSLog(first);
-                    NSLog(second);
-                    return [first compare:second];
-                }];*/
-                //dictionary = [NSDictionary dictionaryWithObjects:matchesForUser forKeys:tableData];
-                //sortedFirstArray = [dictionary allKeys];
-                //sortedSecondArray = [dictionary objectsForKeys:sortedFirstArray notFoundMarker:[NSNull null]];
-                //sortedSecondArray = [sortedSecondArray sortedArrayUsingSelector: @selector(compare:)];
+
                 [_tableView reloadData];
                 [_tableViewScore reloadData];
                 
             }else{
                 NSLog([error description]);
             }
-            
-            NSLog(@"***tabledata***");
-            NSLog([NSString stringWithFormat:@"%lu", (unsigned long)[tableData count]]);
-            NSLog(@"***matchesdata***");
-            NSLog([NSString stringWithFormat:@"%lu", (unsigned long)[matchesForUser count]]);
         });
     }];
-    
-    /*dictionary = [NSDictionary dictionaryWithObjects:matchesForUser forKeys:tableData];
-    sortedFirstArray = [[dictionary allKeys] sortedArrayUsingSelector:@selector(compare:)];
-    sortedSecondArray = [dictionary objectsForKeys:sortedFirstArray notFoundMarker:[NSNull null]];*/
     
     if([screenWidth intValue] == 320) {
         backToMap = [[UIButton alloc] initWithFrame:CGRectMake(10, 498, 300, 60)];
     }
     else if([screenWidth intValue] == 375) {
-        backToMap = [[UIButton alloc] initWithFrame:CGRectMake(10, 585, 355, 60)];
+        backToMap = [[UIButton alloc] initWithFrame:CGRectMake(10, 585, 355, 72)];
     }
     else {
         backToMap = [[UIButton alloc] initWithFrame:CGRectMake(10, 645.5, 394, 80)];
     }
     backToMap.backgroundColor = [UIColor colorWithRed:218.0f/255.0f green:247.0f/255.0f blue:220.0f/255.0f alpha:1.0f];
     backToMap.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:20.0];
-    [backToMap setTitleColor:[UIColor colorWithRed:153.0f/255.0f green:211.0f/255.0f blue:212.0f/255.0f alpha:1.0f] forState:UIControlStateNormal];
+    [backToMap setTitleColor:[UIColor colorWithRed:156.0f/255.0f green:214.0f/255.0f blue:215.0f/255.0f alpha:1.0f] forState:UIControlStateNormal];
     [backToMap addTarget:self action:@selector(dismiss) forControlEvents:UIControlEventTouchUpInside];
     [backToMap setTitle:@"BACK TO MAP" forState:UIControlStateNormal];
-    //backToMap.layer.masksToBounds = true;
-    //backToMap.layer.cornerRadius = 8.0;
+    backToMap.layer.masksToBounds = true;
+    backToMap.layer.cornerRadius = 5.0;
     [self.view addSubview:backToMap];
 }
 
@@ -234,13 +211,14 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    static NSString *simpleTableIdentifier = @"SimpleTableItem";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
+
     if(tableView.tag == 1) {
-        static NSString *simpleTableIdentifier = @"SimpleTableItem";
-        
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
         cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:16.0];
         cell.textLabel.textColor = [UIColor colorWithRed:218.0f/255.0f green:247.0f/255.0f blue:220.0f/255.0f alpha:1.0f];
-        cell.backgroundColor = [UIColor colorWithRed:153.0f/255.0f green:211.0f/255.0f blue:212.0f/255.0f alpha:1.0f];
+        cell.backgroundColor = [UIColor colorWithRed:156.0f/255.0f green:214.0f/255.0f blue:215.0f/255.0f alpha:1.0f];
         cell.layoutMargins = UIEdgeInsetsZero;
         cell.preservesSuperviewLayoutMargins = NO;
         
@@ -251,14 +229,11 @@
         UILabel *contentV = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 230, 44)];
         contentV.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:16.0];
         contentV.textColor = [UIColor colorWithRed:218.0f/255.0f green:247.0f/255.0f blue:220.0f/255.0f alpha:1.0f];
-        contentV.backgroundColor = [UIColor colorWithRed:153.0f/255.0f green:211.0f/255.0f blue:212.0f/255.0f alpha:1.0f];
+        contentV.backgroundColor = [UIColor colorWithRed:156.0f/255.0f green:214.0f/255.0f blue:215.0f/255.0f alpha:1.0f];
 
         cell.contentView.layoutMargins = UIEdgeInsetsZero;
 
         NSString *username2 = [[transfer objectAtIndex:indexPath.row] valueForKey:@"username"];
-        
-        NSLog(@"***username***");
-        NSLog(username2);
         
         contentV.text = username2;
         [cell.contentView addSubview:contentV];
@@ -266,9 +241,6 @@
         return cell;
     }
     else {
-        static NSString *simpleTableIdentifier = @"SimpleTableItem";
-        
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
         cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:16.0];
         cell.textLabel.textColor = [UIColor colorWithRed:153.0f/255.0f green:211.0f/255.0f blue:212.0f/255.0f alpha:1.0f];
         cell.backgroundColor = [UIColor colorWithRed:218.0f/255.0f green:247.0f/255.0f blue:220.0f/255.0f alpha:1.0f];
@@ -279,13 +251,10 @@
         }
         
         NSString *matchAmount = [[transfer objectAtIndex:indexPath.row] valueForKey:@"matches"];
-        NSLog(@"***matchamount***");
-        NSLog(matchAmount);
         
         cell.textLabel.text = matchAmount;
         
         return cell;
-
     }
 }
 

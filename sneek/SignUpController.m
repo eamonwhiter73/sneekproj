@@ -202,8 +202,6 @@
     }
     [user setObject:@"0" forKey:@"matches"];
     
-    // other fields can be set just like with PFObject
-    
     [user signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (!error) {   // Hooray! Let them use the app now.
             [userdefaults setObject:user.username forKey:@"pfuser"];
@@ -216,7 +214,8 @@
             
             ViewController* map = [[ViewController alloc] init];
             [[[[UIApplication sharedApplication] delegate] window] setRootViewController:map];
-        } else {   NSString *errorString = [error userInfo][@"error"];
+        } else {
+            NSString *errorString = [[NSString alloc] initWithFormat:@"%@", [error userInfo][@"error"]];
             NSLog(errorString);
         }
     }];
@@ -239,8 +238,8 @@
 
 - (void) animateTextView:(BOOL) up
 {
-    const int movementDistance = 216; // tweak as needed
-    const float movementDuration = 0.3f; // tweak as needed
+    const int movementDistance = 216;
+    const float movementDuration = 0.3f;
     int movement= movement = (up ? -movementDistance : movementDistance);
     NSLog(@"%d",movement);
     

@@ -104,12 +104,6 @@ typedef void (^CompletionHandlerType)();
 
     deviceNotFoundAlert = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];
     
-    picker = [[UIImagePickerController alloc] init];
-    picker.delegate = self;
-    picker.modalPresentationStyle = UIModalPresentationCurrentContext;
-    picker.sourceType = UIImagePickerControllerSourceTypeCamera;
-    self.imagePickerController = picker;
-    
     letters  = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXZY0123456789";
     
     NSNumber *screenWidth = @([UIScreen mainScreen].bounds.size.width);
@@ -244,7 +238,7 @@ typedef void (^CompletionHandlerType)();
         matchesNumber = [[UILabel alloc] initWithFrame:CGRectMake(120, 5, 60, 20)];
     }
     else if([screenWidth intValue] == 375) {
-        matchesNumber = [[UILabel alloc] initWithFrame:CGRectMake(140.5, 5, 70, 20)];
+        matchesNumber = [[UILabel alloc] initWithFrame:CGRectMake(120, 5, 60, 20)];
     }
     else {
         matchesNumber = [[UILabel alloc] initWithFrame:CGRectMake(120, 7, 77, 20)];
@@ -254,6 +248,17 @@ typedef void (^CompletionHandlerType)();
     matchesNumber.textColor = [UIColor colorWithRed:156.0f/255.0f green:214.0f/255.0f blue:215.0f/255.0f alpha:1.0f];
     matchesNumber.layer.masksToBounds = true;
     matchesNumber.layer.cornerRadius = 3.0f;
+    
+    if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])  {
+        //
+    }
+    else {
+        picker = [[UIImagePickerController alloc] init];
+        picker.delegate = self;
+        picker.modalPresentationStyle = UIModalPresentationCurrentContext;
+        picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+        self.imagePickerController = picker;
+    }
     
     userdefaults = [NSUserDefaults standardUserDefaults];
     
