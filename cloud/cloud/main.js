@@ -15,7 +15,7 @@ Parse.Cloud.define("sendpush", function(request, response) {
 	Parse.Push.send({
         where: query,
         data: {
-            alert: "One of your sneeks was matched by " + request.params.username
+            alert: "One of your pix was matched by " + request.params.username
         }
     }, {
     success: function() {

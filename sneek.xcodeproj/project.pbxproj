@@ -27,8 +27,6 @@
 		DD55379E1C06A384002B52DD /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = DD55379D1C06A384002B52DD /* libsqlite3.tbd */; };
 		DD5537A01C06A3A1002B52DD /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD55379F1C06A3A1002B52DD /* Accounts.framework */; };
 		DD5537A21C06A3A7002B52DD /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD5537A11C06A3A7002B52DD /* Social.framework */; };
-		DD6902841D629AD800C88CB6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DD6902831D629AD800C88CB6 /* LaunchScreen.storyboard */; };
-		DD6902861D6345E600C88CB6 /* LaunchScreen1.png in Resources */ = {isa = PBXBuildFile; fileRef = DD6902851D6345E600C88CB6 /* LaunchScreen1.png */; };
 		DD8D199E1C26E84F000E7418 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD8D199C1C26E84F000E7418 /* Bolts.framework */; };
 		DD8D199F1C26E84F000E7418 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD8D199D1C26E84F000E7418 /* Parse.framework */; };
 		DD8D19A21C28C267000E7418 /* LeaderboardController.m in Sources */ = {isa = PBXBuildFile; fileRef = DD8D19A11C28C267000E7418 /* LeaderboardController.m */; };
@@ -50,6 +48,7 @@
 		DDA63C081D63BC5C00A9E878 /* AFURLRequestSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = DDA63C001D63BC5C00A9E878 /* AFURLRequestSerialization.m */; };
 		DDA63C091D63BC5C00A9E878 /* AFURLResponseSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = DDA63C021D63BC5C00A9E878 /* AFURLResponseSerialization.m */; };
 		DDA63C0A1D63BC5C00A9E878 /* AFURLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DDA63C041D63BC5C00A9E878 /* AFURLSessionManager.m */; };
+		DDC6395C1D7922A200F765DF /* LaunchScreenNew.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DDC6395B1D7922A100F765DF /* LaunchScreenNew.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,7 +70,7 @@
 
 /* Begin PBXFileReference section */
 		DD1F1CB31D6647FF00D55484 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = main.m; path = sneek/main.m; sourceTree = "<group>"; };
-		DD3000F51C067A95002E43C1 /* sneek.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = sneek.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		DD3000F51C067A95002E43C1 /* pixovery.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = pixovery.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD3000F91C067A95002E43C1 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		DD3000FB1C067A95002E43C1 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		DD3000FC1C067A95002E43C1 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -100,8 +99,6 @@
 		DD55379D1C06A384002B52DD /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		DD55379F1C06A3A1002B52DD /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		DD5537A11C06A3A7002B52DD /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
-		DD6902831D629AD800C88CB6 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
-		DD6902851D6345E600C88CB6 /* LaunchScreen1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LaunchScreen1.png; sourceTree = "<group>"; };
 		DD8D199C1C26E84F000E7418 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
 		DD8D199D1C26E84F000E7418 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
 		DD8D19A01C28C257000E7418 /* LeaderboardController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeaderboardController.h; sourceTree = "<group>"; };
@@ -131,6 +128,7 @@
 		DDA63C021D63BC5C00A9E878 /* AFURLResponseSerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLResponseSerialization.m; sourceTree = "<group>"; };
 		DDA63C031D63BC5C00A9E878 /* AFURLSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFURLSessionManager.h; sourceTree = "<group>"; };
 		DDA63C041D63BC5C00A9E878 /* AFURLSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLSessionManager.m; sourceTree = "<group>"; };
+		DDC6395B1D7922A100F765DF /* LaunchScreenNew.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreenNew.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -227,7 +225,7 @@
 		DD3000F61C067A95002E43C1 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				DD3000F51C067A95002E43C1 /* sneek.app */,
+				DD3000F51C067A95002E43C1 /* pixovery.app */,
 				DD3001111C067A95002E43C1 /* sneekTests.xctest */,
 				DD30011C1C067A95002E43C1 /* sneekUITests.xctest */,
 			);
@@ -252,10 +250,9 @@
 				DD30012E1C06839C002E43C1 /* SignUpController.h */,
 				DD30012F1C0683AA002E43C1 /* SignUpController.m */,
 				DD55377F1C068A2A002B52DD /* Images.xcassets */,
-				DD6902851D6345E600C88CB6 /* LaunchScreen1.png */,
 				DD8D19A01C28C257000E7418 /* LeaderboardController.h */,
 				DD8D19A11C28C267000E7418 /* LeaderboardController.m */,
-				DD6902831D629AD800C88CB6 /* LaunchScreen.storyboard */,
+				DDC6395B1D7922A100F765DF /* LaunchScreenNew.storyboard */,
 			);
 			path = sneek;
 			sourceTree = "<group>";
@@ -323,7 +320,7 @@
 			);
 			name = sneek;
 			productName = sneek;
-			productReference = DD3000F51C067A95002E43C1 /* sneek.app */;
+			productReference = DD3000F51C067A95002E43C1 /* pixovery.app */;
 			productType = "com.apple.product-type.application";
 		};
 		DD3001101C067A95002E43C1 /* sneekTests */ = {
@@ -410,9 +407,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DD6902861D6345E600C88CB6 /* LaunchScreen1.png in Resources */,
 				DD5537801C068A2A002B52DD /* Images.xcassets in Resources */,
-				DD6902841D629AD800C88CB6 /* LaunchScreen.storyboard in Resources */,
+				DDC6395C1D7922A200F765DF /* LaunchScreenNew.storyboard in Resources */,
 				DDA63BD21D63B57200A9E878 /* GoogleMaps.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -502,8 +498,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "Apple Development IOS Push Services: com.eamon.sneek";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Development IOS Push Services: com.eamon.sneek";
+				CODE_SIGN_IDENTITY = "Apple Push Services: com.eamon.sneek";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Push Services: com.eamon.sneek";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -547,8 +543,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "Apple Development IOS Push Services: com.eamon.sneek";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Development IOS Push Services: com.eamon.sneek";
+				CODE_SIGN_IDENTITY = "Apple Push Services: com.eamon.sneek";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Push Services: com.eamon.sneek";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -586,7 +582,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.eamon.sneek;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = pixovery;
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -609,7 +605,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.eamon.sneek;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = pixovery;
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

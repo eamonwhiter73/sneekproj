@@ -78,6 +78,7 @@
 
 - (void)viewDidLoad {
     NSNumber *screenWidth = @([UIScreen mainScreen].bounds.size.width);
+    NSLog([screenWidth description]);
     
     if([screenWidth intValue] == 320) {
         [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"LaunchImage568"]]];
@@ -85,24 +86,46 @@
     else if([screenWidth intValue] == 375) {
         [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"LaunchImage667"]]];
     }
-    else {
+    else if([screenWidth intValue] == 414) { //6+
         [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"LaunchImage1242"]]];
     }
+    else if([screenWidth intValue] == 768) { //ipad2
+        [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"LaunchImage768"]]];
+    }
+    else if([screenWidth intValue] == 1024) { //IPAD
+        [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"LaunchImage1024"]]];
+    }
+    
 
     [self enableMyLocation];
     
     if([screenWidth intValue] == 320) {
         textFieldLoc = [[UITextField alloc] initWithFrame:CGRectMake(59.5, 310, 201, 40)];
+        textFieldLoc.font = [UIFont systemFontOfSize:16];
     }
     else if([screenWidth intValue] == 375) {
         textFieldLoc = [[UITextField alloc] initWithFrame:CGRectMake(70, 364, 235.5, 40)];
+        textFieldLoc.font = [UIFont systemFontOfSize:16];
     }
-    else {
+    else if([screenWidth intValue] == 414) {
         textFieldLoc = [[UITextField alloc] initWithFrame:CGRectMake(77, 402, 260, 40)];
+        textFieldLoc.font = [UIFont systemFontOfSize:16];
+    }
+    else if([screenWidth intValue] == 768) { //ipad2
+        textFieldLoc = [[UITextField alloc] initWithFrame:CGRectMake(143, 659, 482, 40)];
+        textFieldLoc.layer.masksToBounds = true;
+        textFieldLoc.layer.cornerRadius = 10.0;
+        textFieldLoc.font = [UIFont systemFontOfSize:16];
+    }
+    else if([screenWidth intValue] == 1024) { //IPAD
+        textFieldLoc.font = [UIFont systemFontOfSize:32];
+        textFieldLoc = [[UITextField alloc] initWithFrame:CGRectMake(191, 865, 641, 60)];
+        textFieldLoc.layer.masksToBounds = true;
+        textFieldLoc.layer.cornerRadius = 15.0;
     }
     textFieldLoc.borderStyle = UITextBorderStyleRoundedRect;
-    textFieldLoc.font = [UIFont systemFontOfSize:15];
-    textFieldLoc.placeholder = @"enter username";
+    
+    textFieldLoc.placeholder = @" enter username";
     textFieldLoc.autocorrectionType = UITextAutocorrectionTypeNo;
     textFieldLoc.keyboardType = UIKeyboardTypeDefault;
     textFieldLoc.returnKeyType = UIReturnKeyDone;
@@ -110,20 +133,39 @@
     textFieldLoc.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
     textFieldLoc.delegate = self;
     textFieldLoc.tag = 1;
+    
     [self.view addSubview:textFieldLoc];
     
     if([screenWidth intValue] == 320) {
         emailFieldLoc = [[UITextField alloc] initWithFrame:CGRectMake(59.5, 410, 201, 40)];
+        emailFieldLoc.font = [UIFont systemFontOfSize:16];
+
     }
     else if([screenWidth intValue] == 375) {
         emailFieldLoc = [[UITextField alloc] initWithFrame:CGRectMake(70, 481, 235.5, 40)];
+        emailFieldLoc.font = [UIFont systemFontOfSize:16];
+
     }
-    else {
+    else if([screenWidth intValue] == 414) {
         emailFieldLoc = [[UITextField alloc] initWithFrame:CGRectMake(77, 531, 260, 40)];
+        emailFieldLoc.font = [UIFont systemFontOfSize:16];
+
+    }
+    else if([screenWidth intValue] == 768) { //ipad2
+        emailFieldLoc = [[UITextField alloc] initWithFrame:CGRectMake(143, 778, 482, 40)];
+        emailFieldLoc.layer.masksToBounds = true;
+        emailFieldLoc.layer.cornerRadius = 10.0;
+        emailFieldLoc.font = [UIFont systemFontOfSize:16];
+
+    }
+    else if([screenWidth intValue] == 1024) { //IPAD
+        emailFieldLoc = [[UITextField alloc] initWithFrame:CGRectMake(191, 1047, 641, 60)];
+        emailFieldLoc.layer.masksToBounds = true;
+        emailFieldLoc.layer.cornerRadius = 15.0;
+        emailFieldLoc.font = [UIFont systemFontOfSize:32];
     }
     emailFieldLoc.borderStyle = UITextBorderStyleRoundedRect;
-    emailFieldLoc.font = [UIFont systemFontOfSize:15];
-    emailFieldLoc.placeholder = @"enter email";
+    emailFieldLoc.placeholder = @" enter email";
     emailFieldLoc.autocorrectionType = UITextAutocorrectionTypeNo;
     emailFieldLoc.keyboardType = UIKeyboardTypeDefault;
     emailFieldLoc.returnKeyType = UIReturnKeyDone;
@@ -131,24 +173,41 @@
     emailFieldLoc.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
     emailFieldLoc.delegate = self;
     emailFieldLoc.tag = 3;
+    
     [self.view addSubview:emailFieldLoc];
 
-    CGRect passwordTextFieldFrame;
     if([screenWidth intValue] == 320) {
-        passwordTextFieldFrame = CGRectMake(59.5, 360, 201, 40);
+        passwordTextField = [[UITextField alloc] initWithFrame:CGRectMake(59.5, 360, 201, 40)];
+        passwordTextField.font = [UIFont systemFontOfSize:16];
+
     }
     else if([screenWidth intValue] == 375) {
-        passwordTextFieldFrame = CGRectMake(70, 423, 235.5, 40);
+        passwordTextField = [[UITextField alloc] initWithFrame:CGRectMake(70, 423, 235.5, 40)];
+        passwordTextField.font = [UIFont systemFontOfSize:16];
+
     }
-    else {
-        passwordTextFieldFrame = CGRectMake(77, 467, 260, 40);
+    else if([screenWidth intValue] == 414) {
+        passwordTextField = [[UITextField alloc] initWithFrame:CGRectMake(77, 467, 260, 40)];
+        passwordTextField.font = [UIFont systemFontOfSize:16];
+
     }
-    passwordTextField = [[UITextField alloc] initWithFrame:passwordTextFieldFrame];
+    else if([screenWidth intValue] == 768) { //ipad2
+        passwordTextField = [[UITextField alloc] initWithFrame:CGRectMake(143, 719, 482, 40)];
+        passwordTextField.font = [UIFont systemFontOfSize:16];
+
+        passwordTextField.layer.masksToBounds = true;
+        passwordTextField.layer.cornerRadius = 10.0;
+    }
+    else if([screenWidth intValue] == 1024) { //IPAD
+        passwordTextField = [[UITextField alloc] initWithFrame:CGRectMake(191, 956, 641, 60)];
+        passwordTextField.font = [UIFont systemFontOfSize:32];
+        passwordTextField.layer.masksToBounds = true;
+        passwordTextField.layer.cornerRadius = 15.0;
+    }
     passwordTextField.secureTextEntry = YES;
-    passwordTextField.placeholder = @"enter password";
+    passwordTextField.placeholder = @" enter password";
     passwordTextField.backgroundColor = [UIColor whiteColor];
     passwordTextField.textColor = [UIColor blackColor];
-    passwordTextField.font = [UIFont systemFontOfSize:14.0f];
     passwordTextField.borderStyle = UITextBorderStyleRoundedRect;
     passwordTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
     passwordTextField.returnKeyType = UIReturnKeyDone;
@@ -156,21 +215,36 @@
     passwordTextField.tag = 2;
     passwordTextField.delegate = self;
     passwordTextField.autocapitalizationType = UITextAutocapitalizationTypeNone;
+
     [self.view addSubview:passwordTextField];
     
     UIButton *signUpButton;
     if([screenWidth intValue] == 320) {
         signUpButton = [[UIButton alloc] initWithFrame:CGRectMake(59.5, 460, 201, 40)];
+        signUpButton.layer.masksToBounds = true;
+        signUpButton.layer.cornerRadius = 5.0;
     }
     else if([screenWidth intValue] == 375) {
         signUpButton = [[UIButton alloc] initWithFrame:CGRectMake(70, 540, 235.5, 40)];
+        signUpButton.layer.masksToBounds = true;
+        signUpButton.layer.cornerRadius = 5.0;
     }
-    else {
+    else if([screenWidth intValue] == 414) {
         signUpButton = [[UIButton alloc] initWithFrame:CGRectMake(77, 596, 260, 40)];
+        signUpButton.layer.masksToBounds = true;
+        signUpButton.layer.cornerRadius = 5.0;
+    }
+    else if([screenWidth intValue] == 768) { //ipad2
+        signUpButton = [[UIButton alloc] initWithFrame:CGRectMake(143, 839, 482, 40)];
+        signUpButton.layer.masksToBounds = true;
+        signUpButton.layer.cornerRadius = 10.0;
+    }
+    else if([screenWidth intValue] == 1024) { //IPAD
+        signUpButton = [[UIButton alloc] initWithFrame:CGRectMake(191, 1138, 641, 60)];
+        signUpButton.layer.masksToBounds = true;
+        signUpButton.layer.cornerRadius = 15.0;
     }
     signUpButton.backgroundColor = [UIColor colorWithRed:218.0f/255.0f green:247.0f/255.0f blue:220.0f/255.0f alpha:1.0f];
-    signUpButton.layer.masksToBounds = true;
-    signUpButton.layer.cornerRadius = 5.0;
     [signUpButton setTitle:@"SIGN UP" forState:UIControlStateNormal];
     signUpButton.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:24.0];
     [signUpButton setTitleColor:[UIColor colorWithRed:156.0f/255.0f green:214.0f/255.0f blue:215.0f/255.0f alpha:1.0f] forState:UIControlStateNormal];

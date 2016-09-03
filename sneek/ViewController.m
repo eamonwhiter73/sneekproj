@@ -40,12 +40,13 @@ typedef void (^CompletionHandlerType)();
     PFObject *deleteObjectId;
     NSString *letters;
     NSString* r;
-    UIActivityIndicatorView *indicator;
     UIAlertController *deviceNotFoundAlertController;
     UIAlertAction *deviceNotFoundAlert;
     UIImagePickerController *picker;
     NSUserDefaults *userdefaults;
     NSArray* placesObjects;
+    UILabel *notclose;
+    int gotahit;
 }
 
 @end
@@ -95,7 +96,7 @@ typedef void (^CompletionHandlerType)();
         }
     }];
     
-    indicator = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    UIActivityIndicatorView *indicator = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
     indicator.frame = CGRectMake(0.0, 0.0, 40.0, 40.0);
     indicator.center = self.view.center;
     [self.view addSubview:indicator];
@@ -110,35 +111,69 @@ typedef void (^CompletionHandlerType)();
     
     if([screenWidth intValue] == 320) {
         image = [[UIImageView alloc] initWithFrame:CGRectMake(10, 30, 300, 426)];
+        image.layer.cornerRadius = 10.0;
     }
     else if([screenWidth intValue] == 375) {
         image = [[UIImageView alloc] initWithFrame:CGRectMake(10, 30, 355, 500)];
+        image.layer.cornerRadius = 10.0;
     }
-    else {
-        image = [[UIImageView alloc] initWithFrame:CGRectMake(10, 30, 392, 552)];
+    else if([screenWidth intValue] == 414) {
+        image = [[UIImageView alloc] initWithFrame:CGRectMake(10, 30, 394, 860)];
+        image.layer.cornerRadius = 10.0;
+    }
+    else if([screenWidth intValue] == 768) {
+        image = [[UIImageView alloc] initWithFrame:CGRectMake(20, 46, 727, 768)];
+        image.layer.cornerRadius = 7.5;
+    }
+    else if([screenWidth intValue] == 1024) { //IPAD
+        image = [[UIImageView alloc] initWithFrame:CGRectMake(27, 60, 969, 1009)];
+        image.layer.cornerRadius = 5.0;
     }
     [image setHidden:YES];
     image.layer.masksToBounds = true;
-    image.layer.cornerRadius = 10.0;
     [self.view addSubview:image];
     
     if([screenWidth intValue] == 320) {
         respondButton = [[UIButton alloc] initWithFrame:CGRectMake(10, 466, 300, 92)];
+        respondButton.layer.cornerRadius = 10.0;
+        respondButton.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:36.0];
+
+
     }
     else if([screenWidth intValue] == 375) {
         respondButton = [[UIButton alloc] initWithFrame:CGRectMake(10, 547, 355, 92)];
+        respondButton.layer.cornerRadius = 10.0;
+        respondButton.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:36.0];
+
+
     }
-    else {
-        respondButton = [[UIButton alloc] initWithFrame:CGRectMake(10, 604, 392, 101.5)];
+    else if([screenWidth intValue] == 414) {
+        respondButton = [[UIButton alloc] initWithFrame:CGRectMake(10, 900, 392, 170)];
+        respondButton.layer.cornerRadius = 10.0;
+        respondButton.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:36.0];
+
+
+    }
+    else if([screenWidth intValue] == 768) {
+        respondButton = [[UIButton alloc] initWithFrame:CGRectMake(20, 840, 727, 141)];
+        respondButton.layer.cornerRadius = 7.5;
+        respondButton.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:36.0];
+
+        
+    }
+    else if([screenWidth intValue] == 1024) { //IPAD
+        respondButton = [[UIButton alloc] initWithFrame:CGRectMake(27, 1096, 969, 230)];
+        respondButton.layer.cornerRadius = 5.0;
+        respondButton.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:72.0];
+
+
     }
     respondButton.backgroundColor = [UIColor colorWithRed:156.0f/255.0f green:214.0f/255.0f blue:215.0f/255.0f alpha:1.0f];
     [respondButton setTitle:@"MATCH IT" forState:UIControlStateNormal];
-    respondButton.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:24.0];
     [respondButton setTitleColor:[UIColor colorWithRed:218.0f/255.0f green:247.0f/255.0f blue:220.0f/255.0f alpha:1.0f] forState:UIControlStateNormal];
     [respondButton addTarget:self action:@selector(openCamera) forControlEvents:UIControlEventTouchUpInside];
     [respondButton setHidden:YES];
     respondButton.layer.masksToBounds = true;
-    respondButton.layer.cornerRadius = 10.0;
     [self.view addSubview:respondButton];
     
     if([screenWidth intValue] == 320) {
@@ -147,8 +182,14 @@ typedef void (^CompletionHandlerType)();
     else if([screenWidth intValue] == 375) {
         xButton = [[UIButton alloc] initWithFrame:CGRectMake(342, 23, 25, 25)];
     }
-    else {
-        xButton = [[UIButton alloc] initWithFrame:CGRectMake(377.5, 25, 50, 50)];
+    else if([screenWidth intValue] == 414) {
+        xButton = [[UIButton alloc] initWithFrame:CGRectMake(379, 25, 50, 50)];
+    }
+    else if([screenWidth intValue] == 768) {
+        xButton = [[UIButton alloc] initWithFrame:CGRectMake(734.5, 35, 25, 25)];
+    }
+    else if([screenWidth intValue] == 1024) { //IPAD
+        xButton = [[UIButton alloc] initWithFrame:CGRectMake(983.5, 47, 25, 25)];
     }
     xButton.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"xbutton"]];
     [xButton addTarget:self action:@selector(close) forControlEvents:UIControlEventTouchUpInside];
@@ -161,8 +202,14 @@ typedef void (^CompletionHandlerType)();
     else if([screenWidth intValue] == 375) {
         menu = [[UIView alloc] initWithFrame:CGRectMake(86.25, 593, 202.5, 54)];
     }
-    else {
+    else if([screenWidth intValue] == 414) {
         menu = [[UIView alloc] initWithFrame:CGRectMake(104, 654, 205, 73)];
+    }
+    else if([screenWidth intValue] == 768) {
+        menu = [[UIView alloc] initWithFrame:CGRectMake(177, 873, 415, 111)];
+    }
+    else if([screenWidth intValue] == 1024) { //IPAD
+        menu = [[UIView alloc] initWithFrame:CGRectMake(235.5, 1214, 553, 110.5)];
     }
     menu.backgroundColor = [UIColor colorWithRed:156.0f/255.0f green:214.0f/255.0f blue:215.0f/255.0f alpha:0.9f];
     menu.layer.masksToBounds = true;
@@ -171,42 +218,88 @@ typedef void (^CompletionHandlerType)();
     
     if([screenWidth intValue] == 320) {
         leadbut = [[UIButton alloc] initWithFrame:CGRectMake(19, 7, 39.5, 39.5)];
+        leadbut.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"leadbut"]];
+
     }
     else if([screenWidth intValue] == 375) {
         leadbut = [[UIButton alloc] initWithFrame:CGRectMake(19, 7, 39.5, 39.5)];
+        leadbut.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"leadbut"]];
+
     }
-    else {
+    else if([screenWidth intValue] == 414) {
         leadbut = [[UIButton alloc] initWithFrame:CGRectMake(10, 10, 53, 53)];
+        leadbut.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"leadbut"]];
+
     }
-    leadbut.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"leadbut"]];
+    else if([screenWidth intValue] == 768) {
+        leadbut = [[UIButton alloc] initWithFrame:CGRectMake(30, 15, 82, 82)];
+        leadbut.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"leadbutipadp"]];
+        
+    }
+    else if([screenWidth intValue] == 1024) { //IPAD
+        leadbut = [[UIButton alloc] initWithFrame:CGRectMake(52, 14, 82, 82)];
+        leadbut.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"leadbutipadp"]];
+
+    }
+    
     [leadbut addTarget:self action:@selector(leaderboardOpen) forControlEvents:UIControlEventTouchUpInside];
     [menu addSubview:leadbut];
     
     if([screenWidth intValue] == 320) {
         tome = [[UIButton alloc] initWithFrame:CGRectMake(141.25, 7, 39.5, 39.5)];
+        tome.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"tome"]];
+
     }
     else if([screenWidth intValue] == 375) {
         tome = [[UIButton alloc] initWithFrame:CGRectMake(141.25, 7, 39.5, 39.5)];
+        tome.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"tome"]];
+
     }
-    else {
+    else if([screenWidth intValue] == 414) {
         tome = [[UIButton alloc] initWithFrame:CGRectMake(142.5, 10, 53, 53)];
+        tome.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"tome"]];
+
     }
-    tome.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"tome"]];
+    else if([screenWidth intValue] == 768) {
+        tome = [[UIButton alloc] initWithFrame:CGRectMake(303, 15, 82, 82)];
+        tome.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"tomeipadp"]];
+        
+    }
+    else if([screenWidth intValue] == 1024) { //IPAD
+        tome = [[UIButton alloc] initWithFrame:CGRectMake(419, 14, 82, 82)];
+        tome.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"tomeipadp"]];
+
+    }
     [tome addTarget:self action:@selector(centerloc) forControlEvents:UIControlEventTouchUpInside];
     [menu addSubview:tome];
     
     
     if([screenWidth intValue] == 320) {
         camerabut = [[UIButton alloc] initWithFrame:CGRectMake(78.375, 5.5, 43, 43)];
+        camerabut.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"camerabut"]];
+
     }
     else if([screenWidth intValue] == 375) {
         camerabut = [[UIButton alloc] initWithFrame:CGRectMake(78.375, 5.5, 43, 43)];
+        camerabut.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"camerabut"]];
+
     }
-    else {
+    else if([screenWidth intValue] == 414) {
         camerabut = [[UIButton alloc] initWithFrame:CGRectMake(72, 5.5, 62, 62)];
+        camerabut.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"camerabut"]];
+
+    }
+    else if([screenWidth intValue] == 768) {
+        camerabut = [[UIButton alloc] initWithFrame:CGRectMake(163.5, 11.5, 88, 88)];
+        camerabut.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"camerabutipadp"]];
+        
+    }
+    else if([screenWidth intValue] == 1024) { //IPAD
+        camerabut = [[UIButton alloc] initWithFrame:CGRectMake(232.5, 11, 88, 88)];
+        camerabut.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"camerabutipadp"]];
+
     }
     
-    camerabut.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"camerabut"]];
     [camerabut addTarget:self action:@selector(dropSneek) forControlEvents:UIControlEventTouchUpInside];
     [menu addSubview:camerabut];
     
@@ -220,34 +313,71 @@ typedef void (^CompletionHandlerType)();
     
     if([screenWidth intValue] == 320) {
         myMatches = [[UILabel alloc] initWithFrame:CGRectMake(67.5, 40, 185, 30)];
+        myMatches.layer.cornerRadius = 3.0f;
+
     }
     else if([screenWidth intValue] == 375) {
         myMatches = [[UILabel alloc] initWithFrame:CGRectMake(95, 40, 185, 30)];
+        myMatches.layer.cornerRadius = 3.0f;
+
     }
-    else {
+    else if([screenWidth intValue] == 414) {
         myMatches = [[UILabel alloc] initWithFrame:CGRectMake(105, 44, 204, 33)];
+        myMatches.layer.cornerRadius = 3.0f;
+
+    }
+    else if([screenWidth intValue] == 768) {
+        myMatches = [[UILabel alloc] initWithFrame:CGRectMake(195, 61, 379, 51)];
+        myMatches.layer.cornerRadius = 5.5f;
+        attrText = [[NSAttributedString alloc] initWithString:@"MY MATCHES" attributes:@{ NSParagraphStyleAttributeName : style, NSForegroundColorAttributeName : [UIColor colorWithRed:211.0f/255.0f green:243.0f/255.0f blue:219.0f/255.0f alpha:1.0f], NSFontAttributeName : [UIFont fontWithName:@"HelveticaNeue-Bold" size:32.0]}];
+        
+    }
+    else if([screenWidth intValue] == 1024) { //IPAD
+        myMatches = [[UILabel alloc] initWithFrame:CGRectMake(300, 109, 425, 60)];
+        myMatches.layer.cornerRadius = 8.0f;
+        attrText = [[NSAttributedString alloc] initWithString:@"MY MATCHES" attributes:@{ NSParagraphStyleAttributeName : style, NSForegroundColorAttributeName : [UIColor colorWithRed:211.0f/255.0f green:243.0f/255.0f blue:219.0f/255.0f alpha:1.0f], NSFontAttributeName : [UIFont fontWithName:@"HelveticaNeue-Bold" size:32.0]}];
+
     }
     myMatches.backgroundColor = [UIColor colorWithRed:156.0f/255.0f green:214.0f/255.0f blue:215.0f/255.0f alpha:0.9f];
     myMatches.numberOfLines = 0;
     myMatches.layer.masksToBounds = true;
-    myMatches.layer.cornerRadius = 3.0f;
     myMatches.attributedText = attrText;
     [self.view addSubview:myMatches];
     
     if([screenWidth intValue] == 320) {
         matchesNumber = [[UILabel alloc] initWithFrame:CGRectMake(120, 5, 60, 20)];
+        matchesNumber.layer.cornerRadius = 3.0f;
+        [matchesNumber setFont:[UIFont systemFontOfSize:16]];
+
     }
     else if([screenWidth intValue] == 375) {
         matchesNumber = [[UILabel alloc] initWithFrame:CGRectMake(120, 5, 60, 20)];
+        matchesNumber.layer.cornerRadius = 3.0f;
+        [matchesNumber setFont:[UIFont systemFontOfSize:16]];
+
     }
-    else {
+    else if([screenWidth intValue] == 414) {
         matchesNumber = [[UILabel alloc] initWithFrame:CGRectMake(120, 7, 77, 20)];
+        matchesNumber.layer.cornerRadius = 3.0f;
+        [matchesNumber setFont:[UIFont systemFontOfSize:16]];
+
+    }
+    else if([screenWidth intValue] == 768) {
+        matchesNumber = [[UILabel alloc] initWithFrame:CGRectMake(229, 6, 144.5, 39)];
+        matchesNumber.layer.cornerRadius = 3.0f;
+        [matchesNumber setFont:[UIFont systemFontOfSize:32]];
+        
+    }
+    else if([screenWidth intValue] == 1024) { //IPAD
+        matchesNumber = [[UILabel alloc] initWithFrame:CGRectMake(228, 10, 189, 41)];
+        matchesNumber.layer.cornerRadius = 8.0f;
+        [matchesNumber setFont:[UIFont systemFontOfSize:32]];
+
     }
     matchesNumber.backgroundColor = [UIColor colorWithRed:211.0f/255.0f green:243.0f/255.0f blue:219.0f/255.0f alpha:1.0f];
     matchesNumber.textAlignment = NSTextAlignmentCenter;
     matchesNumber.textColor = [UIColor colorWithRed:156.0f/255.0f green:214.0f/255.0f blue:215.0f/255.0f alpha:1.0f];
     matchesNumber.layer.masksToBounds = true;
-    matchesNumber.layer.cornerRadius = 3.0f;
     
     if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])  {
         //
@@ -272,11 +402,65 @@ typedef void (^CompletionHandlerType)();
     else if([screenWidth intValue] == 375) {
         statusback = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 375, 20)];
     }
-    else {
+    else if([screenWidth intValue] == 414) {
         statusback = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 414, 20)];
+    }
+    else if([screenWidth intValue] == 768) {
+        statusback = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 768, 20)];
+    }
+    else if([screenWidth intValue] == 1024) { //IPAD
+        statusback = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 1024, 20)];
     }
     statusback.backgroundColor = [UIColor colorWithRed:156.0f/255.0f green:214.0f/255.0f blue:215.0f/255.0f alpha:1.0f];
     [self.view addSubview:statusback];
+    
+    notclose = [[UILabel alloc] init];
+    notclose.textAlignment = NSTextAlignmentCenter;
+    
+    if([screenWidth intValue] == 320) {
+        [notclose setFrame:CGRectMake(10, 466, 300, 92)];
+        notclose.layer.cornerRadius = 10.0;
+        [notclose setFont:[UIFont fontWithName:@"HelveticaNeue-Bold" size:14.0]];
+        
+        
+    }
+    else if([screenWidth intValue] == 375) {
+        [notclose setFrame:CGRectMake(10, 547, 355, 92)];
+        notclose.layer.cornerRadius = 10.0;
+        [notclose setFont:[UIFont fontWithName:@"HelveticaNeue-Bold" size:14.0]];
+        
+        
+    }
+    else if([screenWidth intValue] == 414) {
+        [notclose setFrame:CGRectMake(10, 900, 392, 170)];
+        notclose.layer.cornerRadius = 10.0;
+        [notclose setFont:[UIFont fontWithName:@"HelveticaNeue-Bold" size:14.0]];
+        
+        
+    }
+    else if([screenWidth intValue] == 768) {
+        [notclose setFrame:CGRectMake(20, 840, 727, 141)];
+        notclose.layer.cornerRadius = 7.5;
+        [notclose setFont:[UIFont fontWithName:@"HelveticaNeue-Bold" size:14.0]];
+        
+        
+    }
+    else if([screenWidth intValue] == 1024) { //IPAD
+        [notclose setFrame:CGRectMake(27, 1096, 969, 230)];
+        notclose.layer.cornerRadius = 5.0;
+        [notclose setFont:[UIFont fontWithName:@"HelveticaNeue-Bold" size:28.0]];
+        
+        
+    }
+
+    notclose.backgroundColor = [UIColor colorWithRed:156.0f/255.0f green:214.0f/255.0f blue:215.0f/255.0f alpha:1.0f];
+    [notclose setText:@"YOU NEED TO BE WITHIN 300 FEET"];
+    notclose.textColor = [UIColor colorWithRed:218.0f/255.0f green:247.0f/255.0f blue:220.0f/255.0f alpha:1.0f];
+    [notclose setHidden:YES];
+    notclose.layer.masksToBounds = true;
+    [self.view addSubview:notclose];
+    
+    
 }
 
 - (void)leaderboardOpen {
@@ -298,10 +482,19 @@ typedef void (^CompletionHandlerType)();
         [menu setHidden:YES];
     });
     
+    gotahit = 0;
+    
     staticMarker = marker;
     
     NSLog(@"****gettingtapped****");
     //NSLog([marker.userData objectForKey:@"marker_id"]);
+    
+    UIActivityIndicatorView *indicator = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    indicator.frame = CGRectMake(0.0, 0.0, 40.0, 40.0);
+    indicator.center = self.view.center;
+    [self.view addSubview:indicator];
+    [indicator bringSubviewToFront:self.view];
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = TRUE;
     
     //AREA CHECK
     
@@ -310,7 +503,7 @@ typedef void (^CompletionHandlerType)();
     // Create a query for places
     PFQuery *querygeo = [PFQuery queryWithClassName:@"MapPoints"];
     // Interested in locations near user.
-    [querygeo whereKey:@"location" nearGeoPoint:userGeoPoint withinMiles:0.056];
+    [querygeo whereKey:@"location" nearGeoPoint:userGeoPoint withinMiles:0.0568];
     // Limit what could be a lot of points.
     querygeo.limit = 10;
     // Final list of objects
@@ -330,6 +523,8 @@ typedef void (^CompletionHandlerType)();
             #define fequal(a,b) (fabs((a) - (b)) < FLT_EPSILON)
             
             if(fequal((float)storin.latitude, (float)marker.position.latitude) && fequal((float)storin.longitude, (float)marker.position.longitude))  {
+                
+                gotahit = 1;
                 
                 PFQuery *query = [PFQuery queryWithClassName:@"MapPoints"];
                 [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
@@ -370,6 +565,8 @@ typedef void (^CompletionHandlerType)();
                                 
                                 _manager = [AFHTTPSessionManager manager];
                                 _manager.responseSerializer=[AFJSONResponseSerializer serializerWithReadingOptions:NSJSONReadingAllowFragments];
+                                _manager.responseSerializer.acceptableContentTypes = [_manager.responseSerializer.acceptableContentTypes setByAddingObject:@"text/html"];
+                                _manager.responseSerializer.acceptableContentTypes = [_manager.responseSerializer.acceptableContentTypes setByAddingObject:@"text/plain"];
                                 
                                 NSString *usernameEncoded = marker.title;
                                 
@@ -378,6 +575,8 @@ typedef void (^CompletionHandlerType)();
                                 [indicator startAnimating];
                                 
                                 [_manager POST:@"http://www.eamondev.com/sneekback/getimage.php" parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+                                    
+                                    NSLog([responseObject description]);
                                     
                                     NSData *decodedData = [[NSData alloc] initWithBase64EncodedString:responseObject[@"image"] options:0];
                                     image.image = [UIImage imageWithData:decodedData scale:300/2448];
@@ -405,11 +604,100 @@ typedef void (^CompletionHandlerType)();
                 
             }
             else {
+
+                //
                 NSLog(@"**** IN ELSE IN ELSE ****");
-                deviceNotFoundAlertController = [UIAlertController alertControllerWithTitle:@"ALMOST THERE" message:@"You need to get closer." preferredStyle:UIAlertControllerStyleAlert];
-                [deviceNotFoundAlertController addAction:deviceNotFoundAlert];
+                
             }
         }
+        
+        NSLog([[NSString alloc] initWithFormat:@"%i", gotahit]);
+        
+        if(gotahit == 0) {
+            
+            
+            //deviceNotFoundAlertController = [UIAlertController alertControllerWithTitle:@"ALMOST THERE" message:@"You need to get closer." preferredStyle:UIAlertControllerStyleAlert];
+            //[deviceNotFoundAlertController addAction:deviceNotFoundAlert];
+            
+            PFQuery *query = [PFQuery queryWithClassName:@"MapPoints"];
+            [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+                if (!error) {
+                    for (PFObject *object in objects) {
+                        NSLog(@"%@", object.objectId);
+                        deleteObjectId = object;
+                        
+                        if([[object valueForKey:@"title"] isEqualToString:marker.title] && [[[NSString alloc] initWithFormat:@"%@", [marker.userData objectForKey:@"marker_id"]] isEqualToString:[[NSString alloc] initWithFormat:@"%@", [object objectForKey:@"marker_id"]]]) {
+                            
+                            staticObjectId = [object valueForKey:@"marker_id"];
+                            staticCount = [object valueForKey:@"count"];
+                            
+                            PFQuery *query = [PFQuery queryWithClassName:@"MapPoints"];
+                            [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+                                if (!error) {
+                                    NSLog(@"ran query");
+                                    for (PFObject *object in objects) {
+                                        if([[object valueForKey:@"marker_id"] isEqualToString:staticObjectId]) {
+                                            //PFObject *object = [objects firstObject];
+                                            NSLog(@"%@ ***** OBJECT ID", object.objectId);
+                                            newtitle = [object valueForKey:@"title"];
+                                            NSLog(@"***newtitle****");
+                                            NSLog(newtitle);
+                                        }
+                                    }
+                                    
+                                }else{
+                                    NSLog([error description]);
+                                }
+                            }];
+                            
+                            NSString * downloadURL = @"http://www.eamondev.com/sneekback/getimage.php";
+                            NSLog(@"downloadImageURL: %@", downloadURL);
+                            
+                            NSString *queryStringss = [NSString stringWithFormat:@"%@", downloadURL];
+                            queryStringss = [queryStringss stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+                            
+                            _manager = [AFHTTPSessionManager manager];
+                            _manager.responseSerializer=[AFJSONResponseSerializer serializerWithReadingOptions:NSJSONReadingAllowFragments];
+                            _manager.responseSerializer.acceptableContentTypes = [_manager.responseSerializer.acceptableContentTypes setByAddingObject:@"text/html"];
+                            _manager.responseSerializer.acceptableContentTypes = [_manager.responseSerializer.acceptableContentTypes setByAddingObject:@"text/plain"];
+                            
+                            NSString *usernameEncoded = marker.title;
+                            
+                            NSDictionary *params = @{@"username": usernameEncoded, @"count": [object valueForKey:@"count"]};
+                            
+                            [indicator startAnimating];
+                            
+                            
+                            
+                            [_manager POST:@"http://www.eamondev.com/sneekback/getimage.php" parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+                                
+                                NSData *decodedData = [[NSData alloc] initWithBase64EncodedString:responseObject[@"image"] options:0];
+                                image.image = [UIImage imageWithData:decodedData scale:300/2448];
+                                dispatch_async(dispatch_get_main_queue(), ^(void){
+                                    [image setHidden:NO];
+                                    [respondButton setHidden:YES];
+                                    [notclose setHidden:NO];
+                                    [xButton setHidden:NO];
+                                });
+                                
+                                [indicator stopAnimating];
+                                
+                            } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+                                NSLog(@"Error: %@", error);
+                                [indicator stopAnimating];
+                            }];
+                        }
+                        else {
+                            NSLog(@"*** something not matching  ***");
+                        }
+                    }
+                }else{
+                    NSLog([error description]);
+                }
+            }];
+            
+        }
+
     }];
 }
 
@@ -442,6 +730,7 @@ typedef void (^CompletionHandlerType)();
         [respondButton setHidden:YES];
         [xButton setHidden:YES];
         [image setHidden:YES];
+        [notclose setHidden:YES];
         [matchesNumber setHidden:NO];
         [myMatches setHidden:NO];
         [menu setHidden:NO];
@@ -459,6 +748,13 @@ typedef void (^CompletionHandlerType)();
 }
 
 - (void)dropSneek {
+    UIActivityIndicatorView *indicator = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    indicator.frame = CGRectMake(0.0, 0.0, 40.0, 40.0);
+    indicator.center = self.view.center;
+    [self.view addSubview:indicator];
+    [indicator bringSubviewToFront:self.view];
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = TRUE;
+
     if (! [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
         deviceNotFoundAlertController = [UIAlertController alertControllerWithTitle:@"NO DEVICE" message:@"Camera is not available" preferredStyle:UIAlertControllerStyleAlert];
         [deviceNotFoundAlertController addAction:deviceNotFoundAlert];
@@ -483,7 +779,13 @@ typedef void (^CompletionHandlerType)();
 }
 
 - (void)imagePickerController:(UIImagePickerController *)pickery didFinishPickingMediaWithInfo:(NSDictionary *)info {
-    
+    UIActivityIndicatorView *indicator = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    indicator.frame = CGRectMake(0.0, 0.0, 40.0, 40.0);
+    indicator.center = self.view.center;
+    [self.view addSubview:indicator];
+    [indicator bringSubviewToFront:self.view];
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = TRUE;
+
     if(!isResponding) {
         [indicator startAnimating];
     
@@ -524,7 +826,7 @@ typedef void (^CompletionHandlerType)();
         }];
 
         [_manager POST:@"http://www.eamondev.com/sneekback/upload.php" parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
-            [formData appendPartWithFileData:imageData name:@"file" fileName:@"file.jpeg" mimeType:@"image/jpeg"];
+            [formData appendPartWithFileData:imageData name:@"file" fileName:@"file.jpg" mimeType:@"image/jpeg"];
         } progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
             
             NSLog(@"Success: ***** %@", responseObject);
@@ -598,6 +900,13 @@ typedef void (^CompletionHandlerType)();
             isResponding = false;
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
             NSLog(@"Error: %@ *****", error);
+            [indicator stopAnimating];
+            deviceNotFoundAlertController = [UIAlertController alertControllerWithTitle:@"SORRY" message:@"Nudity is not allowed." preferredStyle:UIAlertControllerStyleAlert];
+            
+            [deviceNotFoundAlertController addAction:deviceNotFoundAlert];
+            
+            [self presentViewController:deviceNotFoundAlertController animated:NO completion:NULL];
+
             isResponding = false;
         }];
     }
@@ -710,17 +1019,35 @@ typedef void (^CompletionHandlerType)();
 
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
             NSLog(@"Error: %@", error);
-            deviceNotFoundAlertController = [UIAlertController alertControllerWithTitle:@"NOT A MATCH!" message:@"If at first you don't succeed..." preferredStyle:UIAlertControllerStyleAlert];
-            [deviceNotFoundAlertController addAction:deviceNotFoundAlert];
-            [self presentViewController:deviceNotFoundAlertController animated:NO completion:NULL];
+            NSHTTPURLResponse* z = (NSHTTPURLResponse*)task.response;
+            NSLog( @"success: %ld", (long)z.statusCode );
             
-            isResponding = false;
-            
-            [respondButton setUserInteractionEnabled:YES];
-            [respondButton setEnabled:YES];
-            [xButton setUserInteractionEnabled:YES];
-            [xButton setEnabled:YES];
-            [indicator stopAnimating];
+            if(z.statusCode == 404) {
+                deviceNotFoundAlertController = [UIAlertController alertControllerWithTitle:@"NOT A MATCH!" message:@"If at first you don't succeed..." preferredStyle:UIAlertControllerStyleAlert];
+                [deviceNotFoundAlertController addAction:deviceNotFoundAlert];
+                [self presentViewController:deviceNotFoundAlertController animated:NO completion:NULL];
+                
+                isResponding = false;
+                
+                [respondButton setUserInteractionEnabled:YES];
+                [respondButton setEnabled:YES];
+                [xButton setUserInteractionEnabled:YES];
+                [xButton setEnabled:YES];
+                [indicator stopAnimating];
+            }
+            else {
+                deviceNotFoundAlertController = [UIAlertController alertControllerWithTitle:@"OOPS!" message:@"Something went wrong, try again." preferredStyle:UIAlertControllerStyleAlert];
+                [deviceNotFoundAlertController addAction:deviceNotFoundAlert];
+                [self presentViewController:deviceNotFoundAlertController animated:NO completion:NULL];
+                
+                isResponding = false;
+                
+                [respondButton setUserInteractionEnabled:YES];
+                [respondButton setEnabled:YES];
+                [xButton setUserInteractionEnabled:YES];
+                [xButton setEnabled:YES];
+                [indicator stopAnimating];
+            }
         }];
     }
 }

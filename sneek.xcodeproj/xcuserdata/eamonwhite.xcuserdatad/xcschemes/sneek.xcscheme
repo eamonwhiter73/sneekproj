@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "DD3000F41C067A95002E43C1"
-               BuildableName = "sneek.app"
+               BuildableName = "pixovery.app"
                BlueprintName = "sneek"
                ReferencedContainer = "container:sneek.xcodeproj">
             </BuildableReference>
@@ -61,7 +61,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "DD3000F41C067A95002E43C1"
-            BuildableName = "sneek.app"
+            BuildableName = "pixovery.app"
             BlueprintName = "sneek"
             ReferencedContainer = "container:sneek.xcodeproj">
          </BuildableReference>
@@ -84,7 +84,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "DD3000F41C067A95002E43C1"
-            BuildableName = "sneek.app"
+            BuildableName = "pixovery.app"
             BlueprintName = "sneek"
             ReferencedContainer = "container:sneek.xcodeproj">
          </BuildableReference>
@@ -103,7 +103,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "DD3000F41C067A95002E43C1"
-            BuildableName = "sneek.app"
+            BuildableName = "pixovery.app"
             BlueprintName = "sneek"
             ReferencedContainer = "container:sneek.xcodeproj">
          </BuildableReference>
