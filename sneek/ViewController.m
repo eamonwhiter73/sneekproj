@@ -11,6 +11,9 @@
 #import <Parse/Parse.h>
 #import "AFHTTPSessionManager.h"
 #import "LeaderboardController.h"
+#import "Tutorial.h"
+#import "RespTutorial.h"
+
 @import GoogleMaps;
 
 typedef void (^CompletionHandlerType)();
@@ -47,6 +50,9 @@ typedef void (^CompletionHandlerType)();
     NSArray* placesObjects;
     UILabel *notclose;
     int gotahit;
+    Tutorial *first;
+    RespTutorial *resptute;
+    UILabel *tute;
 }
 
 @end
@@ -54,6 +60,9 @@ typedef void (^CompletionHandlerType)();
 @implementation ViewController {}
 
 - (void)viewDidLoad {
+    userdefaults = [NSUserDefaults standardUserDefaults];
+    NSNumber *screenWidth = @([UIScreen mainScreen].bounds.size.width);
+    
     // Create a GMSCameraPosition that tells the map to display the
     // coordinate -33.86,151.20 at zoom level 6.
     GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:42.36
@@ -76,25 +85,65 @@ typedef void (^CompletionHandlerType)();
     
     mapView_.delegate = self;
     
-    PFQuery *query = [PFQuery queryWithClassName:@"MapPoints"];
-    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-        if (!error) {
-            for (PFObject *object in objects) {
-                NSLog(@"%@", object.objectId);
-                PFGeoPoint *point = [object objectForKey:@"location"];
-                
-                GMSMarker *initMarker = [GMSMarker markerWithPosition:CLLocationCoordinate2DMake(point.latitude, point.longitude)];
-                initMarker.title = [object valueForKey:@"title"];
-                initMarker.appearAnimation = kGMSMarkerAnimationPop;
-                initMarker.icon = [UIImage imageNamed:@"marker"];
-                initMarker.userData = @{@"marker_id":[object objectForKey:@"marker_id"]};
-                initMarker.map = mapView_;
-            }
-            
-        }else{
-            NSLog([error description]);
+    NSLog([userdefaults objectForKey:@"new"]);
+    
+    first = [[Tutorial alloc] init];
+    first.myViewController = self;
+    first.tag = 99;
+    
+    if([[[NSString alloc] initWithString:[userdefaults objectForKey:@"new"]] isEqualToString:@"new"]) {
+        NSLog(@"in tutu");
+        if([screenWidth intValue] == 320) {
+            first = [[Tutorial alloc] initWithFrame:CGRectMake(0, 0, 320, 568)];
+            resptute = [[RespTutorial alloc] initWithFrame:CGRectMake(0, 0, 320, 568)];
         }
-    }];
+        else if([screenWidth intValue] == 375) {
+            first = [[Tutorial alloc] initWithFrame:CGRectMake(0, 0, 375, 667)];
+            resptute = [[RespTutorial alloc] initWithFrame:CGRectMake(0, 0, 320, 568)];
+
+        }
+        else if([screenWidth intValue] == 414) {
+            first = [[Tutorial alloc] initWithFrame:CGRectMake(0, 0, 414, 737)];
+            resptute = [[RespTutorial alloc] initWithFrame:CGRectMake(0, 0, 320, 568)];
+
+        }
+        else if([screenWidth intValue] == 768) {
+            first = [[Tutorial alloc] initWithFrame:CGRectMake(0, 0, 768, 1024)];
+            resptute = [[RespTutorial alloc] initWithFrame:CGRectMake(0, 0, 320, 568)];
+
+        }
+        else if([screenWidth intValue] == 1024) { //IPAD
+            first = [[Tutorial alloc] initWithFrame:CGRectMake(0, 0, 1024, 1366)];
+            resptute = [[RespTutorial alloc] initWithFrame:CGRectMake(0, 0, 320, 568)];
+
+        }
+        first.backgroundColor = [UIColor colorWithRed:0.0f/255.0f green:0.0f/255.0f blue:0.0f/255.0f alpha:0.4f];
+        resptute.backgroundColor = [UIColor colorWithRed:0.0f/255.0f green:0.0f/255.0f blue:0.0f/255.0f alpha:0.4f];
+
+        [self.view addSubview:first];
+        [self.view addSubview:resptute];
+        [resptute setHidden:YES];
+    }
+    else {
+        PFQuery *query = [PFQuery queryWithClassName:@"MapPoints"];
+        [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+            if (!error) {
+                for (PFObject *object in objects) {
+                    NSLog(@"%@", object.objectId);
+                    PFGeoPoint *point = [object objectForKey:@"location"];
+                    
+                    GMSMarker *initMarker = [GMSMarker markerWithPosition:CLLocationCoordinate2DMake(point.latitude, point.longitude)];
+                    initMarker.title = [object valueForKey:@"title"];
+                    initMarker.appearAnimation = kGMSMarkerAnimationPop;
+                    initMarker.icon = [UIImage imageNamed:@"marker"];
+                    initMarker.userData = @{@"marker_id":[object objectForKey:@"marker_id"]};
+                    initMarker.map = mapView_;
+                }
+            }else{
+                NSLog([error description]);
+            }
+        }];
+    }
     
     UIActivityIndicatorView *indicator = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
     indicator.frame = CGRectMake(0.0, 0.0, 40.0, 40.0);
@@ -107,7 +156,33 @@ typedef void (^CompletionHandlerType)();
     
     letters  = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXZY0123456789";
     
-    NSNumber *screenWidth = @([UIScreen mainScreen].bounds.size.width);
+    tute = [[UILabel alloc] init];
+    
+    if([screenWidth intValue] == 320) {
+        tute.frame = CGRectMake(20, 90, 280, 120);
+    }
+    else if([screenWidth intValue] == 375) {
+        tute.frame = CGRectMake(23, 105, 328, 141);
+        
+    }
+    else if([screenWidth intValue] == 414) {
+        tute.frame = CGRectMake(26, 116, 362, 155.5);
+    }
+    else if([screenWidth intValue] == 768) {
+        tute.frame = CGRectMake(48, 161, 671.7, 216.4);
+    }
+    else if([screenWidth intValue] == 1024) { //IPAD
+        tute.frame = CGRectMake(64, 215, 895.6, 288.7);
+    }
+    
+    tute.text = @"TAP THE MARKER, THEN TAP THE INFO WINDOW POPUP";
+    tute.numberOfLines = 0;
+    tute.textAlignment = NSTextAlignmentCenter;
+    [tute setFont:[UIFont fontWithName:@"HelveticaNeue-Bold" size:24.0]];
+    tute.textColor = [UIColor colorWithRed:0.0f/255.0f green:0.0f/255.0f blue:0.0f/255.0f alpha:1.0f];
+    [tute setHidden:YES];
+    [self.view addSubview:tute];
+    
     
     if([screenWidth intValue] == 320) {
         image = [[UIImageView alloc] initWithFrame:CGRectMake(10, 30, 300, 426)];
@@ -390,8 +465,6 @@ typedef void (^CompletionHandlerType)();
         self.imagePickerController = picker;
     }
     
-    userdefaults = [NSUserDefaults standardUserDefaults];
-    
     NSUInteger matches = [userdefaults integerForKey:@"matches"];
     matchesNumber.text = [[NSString alloc] initWithFormat:@"%lu", (unsigned long)matches];
     [myMatches addSubview:matchesNumber];
@@ -460,7 +533,9 @@ typedef void (^CompletionHandlerType)();
     notclose.layer.masksToBounds = true;
     [self.view addSubview:notclose];
     
-    
+    if([[[NSString alloc] initWithString:[userdefaults objectForKey:@"new"]] isEqualToString:@"new"]) {
+        [self.view bringSubviewToFront:first];
+    }
 }
 
 - (void)leaderboardOpen {
@@ -480,6 +555,7 @@ typedef void (^CompletionHandlerType)();
         [matchesNumber setHidden:YES];
         [myMatches setHidden:YES];
         [menu setHidden:YES];
+        [tute setHidden:YES];
     });
     
     gotahit = 0;
@@ -576,6 +652,8 @@ typedef void (^CompletionHandlerType)();
                                 
                                 [_manager POST:@"http://www.eamondev.com/sneekback/getimage.php" parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
                                     
+                                    
+                                    
                                     NSLog([responseObject description]);
                                     
                                     NSData *decodedData = [[NSData alloc] initWithBase64EncodedString:responseObject[@"image"] options:0];
@@ -586,9 +664,22 @@ typedef void (^CompletionHandlerType)();
                                         [xButton setHidden:NO];
                                     });
                                     
+                                    if([[[NSString alloc] initWithString:[userdefaults objectForKey:@"new"]] isEqualToString:@"new"]) {
+                                        NSLog(@"in tutu");
+                                        dispatch_async(dispatch_get_main_queue(), ^(void){
+
+                                            [resptute setHidden:NO];
+                                            [self.view bringSubviewToFront:resptute];
+                                            
+                                        });
+                                    }
+                                    
                                     [indicator stopAnimating];
                                     
                                 } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+                                    deviceNotFoundAlertController = [UIAlertController alertControllerWithTitle:@"HMMM" message:@"Maybe your connection is bad" preferredStyle:UIAlertControllerStyleAlert];
+                                    
+                                    [deviceNotFoundAlertController addAction:deviceNotFoundAlert];
                                     NSLog(@"Error: %@", error);
                                     [indicator stopAnimating];
                                 }];
@@ -680,9 +771,19 @@ typedef void (^CompletionHandlerType)();
                                     [xButton setHidden:NO];
                                 });
                                 
+                                if([[[NSString alloc] initWithString:[userdefaults objectForKey:@"new"]] isEqualToString:@"new"]) {
+                                    dispatch_async(dispatch_get_main_queue(), ^(void){
+                                        [resptute setHidden:NO];
+                                    });
+                                }
+                                
                                 [indicator stopAnimating];
                                 
                             } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+                                deviceNotFoundAlertController = [UIAlertController alertControllerWithTitle:@"HMMM" message:@"Maybe your connection is bad" preferredStyle:UIAlertControllerStyleAlert];
+                                
+                                [deviceNotFoundAlertController addAction:deviceNotFoundAlert];
+
                                 NSLog(@"Error: %@", error);
                                 [indicator stopAnimating];
                             }];
@@ -741,19 +842,33 @@ typedef void (^CompletionHandlerType)();
     if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
         deviceNotFoundAlertController = [UIAlertController alertControllerWithTitle:@"NO DEVICE" message:@"Camera is not available" preferredStyle:UIAlertControllerStyleAlert];
         [deviceNotFoundAlertController addAction:deviceNotFoundAlert];
+        [tute removeFromSuperview];
     } else {
         isResponding = true;
+        if([[[NSString alloc] initWithString:[userdefaults objectForKey:@"new"]] isEqualToString:@"new"]) {
+            dispatch_async(dispatch_get_main_queue(), ^(void){
+                [resptute setHidden:YES];
+            });
+        }
         [self presentViewController:self.imagePickerController animated:YES completion:nil];
     }
 }
 
 - (void)dropSneek {
+    isResponding = false;
     UIActivityIndicatorView *indicator = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
     indicator.frame = CGRectMake(0.0, 0.0, 40.0, 40.0);
     indicator.center = self.view.center;
     [self.view addSubview:indicator];
     [indicator bringSubviewToFront:self.view];
     [UIApplication sharedApplication].networkActivityIndicatorVisible = TRUE;
+    
+    if([[[NSString alloc] initWithString:[userdefaults objectForKey:@"new"]] isEqualToString:@"new"]) {
+
+        [first removeFromSuperview];        
+    }
+
+
 
     if (! [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
         deviceNotFoundAlertController = [UIAlertController alertControllerWithTitle:@"NO DEVICE" message:@"Camera is not available" preferredStyle:UIAlertControllerStyleAlert];
@@ -787,6 +902,7 @@ typedef void (^CompletionHandlerType)();
     [UIApplication sharedApplication].networkActivityIndicatorVisible = TRUE;
 
     if(!isResponding) {
+        
         [indicator startAnimating];
     
         UIImageWriteToSavedPhotosAlbum(info[UIImagePickerControllerOriginalImage], nil, nil, nil);
@@ -886,6 +1002,12 @@ typedef void (^CompletionHandlerType)();
                 [[PFInstallation currentInstallation] saveEventually];
                 
                 [indicator stopAnimating];
+                
+                if([[[NSString alloc] initWithString:[userdefaults objectForKey:@"new"]] isEqualToString:@"new"]) {
+                    dispatch_async(dispatch_get_main_queue(), ^(void){
+                        [tute setHidden:NO];
+                    });
+                }
             }
             else {
                 [indicator stopAnimating];
@@ -897,20 +1019,22 @@ typedef void (^CompletionHandlerType)();
                 add = true;
             }
             
-            isResponding = false;
+            
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
             NSLog(@"Error: %@ *****", error);
             [indicator stopAnimating];
-            deviceNotFoundAlertController = [UIAlertController alertControllerWithTitle:@"SORRY" message:@"Nudity is not allowed." preferredStyle:UIAlertControllerStyleAlert];
+            deviceNotFoundAlertController = [UIAlertController alertControllerWithTitle:@"SORRY" message:@"Either you are taking a nude picture, or your connection is bad" preferredStyle:UIAlertControllerStyleAlert];
             
             [deviceNotFoundAlertController addAction:deviceNotFoundAlert];
             
             [self presentViewController:deviceNotFoundAlertController animated:NO completion:NULL];
 
-            isResponding = false;
+            
         }];
+        
     }
     else {
+        [tute removeFromSuperview];
         
         dispatch_async(dispatch_get_main_queue(), ^(void){
             [myMatches setHidden:YES];
@@ -1006,7 +1130,7 @@ typedef void (^CompletionHandlerType)();
                                    withParameters:@{@"user":(PFUser *)object.objectId, @"username":newtitle}];
             }];
             
-            isResponding = false;
+            
             
             [respondButton setUserInteractionEnabled:YES];
             [respondButton setEnabled:YES];
@@ -1014,9 +1138,10 @@ typedef void (^CompletionHandlerType)();
             [xButton setEnabled:YES];
             [indicator stopAnimating];
             
-            
-            
-
+            if([[[NSString alloc] initWithString:[userdefaults objectForKey:@"new"]] isEqualToString:@"new"]) {
+                [userdefaults setObject:@"old" forKey:@"new"];
+            }
+    
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
             NSLog(@"Error: %@", error);
             NSHTTPURLResponse* z = (NSHTTPURLResponse*)task.response;
@@ -1027,7 +1152,7 @@ typedef void (^CompletionHandlerType)();
                 [deviceNotFoundAlertController addAction:deviceNotFoundAlert];
                 [self presentViewController:deviceNotFoundAlertController animated:NO completion:NULL];
                 
-                isResponding = false;
+                
                 
                 [respondButton setUserInteractionEnabled:YES];
                 [respondButton setEnabled:YES];
@@ -1040,7 +1165,7 @@ typedef void (^CompletionHandlerType)();
                 [deviceNotFoundAlertController addAction:deviceNotFoundAlert];
                 [self presentViewController:deviceNotFoundAlertController animated:NO completion:NULL];
                 
-                isResponding = false;
+                
                 
                 [respondButton setUserInteractionEnabled:YES];
                 [respondButton setEnabled:YES];

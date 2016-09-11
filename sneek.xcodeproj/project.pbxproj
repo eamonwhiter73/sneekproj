@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DD08D70C1D8495B2002D9D11 /* RespTutorial.m in Sources */ = {isa = PBXBuildFile; fileRef = DD08D70B1D8495B2002D9D11 /* RespTutorial.m */; };
 		DD1F1CB41D6647FF00D55484 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = DD1F1CB31D6647FF00D55484 /* main.m */; };
 		DD3000FD1C067A95002E43C1 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = DD3000FC1C067A95002E43C1 /* AppDelegate.m */; };
 		DD3001001C067A95002E43C1 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DD3000FF1C067A95002E43C1 /* ViewController.m */; };
@@ -49,6 +50,7 @@
 		DDA63C091D63BC5C00A9E878 /* AFURLResponseSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = DDA63C021D63BC5C00A9E878 /* AFURLResponseSerialization.m */; };
 		DDA63C0A1D63BC5C00A9E878 /* AFURLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DDA63C041D63BC5C00A9E878 /* AFURLSessionManager.m */; };
 		DDC6395C1D7922A200F765DF /* LaunchScreenNew.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DDC6395B1D7922A100F765DF /* LaunchScreenNew.storyboard */; };
+		DDD0501F1D82051400056C33 /* Tutorial.m in Sources */ = {isa = PBXBuildFile; fileRef = DDD0501E1D82051300056C33 /* Tutorial.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +71,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		DD08D70A1D8495A5002D9D11 /* RespTutorial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RespTutorial.h; sourceTree = "<group>"; };
+		DD08D70B1D8495B2002D9D11 /* RespTutorial.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RespTutorial.m; sourceTree = "<group>"; };
 		DD1F1CB31D6647FF00D55484 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = main.m; path = sneek/main.m; sourceTree = "<group>"; };
 		DD3000F51C067A95002E43C1 /* pixovery.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = pixovery.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD3000F91C067A95002E43C1 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -129,6 +133,8 @@
 		DDA63C031D63BC5C00A9E878 /* AFURLSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFURLSessionManager.h; sourceTree = "<group>"; };
 		DDA63C041D63BC5C00A9E878 /* AFURLSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLSessionManager.m; sourceTree = "<group>"; };
 		DDC6395B1D7922A100F765DF /* LaunchScreenNew.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreenNew.storyboard; sourceTree = "<group>"; };
+		DDD0501D1D8204C300056C33 /* Tutorial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tutorial.h; sourceTree = "<group>"; };
+		DDD0501E1D82051300056C33 /* Tutorial.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tutorial.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -253,6 +259,10 @@
 				DD8D19A01C28C257000E7418 /* LeaderboardController.h */,
 				DD8D19A11C28C267000E7418 /* LeaderboardController.m */,
 				DDC6395B1D7922A100F765DF /* LaunchScreenNew.storyboard */,
+				DDD0501D1D8204C300056C33 /* Tutorial.h */,
+				DDD0501E1D82051300056C33 /* Tutorial.m */,
+				DD08D70A1D8495A5002D9D11 /* RespTutorial.h */,
+				DD08D70B1D8495B2002D9D11 /* RespTutorial.m */,
 			);
 			path = sneek;
 			sourceTree = "<group>";
@@ -435,6 +445,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DD3001061C067A95002E43C1 /* sneek.xcdatamodeld in Sources */,
+				DDD0501F1D82051400056C33 /* Tutorial.m in Sources */,
 				DDA63C071D63BC5C00A9E878 /* AFSecurityPolicy.m in Sources */,
 				DD3001001C067A95002E43C1 /* ViewController.m in Sources */,
 				DD3001301C0683AA002E43C1 /* SignUpController.m in Sources */,
@@ -444,6 +455,7 @@
 				DD1F1CB41D6647FF00D55484 /* main.m in Sources */,
 				DDA63C051D63BC5C00A9E878 /* AFHTTPSessionManager.m in Sources */,
 				DDA63C081D63BC5C00A9E878 /* AFURLRequestSerialization.m in Sources */,
+				DD08D70C1D8495B2002D9D11 /* RespTutorial.m in Sources */,
 				DDA63C0A1D63BC5C00A9E878 /* AFURLSessionManager.m in Sources */,
 				DDA63C061D63BC5C00A9E878 /* AFNetworkReachabilityManager.m in Sources */,
 			);

@@ -276,9 +276,12 @@
     }
     [user setObject:@"0" forKey:@"matches"];
     
+    [userdefaults setObject:@"old" forKey:@"new"]; 
+    
     [user signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (!error) {   // Hooray! Let them use the app now.
             [userdefaults setObject:user.username forKey:@"pfuser"];
+            [userdefaults setObject:@"new" forKey:@"new"];
             [userdefaults setObject:user.password forKey:@"pfpass"];
             [userdefaults setObject:user.email forKey:@"pfemail"];
             [userdefaults setInteger:0 forKey:@"count"];

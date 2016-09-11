@@ -19,6 +19,7 @@
 @property (strong, nonatomic) AFHTTPSessionManager *manager;
 
 -(NSString *) randomStringWithLength: (int) len;
+- (void)dropSneek;
 
 #endif
 
