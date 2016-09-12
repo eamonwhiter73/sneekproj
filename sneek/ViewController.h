@@ -20,6 +20,7 @@
 
 -(NSString *) randomStringWithLength: (int) len;
 - (void)dropSneek;
+- (void)openCamera;
 
 #endif
 
