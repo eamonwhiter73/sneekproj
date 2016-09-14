@@ -10,7 +10,7 @@
 #import "AFHTTPSessionManager.h"
 @import GoogleMaps;
 
-@interface ViewController : UIViewController <GMSMapViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+@interface ViewController : UIViewController <GMSMapViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, CLLocationManagerDelegate>
 
 @property (nonatomic) UIImagePickerController *imagePickerController;
 

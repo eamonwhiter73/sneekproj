@@ -87,6 +87,9 @@ typedef void (^CompletionHandlerType)();
     
     NSLog([userdefaults objectForKey:@"new"]);
     
+    [[PFInstallation currentInstallation] setObject:[PFUser currentUser] forKey:@"user"];
+    [[PFInstallation currentInstallation] saveEventually];
+    
     first = [[Tutorial alloc] init];
     first.myViewController = self;
     first.tag = 99;
@@ -538,6 +541,32 @@ typedef void (^CompletionHandlerType)();
     }
 }
 
+- (void)startSignificantChangeUpdates
+{
+    // Create the location manager if this object does not
+    // already have one.
+    if (nil == locationManager)
+        locationManager = [[CLLocationManager alloc] init];
+    
+    locationManager.delegate = self;
+    [locationManager startMonitoringSignificantLocationChanges];
+}
+
+// Delegate method from the CLLocationManagerDelegate protocol.
+- (void)locationManager:(CLLocationManager *)manager
+     didUpdateLocations:(NSArray *)locations {
+    // If it's a relatively recent event, turn off updates to save power.
+    CLLocation* location = [locations lastObject];
+    NSDate* eventDate = location.timestamp;
+    NSTimeInterval howRecent = [eventDate timeIntervalSinceNow];
+    if (fabs(howRecent) < 15.0) {
+        // If the event is recent, do something with it.
+        NSLog(@"latitude %+.6f, longitude %+.6f\n",
+              location.coordinate.latitude,
+              location.coordinate.longitude);
+    }
+}
+
 - (void)leaderboardOpen {
     [self presentViewController:[[LeaderboardController alloc] init] animated:YES completion:nil];
 }
@@ -986,6 +1015,7 @@ typedef void (^CompletionHandlerType)();
                     
                     if (error) {
                         NSLog(@"Error");
+                        NSLog([error description]);
                     }
                     else {
                         GMSMarker *marker3 = [[GMSMarker alloc] init];
@@ -996,10 +1026,6 @@ typedef void (^CompletionHandlerType)();
                         marker3.map = mapView_;
                     }
                 }];
-                
-                
-                [[PFInstallation currentInstallation] setObject:[PFUser currentUser] forKey:@"user"];
-                [[PFInstallation currentInstallation] saveEventually];
                 
                 [indicator stopAnimating];
                 
@@ -1031,7 +1057,6 @@ typedef void (^CompletionHandlerType)();
 
             
         }];
-        
     }
     else {
         [tute removeFromSuperview];

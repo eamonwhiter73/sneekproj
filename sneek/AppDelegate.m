@@ -48,6 +48,10 @@
     
     NSUserDefaults *userdefaults = [NSUserDefaults standardUserDefaults];
     
+    if([launchOptions objectForKey:@"UIApplicationLaunchOptionsLocationKey"] != nil) {
+        
+    }
+    
     if([userdefaults objectForKey:@"pfuser"] == nil) {
         NSLog(@"in delegate signup");
         SignUpController *signup = [[SignUpController alloc] init];
