@@ -17,6 +17,7 @@
 #if TARGET_OS_IPHONE
 @property NSMutableDictionary *completionHandlerDictionary;
 @property (strong, nonatomic) AFHTTPSessionManager *manager;
+@property (strong, nonatomic) CLLocationManager *locationManager;
 
 -(NSString *) randomStringWithLength: (int) len;
 - (void)dropSneek;

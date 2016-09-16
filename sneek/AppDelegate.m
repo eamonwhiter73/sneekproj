@@ -12,7 +12,9 @@
 @import GoogleMaps;
 #import <Parse/Parse.h>
 
-@interface AppDelegate ()
+@interface AppDelegate () {
+    CLLocationManager *locationManager;
+}
 
 @end
 
@@ -49,7 +51,10 @@
     NSUserDefaults *userdefaults = [NSUserDefaults standardUserDefaults];
     
     if([launchOptions objectForKey:@"UIApplicationLaunchOptionsLocationKey"] != nil) {
-        
+        _restartloc = [[NSNumber alloc] initWithInt:1];
+    }
+    else {
+        _restartloc = [[NSNumber alloc] initWithInt:0];
     }
     
     if([userdefaults objectForKey:@"pfuser"] == nil) {

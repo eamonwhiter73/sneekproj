@@ -2,6 +2,10 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>location</string>
+	</array>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en_US</string>
 	<key>CFBundleDisplayName</key>
@@ -44,8 +48,6 @@
 	</dict>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>You should enable this so that the app works correctly.</string>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>You need to do this.</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreenNew</string>
 	<key>UIRequiredDeviceCapabilities</key>
