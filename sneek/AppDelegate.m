@@ -13,8 +13,10 @@
 #import <Parse/Parse.h>
 
 @interface AppDelegate () {
-    CLLocationManager *locationManager;
+    UIAlertController *deviceNotFoundAlertController;
+    UIAlertAction *deviceNotFoundAlert;
 }
+
 
 @end
 
@@ -50,11 +52,30 @@
     
     NSUserDefaults *userdefaults = [NSUserDefaults standardUserDefaults];
     
-    if([launchOptions objectForKey:@"UIApplicationLaunchOptionsLocationKey"] != nil) {
-        _restartloc = [[NSNumber alloc] initWithInt:1];
+    NSLog(@"app launching");
+    
+    _locationMgr = [[CLLocationManager alloc] init];
+    [_locationMgr setDelegate:self];
+    if([_locationMgr respondsToSelector:@selector(setAllowsBackgroundLocationUpdates:)])
+        [_locationMgr setAllowsBackgroundLocationUpdates:YES];
+    CLAuthorizationStatus authorizationStatus= [CLLocationManager authorizationStatus];
+    
+    if([launchOptions valueForKey:UIApplicationLaunchOptionsLocationKey] != nil) {
+        NSLog(@"relaunching because of significant location change - restarting SLC");
+        [_locationMgr startMonitoringSignificantLocationChanges];
     }
-    else {
-        _restartloc = [[NSNumber alloc] initWithInt:0];
+    else
+    {
+        if (authorizationStatus == kCLAuthorizationStatusAuthorizedAlways) {
+            NSLog(@"launching with authorization to always use location - starting SLC");
+            [_locationMgr startMonitoringSignificantLocationChanges];
+        }
+        else
+        {
+            NSLog(@"launching with no authorization to always use location - requesting authorization");
+            if([_locationMgr respondsToSelector:@selector(requestAlwaysAuthorization)])
+                [_locationMgr requestAlwaysAuthorization];
+        }
     }
     
     if([userdefaults objectForKey:@"pfuser"] == nil) {
@@ -70,6 +91,48 @@
 
     return YES;
 }
+
+- (void)startSignificantChangeUpdates
+{
+    deviceNotFoundAlertController = [UIAlertController alertControllerWithTitle:@"START" message:@"startSignificantChangeUpdates called" preferredStyle:UIAlertControllerStyleAlert];
+    
+    [deviceNotFoundAlertController addAction:deviceNotFoundAlert];
+    // Create the location manager if this object does not
+    // already have one.
+    if (nil == _locationMgr) {
+        _locationMgr = [[CLLocationManager alloc] init];
+        _locationMgr.delegate = self;
+    }
+    
+    [CLLocationManager significantLocationChangeMonitoringAvailable];
+    [_locationMgr startMonitoringSignificantLocationChanges];
+}
+
+-(void)locationManger:(CLLocationManager *)manager didFailWithError:(NSError *)error {
+    NSLog(@"didFailWithError: %@", error);
+    deviceNotFoundAlertController = [UIAlertController alertControllerWithTitle:@"LOCATION FAIL" message:@"didFailWithError" preferredStyle:UIAlertControllerStyleAlert];
+    
+    [deviceNotFoundAlertController addAction:deviceNotFoundAlert];
+}
+
+// Delegate method from the CLLocationManagerDelegate protocol.
+- (void)_locationManager:(CLLocationManager *)manager
+      didUpdateLocations:(NSArray *)locations {
+    deviceNotFoundAlertController = [UIAlertController alertControllerWithTitle:@"LOCATION UPDATE" message:@"didUpdateLocations called" preferredStyle:UIAlertControllerStyleAlert];
+    
+    [deviceNotFoundAlertController addAction:deviceNotFoundAlert];
+    // If it's a relatively recent event, turn off updates to save power.
+    CLLocation* location = [locations lastObject];
+    NSDate* eventDate = location.timestamp;
+    NSTimeInterval howRecent = [eventDate timeIntervalSinceNow];
+    if (fabs(howRecent) < 0.5) {
+        // If the event is recent, do something with it.
+        NSLog(@"latitude %+.6f, longitude %+.6f\n",
+              location.coordinate.latitude,
+              location.coordinate.longitude);
+    }
+}
+
 
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     // Store the deviceToken in the current installation and save it to Parse.

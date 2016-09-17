@@ -10,14 +10,13 @@
 #import "AFHTTPSessionManager.h"
 @import GoogleMaps;
 
-@interface ViewController : UIViewController <GMSMapViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, CLLocationManagerDelegate>
+@interface ViewController : UIViewController <GMSMapViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
 @property (nonatomic) UIImagePickerController *imagePickerController;
 
 #if TARGET_OS_IPHONE
 @property NSMutableDictionary *completionHandlerDictionary;
 @property (strong, nonatomic) AFHTTPSessionManager *manager;
-@property (strong, nonatomic) CLLocationManager *locationManager;
 
 -(NSString *) randomStringWithLength: (int) len;
 - (void)dropSneek;

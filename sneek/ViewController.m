@@ -90,22 +90,6 @@ typedef void (^CompletionHandlerType)();
     [[PFInstallation currentInstallation] setObject:[PFUser currentUser] forKey:@"user"];
     [[PFInstallation currentInstallation] saveEventually];
     
-    if(((AppDelegate *)[UIApplication sharedApplication].delegate).restartloc == [[NSNumber alloc] initWithInt:1]) {
-        [_locationManager stopMonitoringSignificantLocationChanges];
-        
-        _locationManager = [[CLLocationManager alloc] init];
-        _locationManager.delegate = self;
-        
-        [_locationManager startMonitoringSignificantLocationChanges];
-    }
-    
-    _locationManager = [[CLLocationManager alloc] init];
-    _locationManager.delegate = self;
-    
-    if([_locationManager respondsToSelector:@selector(setAllowsBackgroundLocationUpdates:)]) {
-        [_locationManager setAllowsBackgroundLocationUpdates:YES];
-    }
-    
     first = [[Tutorial alloc] init];
     first.myViewController = self;
     first.tag = 99;
@@ -554,66 +538,6 @@ typedef void (^CompletionHandlerType)();
     
     if([[[NSString alloc] initWithString:[userdefaults objectForKey:@"new"]] isEqualToString:@"new"]) {
         [self.view bringSubviewToFront:first];
-    }
-}
-
-- (void)startSignificantChangeUpdates
-{
-    deviceNotFoundAlertController = [UIAlertController alertControllerWithTitle:@"START" message:@"startSignificantChangeUpdates called" preferredStyle:UIAlertControllerStyleAlert];
-    
-    [deviceNotFoundAlertController addAction:deviceNotFoundAlert];
-    // Create the location manager if this object does not
-    // already have one.
-    if (nil == _locationManager) {
-        _locationManager = [[CLLocationManager alloc] init];
-        _locationManager.delegate = self;
-    }
-    
-    //if ([CLLocationManager locationServicesEnabled]){
-        
-        //NSLog(@"Location Services Enabled");
-        
-    if ([CLLocationManager authorizationStatus]==kCLAuthorizationStatusNotDetermined){
-        [_locationManager requestAlwaysAuthorization];
-    }
-    else if([CLLocationManager authorizationStatus]==kCLAuthorizationStatusRestricted || [CLLocationManager authorizationStatus]==kCLAuthorizationStatusDenied) {
-        deviceNotFoundAlertController = [UIAlertController alertControllerWithTitle:@"AUTH" message:@"Not allowed by phone to proceed with location services priveleges" preferredStyle:UIAlertControllerStyleAlert];
-        
-        [deviceNotFoundAlertController addAction:deviceNotFoundAlert];
-    }
-    else if([CLLocationManager authorizationStatus]==kCLAuthorizationStatusAuthorizedWhenInUse) {
-        [_locationManager requestAlwaysAuthorization];
-    }
-    else {
-        //
-    }
-    
-    [CLLocationManager significantLocationChangeMonitoringAvailable];
-    [_locationManager startMonitoringSignificantLocationChanges];
-}
-
--(void)locationManger:(CLLocationManager *)manager didFailWithError:(NSError *)error {
-    NSLog(@"didFailWithError: %@", error);
-    deviceNotFoundAlertController = [UIAlertController alertControllerWithTitle:@"LOCATION FAIL" message:@"didFailWithError" preferredStyle:UIAlertControllerStyleAlert];
-    
-    [deviceNotFoundAlertController addAction:deviceNotFoundAlert];
-}
-
-// Delegate method from the CLLocationManagerDelegate protocol.
-- (void)_locationManager:(CLLocationManager *)manager
-     didUpdateLocations:(NSArray *)locations {
-    deviceNotFoundAlertController = [UIAlertController alertControllerWithTitle:@"LOCATION UPDATE" message:@"didUpdateLocations called" preferredStyle:UIAlertControllerStyleAlert];
-    
-    [deviceNotFoundAlertController addAction:deviceNotFoundAlert];
-    // If it's a relatively recent event, turn off updates to save power.
-    CLLocation* location = [locations lastObject];
-    NSDate* eventDate = location.timestamp;
-    NSTimeInterval howRecent = [eventDate timeIntervalSinceNow];
-    if (fabs(howRecent) < 0.5) {
-        // If the event is recent, do something with it.
-        NSLog(@"latitude %+.6f, longitude %+.6f\n",
-              location.coordinate.latitude,
-              location.coordinate.longitude);
     }
 }
 
