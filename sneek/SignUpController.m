@@ -84,7 +84,7 @@
         [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"LaunchImage568"]]];
     }
     else if([screenWidth intValue] == 375) {
-        [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"LaunchImage667"]]];
+        [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"LaunchImage1334"]]];
     }
     else if([screenWidth intValue] == 414) { //6+
         [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"LaunchImage1242"]]];
@@ -118,10 +118,10 @@
         textFieldLoc.font = [UIFont systemFontOfSize:16];
     }
     else if([screenWidth intValue] == 1024) { //IPAD
-        textFieldLoc.font = [UIFont systemFontOfSize:32];
         textFieldLoc = [[UITextField alloc] initWithFrame:CGRectMake(191, 865, 641, 60)];
         textFieldLoc.layer.masksToBounds = true;
         textFieldLoc.layer.cornerRadius = 15.0;
+        textFieldLoc.font = [UIFont systemFontOfSize:32];
     }
     textFieldLoc.borderStyle = UITextBorderStyleRoundedRect;
     

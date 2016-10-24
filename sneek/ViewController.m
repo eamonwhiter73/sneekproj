@@ -203,7 +203,7 @@ typedef void (^CompletionHandlerType)();
         image.layer.cornerRadius = 10.0;
     }
     else if([screenWidth intValue] == 414) {
-        image = [[UIImageView alloc] initWithFrame:CGRectMake(10, 30, 394, 860)];
+        image = [[UIImageView alloc] initWithFrame:CGRectMake(10, 30, 394, 544)];
         image.layer.cornerRadius = 10.0;
     }
     else if([screenWidth intValue] == 768) {
@@ -233,7 +233,7 @@ typedef void (^CompletionHandlerType)();
 
     }
     else if([screenWidth intValue] == 414) {
-        respondButton = [[UIButton alloc] initWithFrame:CGRectMake(10, 900, 392, 170)];
+        respondButton = [[UIButton alloc] initWithFrame:CGRectMake(10, 584, 392, 142)];
         respondButton.layer.cornerRadius = 10.0;
         respondButton.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:36.0];
 
@@ -269,14 +269,14 @@ typedef void (^CompletionHandlerType)();
         
     }
     else if([screenWidth intValue] == 375) {
-        reportButton = [[UIButton alloc] initWithFrame:CGRectMake(272, 23, 60, 25)];
+        reportButton = [[UIButton alloc] initWithFrame:CGRectMake(276, 23, 60, 25)];
         reportButton.layer.cornerRadius = 2.0;
         reportButton.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:10.0];
         
         
     }
     else if([screenWidth intValue] == 414) {
-        reportButton = [[UIButton alloc] initWithFrame:CGRectMake(209, 25, 80, 50)];
+        reportButton = [[UIButton alloc] initWithFrame:CGRectMake(310, 22, 60, 33.5)];
         reportButton.layer.cornerRadius = 2.0;
         reportButton.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:10.0];
         
@@ -308,10 +308,10 @@ typedef void (^CompletionHandlerType)();
         xButton = [[UIButton alloc] initWithFrame:CGRectMake(292, 23, 25, 25)];
     }
     else if([screenWidth intValue] == 375) {
-        xButton = [[UIButton alloc] initWithFrame:CGRectMake(342, 23, 25, 25)];
+        xButton = [[UIButton alloc] initWithFrame:CGRectMake(346, 23, 25, 25)];
     }
     else if([screenWidth intValue] == 414) {
-        xButton = [[UIButton alloc] initWithFrame:CGRectMake(379, 25, 50, 50)];
+        xButton = [[UIButton alloc] initWithFrame:CGRectMake(378, 22, 33.5, 33.5)];
     }
     else if([screenWidth intValue] == 768) {
         xButton = [[UIButton alloc] initWithFrame:CGRectMake(734.5, 35, 25, 25)];
@@ -325,19 +325,19 @@ typedef void (^CompletionHandlerType)();
     [self.view addSubview:xButton];
     
     if([screenWidth intValue] == 320) {
-        infobut = [[UIButton alloc] initWithFrame:CGRectMake(289, 537, 25, 25)];
+        infobut = [[UIButton alloc] initWithFrame:CGRectMake(283, 531, 25, 25)];
     }
     else if([screenWidth intValue] == 375) {
-        infobut = [[UIButton alloc] initWithFrame:CGRectMake(339, 636, 25, 25)];
+        infobut = [[UIButton alloc] initWithFrame:CGRectMake(338, 630, 25, 25)];
     }
     else if([screenWidth intValue] == 414) {
-        infobut = [[UIButton alloc] initWithFrame:CGRectMake(376, 680, 50, 50)];
+        infobut = [[UIButton alloc] initWithFrame:CGRectMake(371, 693, 33.5, 33.5)];
     }
     else if([screenWidth intValue] == 768) {
-        infobut = [[UIButton alloc] initWithFrame:CGRectMake(731, 993, 25, 25)];
+        infobut = [[UIButton alloc] initWithFrame:CGRectMake(731, 987, 25, 25)];
     }
     else if([screenWidth intValue] == 1024) { //IPAD
-        infobut = [[UIButton alloc] initWithFrame:CGRectMake(987, 2011, 25, 25)];
+        infobut = [[UIButton alloc] initWithFrame:CGRectMake(987, 1329, 25, 25)];
     }
     infobut.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"info"]];
     [infobut addTarget:self action:@selector(info) forControlEvents:UIControlEventTouchUpInside];
@@ -577,7 +577,7 @@ typedef void (^CompletionHandlerType)();
         
     }
     else if([screenWidth intValue] == 414) {
-        [notclose setFrame:CGRectMake(10, 900, 392, 170)];
+        [notclose setFrame:CGRectMake(10, 584, 392, 142)];
         notclose.layer.cornerRadius = 10.0;
         [notclose setFont:[UIFont fontWithName:@"HelveticaNeue-Bold" size:14.0]];
         
@@ -628,6 +628,7 @@ typedef void (^CompletionHandlerType)();
         [myMatches setHidden:YES];
         [menu setHidden:YES];
         [tute setHidden:YES];
+        [infobut setHidden:YES];
     });
     
     gotahit = 0;
@@ -734,6 +735,7 @@ typedef void (^CompletionHandlerType)();
                                         [image setHidden:NO];
                                         [respondButton setHidden:NO];
                                         [xButton setHidden:NO];
+                                        [infobut setHidden:YES];
                                         [reportButton setHidden:NO];
                                     });
                                     
@@ -842,6 +844,7 @@ typedef void (^CompletionHandlerType)();
                                     [respondButton setHidden:YES];
                                     [notclose setHidden:NO];
                                     [xButton setHidden:NO];
+                                    [infobut setHidden:YES];
                                     [reportButton setHidden:NO];
                                 });
                                 
@@ -904,6 +907,7 @@ typedef void (^CompletionHandlerType)();
     dispatch_async(dispatch_get_main_queue(), ^(void){
         [respondButton setHidden:YES];
         [xButton setHidden:YES];
+        [infobut setHidden:NO];
         [reportButton setHidden:YES];
         [image setHidden:YES];
         [notclose setHidden:YES];
@@ -960,7 +964,7 @@ typedef void (^CompletionHandlerType)();
 }
 
 - (void)info {
-    deviceNotFoundAlertController = [UIAlertController alertControllerWithTitle:@"CONTACT INFO" message:@"E-mail: eamon@eamondev.com" preferredStyle:UIAlertControllerStyleAlert];
+    deviceNotFoundAlertController = [UIAlertController alertControllerWithTitle:@"CONTACT INFO" message:@"Website: http://eamondev.com\nE-mail: eamon@eamondev.com" preferredStyle:UIAlertControllerStyleAlert];
     [deviceNotFoundAlertController addAction:deviceNotFoundAlert];
     
     [self presentViewController:deviceNotFoundAlertController animated:NO completion:NULL];
@@ -1185,6 +1189,7 @@ typedef void (^CompletionHandlerType)();
                 [image setHidden:YES];
                 [respondButton setHidden:YES];
                 [xButton setHidden:YES];
+                [infobut setHidden:NO];
                 [reportButton setHidden:YES];
                 [myMatches setHidden:NO];
                 [matchesNumber setHidden:NO];
