@@ -26,10 +26,12 @@ typedef void (^CompletionHandlerType)();
     UIImageView *image;
     UIButton *respondButton;
     UIButton *xButton;
+    UIButton *reportButton;
     UIButton *leaderboard;
     UIButton *leadbut;
     UIButton *tome;
     UIButton *camerabut;
+    UIButton *infobut;
     bool isResponding;
     GMSMarker *staticMarker;
     NSNumber *staticCount;
@@ -61,6 +63,11 @@ typedef void (^CompletionHandlerType)();
 
 - (void)viewDidLoad {
     userdefaults = [NSUserDefaults standardUserDefaults];
+    
+    /******CHANGE BACK DELETE*********/
+    [userdefaults setObject:@"old" forKey:@"new"];
+    /******CHANGE BACK DELETE*********/
+
     NSNumber *screenWidth = @([UIScreen mainScreen].bounds.size.width);
     
     // Create a GMSCameraPosition that tells the map to display the
@@ -85,7 +92,7 @@ typedef void (^CompletionHandlerType)();
     
     mapView_.delegate = self;
     
-    NSLog([userdefaults objectForKey:@"new"]);
+    NSLog(@"%@", [userdefaults objectForKey:@"new"]);
     
     [[PFInstallation currentInstallation] setObject:[PFUser currentUser] forKey:@"user"];
     [[PFInstallation currentInstallation] saveEventually];
@@ -143,7 +150,7 @@ typedef void (^CompletionHandlerType)();
                     initMarker.map = mapView_;
                 }
             }else{
-                NSLog([error description]);
+                NSLog(@"%@", [error description]);
             }
         }];
     }
@@ -255,6 +262,49 @@ typedef void (^CompletionHandlerType)();
     [self.view addSubview:respondButton];
     
     if([screenWidth intValue] == 320) {
+        reportButton = [[UIButton alloc] initWithFrame:CGRectMake(222, 23, 60, 25)];
+        reportButton.layer.cornerRadius = 2.0;
+        reportButton.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:10.0];
+        
+        
+    }
+    else if([screenWidth intValue] == 375) {
+        reportButton = [[UIButton alloc] initWithFrame:CGRectMake(272, 23, 60, 25)];
+        reportButton.layer.cornerRadius = 2.0;
+        reportButton.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:10.0];
+        
+        
+    }
+    else if([screenWidth intValue] == 414) {
+        reportButton = [[UIButton alloc] initWithFrame:CGRectMake(209, 25, 80, 50)];
+        reportButton.layer.cornerRadius = 2.0;
+        reportButton.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:10.0];
+        
+        
+    }
+    else if([screenWidth intValue] == 768) {
+        reportButton = [[UIButton alloc] initWithFrame:CGRectMake(664.5, 35, 60, 25)];
+        reportButton.layer.cornerRadius = 2.0;
+        reportButton.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:10.0];
+        
+        
+    }
+    else if([screenWidth intValue] == 1024) { //IPAD
+        reportButton = [[UIButton alloc] initWithFrame:CGRectMake(913.5, 47, 60, 25)];
+        reportButton.layer.cornerRadius = 2.0;
+        reportButton.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:10];
+        
+        
+    }
+    reportButton.backgroundColor = [UIColor colorWithRed:210.0f/255.0f green:1.0f/255.0f blue:1.0f/255.0f alpha:1.0f];
+    [reportButton setTitle:@"REPORT" forState:UIControlStateNormal];
+    [reportButton setTitleColor:[UIColor colorWithRed:255.0f/255.0f green:255.0f/255.0f blue:255.0f/255.0f alpha:1.0f] forState:UIControlStateNormal];
+    [reportButton addTarget:self action:@selector(report) forControlEvents:UIControlEventTouchUpInside];
+    [reportButton setHidden:YES];
+    reportButton.layer.masksToBounds = true;
+    [self.view addSubview:reportButton];
+    
+    if([screenWidth intValue] == 320) {
         xButton = [[UIButton alloc] initWithFrame:CGRectMake(292, 23, 25, 25)];
     }
     else if([screenWidth intValue] == 375) {
@@ -273,6 +323,25 @@ typedef void (^CompletionHandlerType)();
     [xButton addTarget:self action:@selector(close) forControlEvents:UIControlEventTouchUpInside];
     [xButton setHidden:YES];
     [self.view addSubview:xButton];
+    
+    if([screenWidth intValue] == 320) {
+        infobut = [[UIButton alloc] initWithFrame:CGRectMake(289, 537, 25, 25)];
+    }
+    else if([screenWidth intValue] == 375) {
+        infobut = [[UIButton alloc] initWithFrame:CGRectMake(339, 636, 25, 25)];
+    }
+    else if([screenWidth intValue] == 414) {
+        infobut = [[UIButton alloc] initWithFrame:CGRectMake(376, 680, 50, 50)];
+    }
+    else if([screenWidth intValue] == 768) {
+        infobut = [[UIButton alloc] initWithFrame:CGRectMake(731, 993, 25, 25)];
+    }
+    else if([screenWidth intValue] == 1024) { //IPAD
+        infobut = [[UIButton alloc] initWithFrame:CGRectMake(987, 2011, 25, 25)];
+    }
+    infobut.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"info"]];
+    [infobut addTarget:self action:@selector(info) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:infobut];
     
     if([screenWidth intValue] == 320) {
         menu = [[UIView alloc] initWithFrame:CGRectMake(58.75, 494, 202.5, 54)];
@@ -324,17 +393,17 @@ typedef void (^CompletionHandlerType)();
     [menu addSubview:leadbut];
     
     if([screenWidth intValue] == 320) {
-        tome = [[UIButton alloc] initWithFrame:CGRectMake(141.25, 7, 39.5, 39.5)];
+        tome = [[UIButton alloc] initWithFrame:CGRectMake(144, 7, 39.5, 39.5)];
         tome.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"tome"]];
 
     }
     else if([screenWidth intValue] == 375) {
-        tome = [[UIButton alloc] initWithFrame:CGRectMake(141.25, 7, 39.5, 39.5)];
+        tome = [[UIButton alloc] initWithFrame:CGRectMake(144, 7, 39.5, 39.5)];
         tome.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"tome"]];
 
     }
     else if([screenWidth intValue] == 414) {
-        tome = [[UIButton alloc] initWithFrame:CGRectMake(142.5, 10, 53, 53)];
+        tome = [[UIButton alloc] initWithFrame:CGRectMake(142, 10, 53, 53)];
         tome.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"tome"]];
 
     }
@@ -353,17 +422,17 @@ typedef void (^CompletionHandlerType)();
     
     
     if([screenWidth intValue] == 320) {
-        camerabut = [[UIButton alloc] initWithFrame:CGRectMake(78.375, 5.5, 43, 43)];
+        camerabut = [[UIButton alloc] initWithFrame:CGRectMake(79.75, 5.5, 43, 43)];
         camerabut.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"camerabut"]];
 
     }
     else if([screenWidth intValue] == 375) {
-        camerabut = [[UIButton alloc] initWithFrame:CGRectMake(78.375, 5.5, 43, 43)];
+        camerabut = [[UIButton alloc] initWithFrame:CGRectMake(79.75, 5.5, 43, 43)];
         camerabut.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"camerabut"]];
 
     }
     else if([screenWidth intValue] == 414) {
-        camerabut = [[UIButton alloc] initWithFrame:CGRectMake(72, 5.5, 62, 62)];
+        camerabut = [[UIButton alloc] initWithFrame:CGRectMake(71.5, 5.5, 62, 62)];
         camerabut.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"camerabut"]];
 
     }
@@ -592,12 +661,12 @@ typedef void (^CompletionHandlerType)();
 
         for(PFGeoPoint* object in objects) {
             NSLog (@"**** location location ****");
-            NSLog ([[object valueForKey:@"location"] description]);
+            NSLog (@"%@", [[object valueForKey:@"location"] description]);
             
             PFGeoPoint *storin = [object valueForKey:@"location"];
             NSLog(@"****storin****");
-            NSLog([[NSString alloc] initWithFormat:@"%f", storin.latitude]);
-            NSLog([[NSString alloc] initWithFormat:@"%f", storin.longitude]);
+            NSLog(@"%@", [[NSString alloc] initWithFormat:@"%f", storin.latitude]);
+            NSLog(@"%@", [[NSString alloc] initWithFormat:@"%f", storin.longitude]);
             
             #define fequal(a,b) (fabs((a) - (b)) < FLT_EPSILON)
             
@@ -627,12 +696,12 @@ typedef void (^CompletionHandlerType)();
                                                 NSLog(@"%@ ***** OBJECT ID", object.objectId);
                                                 newtitle = [object valueForKey:@"title"];
                                                 NSLog(@"***newtitle****");
-                                                NSLog(newtitle);
+                                                NSLog(@"%@", newtitle);
                                             }
                                         }
                                         
                                     }else{
-                                        NSLog([error description]);
+                                        NSLog(@"%@", [error description]);
                                     }
                                 }];
                                 
@@ -657,7 +726,7 @@ typedef void (^CompletionHandlerType)();
                                     
                                     
                                     
-                                    NSLog([responseObject description]);
+                                    NSLog(@"%@", [responseObject description]);
                                     
                                     NSData *decodedData = [[NSData alloc] initWithBase64EncodedString:responseObject[@"image"] options:0];
                                     image.image = [UIImage imageWithData:decodedData scale:300/2448];
@@ -665,6 +734,7 @@ typedef void (^CompletionHandlerType)();
                                         [image setHidden:NO];
                                         [respondButton setHidden:NO];
                                         [xButton setHidden:NO];
+                                        [reportButton setHidden:NO];
                                     });
                                     
                                     if([[[NSString alloc] initWithString:[userdefaults objectForKey:@"new"]] isEqualToString:@"new"]) {
@@ -692,7 +762,7 @@ typedef void (^CompletionHandlerType)();
                             }
                         }
                     }else{
-                        NSLog([error description]);
+                        NSLog(@"%@", [error description]);
                     }
                 }];
                 
@@ -705,7 +775,7 @@ typedef void (^CompletionHandlerType)();
             }
         }
         
-        NSLog([[NSString alloc] initWithFormat:@"%i", gotahit]);
+        NSLog(@"%@", [[NSString alloc] initWithFormat:@"%i", gotahit]);
         
         if(gotahit == 0) {
             
@@ -735,12 +805,12 @@ typedef void (^CompletionHandlerType)();
                                             NSLog(@"%@ ***** OBJECT ID", object.objectId);
                                             newtitle = [object valueForKey:@"title"];
                                             NSLog(@"***newtitle****");
-                                            NSLog(newtitle);
+                                            NSLog(@"%@", newtitle);
                                         }
                                     }
                                     
                                 }else{
-                                    NSLog([error description]);
+                                    NSLog(@"%@", [error description]);
                                 }
                             }];
                             
@@ -772,6 +842,7 @@ typedef void (^CompletionHandlerType)();
                                     [respondButton setHidden:YES];
                                     [notclose setHidden:NO];
                                     [xButton setHidden:NO];
+                                    [reportButton setHidden:NO];
                                 });
                                 
                                 if([[[NSString alloc] initWithString:[userdefaults objectForKey:@"new"]] isEqualToString:@"new"]) {
@@ -796,7 +867,7 @@ typedef void (^CompletionHandlerType)();
                         }
                     }
                 }else{
-                    NSLog([error description]);
+                    NSLog(@"%@", [error description]);
                 }
             }];
             
@@ -833,6 +904,7 @@ typedef void (^CompletionHandlerType)();
     dispatch_async(dispatch_get_main_queue(), ^(void){
         [respondButton setHidden:YES];
         [xButton setHidden:YES];
+        [reportButton setHidden:YES];
         [image setHidden:YES];
         [notclose setHidden:YES];
         [matchesNumber setHidden:NO];
@@ -855,6 +927,43 @@ typedef void (^CompletionHandlerType)();
         }
         [self presentViewController:self.imagePickerController animated:YES completion:nil];
     }
+}
+
+- (void)report {
+    _manager = [AFHTTPSessionManager manager];
+    _manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    _manager.responseSerializer.acceptableContentTypes = [_manager.responseSerializer.acceptableContentTypes setByAddingObject:@"text/html"];
+    _manager.responseSerializer.acceptableContentTypes = [_manager.responseSerializer.acceptableContentTypes setByAddingObject:@"text/plain"];
+    
+    NSDictionary *parameters = @{@"markerid": [staticMarker.userData valueForKey:@"marker_id"], @"user": [userdefaults valueForKey:@"pfuser"]};
+    [_manager POST:@"http://www.eamondev.com/sneekback/sendreport.php" parameters:parameters progress:nil success:^(NSURLSessionTask *task, id responseObject) {
+        NSLog(@"JSON: %@", responseObject);
+        
+        dispatch_async(dispatch_get_main_queue(), ^(void){
+            deviceNotFoundAlertController = [UIAlertController alertControllerWithTitle:@"REPORTED" message:@"Thank you, Pixovery has been notified." preferredStyle:UIAlertControllerStyleAlert];
+            [deviceNotFoundAlertController addAction:deviceNotFoundAlert];
+            
+            [self presentViewController:deviceNotFoundAlertController animated:NO completion:NULL];
+        });
+        
+    } failure:^(NSURLSessionTask *operation, NSError *error) {
+        NSLog(@"Error()()()()()()()()()()******************: %@", error);
+
+        dispatch_async(dispatch_get_main_queue(), ^(void){
+            deviceNotFoundAlertController = [UIAlertController alertControllerWithTitle:@"SORRY" message:@"Sorry, something went wrong - try to report it again." preferredStyle:UIAlertControllerStyleAlert];
+            [deviceNotFoundAlertController addAction:deviceNotFoundAlert];
+            
+            [self presentViewController:deviceNotFoundAlertController animated:NO completion:NULL];
+        });
+
+    }];
+}
+
+- (void)info {
+    deviceNotFoundAlertController = [UIAlertController alertControllerWithTitle:@"CONTACT INFO" message:@"E-mail: eamon@eamondev.com" preferredStyle:UIAlertControllerStyleAlert];
+    [deviceNotFoundAlertController addAction:deviceNotFoundAlert];
+    
+    [self presentViewController:deviceNotFoundAlertController animated:NO completion:NULL];
 }
 
 - (void)dropSneek {
@@ -940,7 +1049,7 @@ typedef void (^CompletionHandlerType)();
             }
             else {
                 NSLog(@"*** SOMETHING IS WRONG ***");
-                NSLog([error description]);
+                NSLog(@"%@", [error description]);
             }
         }];
 
@@ -968,7 +1077,7 @@ typedef void (^CompletionHandlerType)();
                     }
                     
                 }else{
-                    NSLog([error description]);
+                    NSLog(@"%@", [error description]);
                 }
             }];
             
@@ -989,7 +1098,7 @@ typedef void (^CompletionHandlerType)();
                     
                     if (error) {
                         NSLog(@"Error");
-                        NSLog([error description]);
+                        NSLog(@"%@", [error description]);
                     }
                     else {
                         GMSMarker *marker3 = [[GMSMarker alloc] init];
@@ -1076,6 +1185,7 @@ typedef void (^CompletionHandlerType)();
                 [image setHidden:YES];
                 [respondButton setHidden:YES];
                 [xButton setHidden:YES];
+                [reportButton setHidden:YES];
                 [myMatches setHidden:NO];
                 [matchesNumber setHidden:NO];
                 [menu setHidden:NO];
@@ -1126,7 +1236,7 @@ typedef void (^CompletionHandlerType)();
             
             [sosQuery getFirstObjectInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
                 [PFCloud callFunctionInBackground:@"sendpush"
-                                   withParameters:@{@"user":(PFUser *)object.objectId, @"username":newtitle}];
+                                   withParameters:@{@"user":(PFUser *)object.objectId, @"username":[userdefaults objectForKey:@"pfuser"]}];
             }];
             
             

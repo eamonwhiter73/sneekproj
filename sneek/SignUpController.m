@@ -78,7 +78,7 @@
 
 - (void)viewDidLoad {
     NSNumber *screenWidth = @([UIScreen mainScreen].bounds.size.width);
-    NSLog([screenWidth description]);
+    NSLog(@"%@", [screenWidth description]);
     
     if([screenWidth intValue] == 320) {
         [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"LaunchImage568"]]];
@@ -287,13 +287,16 @@
             [userdefaults setInteger:0 forKey:@"count"];
             [userdefaults synchronize];
             
+            //PFInstallation *currentInstallation = [PFInstallation currentInstallation];
+            //[currentInstallation saveEventually];
+            
             [self dismissViewControllerAnimated:YES completion:nil];
             
             ViewController* map = [[ViewController alloc] init];
             [[[[UIApplication sharedApplication] delegate] window] setRootViewController:map];
         } else {
             NSString *errorString = [[NSString alloc] initWithFormat:@"%@", [error userInfo][@"error"]];
-            NSLog(errorString);
+            NSLog(@"%@", errorString);
         }
     }];
 }

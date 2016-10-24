@@ -230,7 +230,7 @@
                 [_tableViewScore reloadData];
                 
             }else{
-                NSLog([error description]);
+                NSLog(@"%@", [error description]);
             }
         });
     }];
