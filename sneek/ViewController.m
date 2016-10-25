@@ -32,6 +32,7 @@ typedef void (^CompletionHandlerType)();
     UIButton *tome;
     UIButton *camerabut;
     UIButton *infobut;
+    UIButton *groupGame;
     bool isResponding;
     GMSMarker *staticMarker;
     NSNumber *staticCount;
@@ -196,6 +197,7 @@ typedef void (^CompletionHandlerType)();
         [notclose setFont:[UIFont fontWithName:@"HelveticaNeue-Bold" size:14.0]];
         camerabut = [[UIButton alloc] initWithFrame:CGRectMake(79.75, 5.5, 43, 43)];
         camerabut.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"camerabut"]];
+        groupGame = [[UIButton alloc] initWithFrame:CGRectMake(270.5, 32, 37.5, 37.5)];
     }
     if([screenWidth intValue] == 375) {
         tute.frame = CGRectMake(23, 105, 328, 141);
@@ -315,6 +317,14 @@ typedef void (^CompletionHandlerType)();
         notclose.layer.cornerRadius = 5.0;
         [notclose setFont:[UIFont fontWithName:@"HelveticaNeue-Bold" size:28.0]];
     }
+    
+    groupGame.backgroundColor = [UIColor colorWithRed:156.0f/255.0f green:214.0f/255.0f blue:215.0f/255.0f alpha:1.0f];
+    [groupGame setTitleColor:[UIColor colorWithRed:218.0f/255.0f green:247.0f/255.0f blue:220.0f/255.0f alpha:1.0f] forState:UIControlStateNormal];
+    [groupGame addTarget:self action:@selector(group) forControlEvents:UIControlEventTouchUpInside];
+    [groupGame setTitle:@"GROUP\nGAME" forState:UIControlStateNormal];
+    groupGame.layer.masksToBounds = true;
+    groupGame.layer.cornerRadius = 5.0;
+    [self.view addSubview:groupGame];
 
     tute.text = @"TAP THE MARKER, THEN TAP THE INFO WINDOW POPUP";
     tute.numberOfLines = 0;

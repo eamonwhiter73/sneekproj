@@ -208,26 +208,6 @@
         });
     }];
     
-    if([screenWidth intValue] == 320) {
-       
-
-    }
-    else if([screenWidth intValue] == 375) {
-        
-
-    }
-    else if([screenWidth intValue] == 414) {
-        
-
-    }
-    else if([screenWidth intValue] == 768) {
-        
-        
-    }
-    else if([screenWidth intValue] == 1024) {
-        
-
-    }
     [backToMap setFrame:backtomaprect];
     backToMap.backgroundColor = [UIColor colorWithRed:218.0f/255.0f green:247.0f/255.0f blue:220.0f/255.0f alpha:1.0f];
     [backToMap setTitleColor:[UIColor colorWithRed:156.0f/255.0f green:214.0f/255.0f blue:215.0f/255.0f alpha:1.0f] forState:UIControlStateNormal];
