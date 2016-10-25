@@ -38,40 +38,95 @@
     sortedSecondArray = [[NSArray alloc] init];
     
     NSNumber *screenWidth = @([UIScreen mainScreen].bounds.size.width);
-
+    CGRect tablehold = CGRectZero;
+    CGRect tableviewhold = CGRectZero;
+    CGRect tableviewscore = CGRectZero;
+    CGRect leaderboardtitrect = CGRectZero;
+    CGRect userrect = CGRectZero;
+    CGRect matchesrect = CGRectZero;
+    CGRect backtomaprect = CGRectZero;
+    
+    NSMutableParagraphStyle *style =  [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
+    style.alignment = NSTextAlignmentCenter;
+    
+    NSAttributedString *attrString = [[NSAttributedString alloc] initWithString:@"LEADERBOARD" attributes:@{ NSParagraphStyleAttributeName : style, NSForegroundColorAttributeName : [UIColor colorWithRed:156.0f/255.0f green:214.0f/255.0f blue:215.0f/255.0f alpha:1.0f], NSFontAttributeName : [UIFont fontWithName:@"HelveticaNeue-Bold" size:20.0]}];
+    
+    username = [[UILabel alloc] initWithFrame:userrect];
+    matches = [[UILabel alloc] initWithFrame:matchesrect];
+    backToMap = [[UIButton alloc] initWithFrame:backtomaprect];
+    
     if([screenWidth intValue] == 320) {
-        tableHolder = [[UIView alloc] initWithFrame:CGRectMake(10, 120, 300, 368)];
+        tablehold = CGRectMake(10, 120, 300, 368);
+        tableviewhold = CGRectMake(0, 0, 230, 368);
+        tableviewscore = CGRectMake(240, 0, 60, 368);
+        leaderboardtitrect = CGRectMake(0, 20, 320, 60);
+        userrect = CGRectMake(10, 90, 140, 20);
+        matchesrect = CGRectMake(170, 90, 140, 20);
+        matches.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:14.0];
+        backtomaprect = CGRectMake(10, 498, 300, 60);
+        backToMap.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:20.0];
     }
-    else if([screenWidth intValue] == 375) {
-        tableHolder = [[UIView alloc] initWithFrame:CGRectMake(10, 140, 355, 432)];
+    if([screenWidth intValue] == 375) {
+        tablehold = CGRectMake(10, 140, 355, 432);
+        tableviewhold = CGRectMake(0, 0, 270, 432);
+        tableviewscore = CGRectMake(285, 0, 70, 432);
+        leaderboardtitrect = CGRectMake(0, 20, 375, 60);
+        userrect = CGRectMake(10, 105, 140, 20);
+        username.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:14.0];
+        matchesrect = CGRectMake(224, 105, 140, 20);
+        matches.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:14.0];
+        backtomaprect = CGRectMake(10, 585, 355, 72);
+        backToMap.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:20.0];
     }
-    else if([screenWidth intValue] == 414) {
-        tableHolder = [[UIView alloc] initWithFrame:CGRectMake(10, 154, 394, 477)];
+    if([screenWidth intValue] == 414) {
+        tablehold = CGRectMake(10, 154, 394, 477);
+        tablehold = CGRectMake(0, 0, 298, 477);
+        tableviewscore = CGRectMake(317, 0, 77, 477);
+        leaderboardtitrect = CGRectMake(0, 22, 414, 80);
+        userrect = CGRectMake(10, 116, 154, 22);
+        username.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:14.0];
+        matchesrect = CGRectMake(247, 116, 154, 22);
+        matches.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:14.0];
+        backtomaprect = CGRectMake(10, 645.5, 394, 80);
+        backToMap.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:20.0];
     }
-    else if([screenWidth intValue] == 768){
-        tableHolder = [[UIView alloc] initWithFrame:CGRectMake(20, 215, 727, 663)];
+    if([screenWidth intValue] == 768){
+        tablehold = CGRectMake(20, 215, 727, 663);
+        tableviewhold = CGRectMake(0, 0, 607, 663);
+        tableviewscore = CGRectMake(627, 0, 100, 663);
+        
+        leaderboardtitrect = CGRectMake(0, 30, 768, 110.5);
+        attrString = [[NSAttributedString alloc] initWithString:@"LEADERBOARD" attributes:@{ NSParagraphStyleAttributeName : style, NSForegroundColorAttributeName : [UIColor colorWithRed:156.0f/255.0f green:214.0f/255.0f blue:215.0f/255.0f alpha:1.0f], NSFontAttributeName : [UIFont fontWithName:@"HelveticaNeue-Bold" size:48.0]}];
+        
+        userrect = CGRectMake(20, 161, 287, 30);
+        username.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:20.0];
+        matchesrect = CGRectMake(459, 161, 287, 30);
+        matches.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:20.0];
+        backtomaprect = CGRectMake(20, 898, 727, 110.5);
+        backToMap.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:42.0];
     }
-    else if([screenWidth intValue] == 1024){
-        tableHolder = [[UIView alloc] initWithFrame:CGRectMake(27, 287, 969, 885)];
+    if([screenWidth intValue] == 1024){
+        tablehold = CGRectMake(27, 287, 969, 885);
+        tableviewhold = CGRectMake(0, 0, 737, 885);
+        tableviewscore = CGRectMake(778, 0, 191, 885);
+        
+        leaderboardtitrect = CGRectMake(0, 20, 1024, 200);
+        attrString = [[NSAttributedString alloc] initWithString:@"LEADERBOARD" attributes:@{ NSParagraphStyleAttributeName : style, NSForegroundColorAttributeName : [UIColor colorWithRed:156.0f/255.0f green:214.0f/255.0f blue:215.0f/255.0f alpha:1.0f], NSFontAttributeName : [UIFont fontWithName:@"HelveticaNeue-Bold" size:72.0]}];
+        
+        userrect = CGRectMake(27, 215, 382, 73);
+        username.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:36.0];
+        matchesrect = CGRectMake(612, 215, 382, 73);
+        matches.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:36.0];
+        
+        backtomaprect = CGRectMake(27, 1198, 969, 147);
+        backToMap.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:54.0];
     }
+    
+    tableHolder = [[UIView alloc] initWithFrame:tablehold];
     tableHolder.layoutMargins = UIEdgeInsetsZero;
     [self.view addSubview:tableHolder];
 
-    if([screenWidth intValue] == 320) {
-        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 230, 368) style:UITableViewStylePlain];
-    }
-    else if([screenWidth intValue] == 375) {
-        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 270, 432) style:UITableViewStylePlain];
-    }
-    else if([screenWidth intValue] == 414) {
-        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 298, 477) style:UITableViewStylePlain];
-    }
-    else if([screenWidth intValue] == 768) {
-        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 607, 663) style:UITableViewStylePlain];
-    }
-    else if([screenWidth intValue] == 1024) {
-        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 737, 885) style:UITableViewStylePlain];
-    }
+    _tableView = [[UITableView alloc] initWithFrame:tableviewhold];
     _tableView.delegate = self;
     _tableView.dataSource = self;
     _tableView.tag = 1;
@@ -85,22 +140,7 @@
     }
     [tableHolder addSubview:_tableView];
     
-    
-    if([screenWidth intValue] == 320) {
-        _tableViewScore = [[UITableView alloc] initWithFrame:CGRectMake(240, 0, 60, 368) style:UITableViewStylePlain];
-    }
-    else if([screenWidth intValue] == 375) {
-        _tableViewScore = [[UITableView alloc] initWithFrame:CGRectMake(285, 0, 70, 432) style:UITableViewStylePlain];
-    }
-    else if([screenWidth intValue] == 414) {
-        _tableViewScore = [[UITableView alloc] initWithFrame:CGRectMake(317, 0, 77, 477) style:UITableViewStylePlain];
-    }
-    else if([screenWidth intValue] == 768) {
-        _tableViewScore = [[UITableView alloc] initWithFrame:CGRectMake(627, 0, 100, 663) style:UITableViewStylePlain];
-    }
-    else if([screenWidth intValue] == 1024) {
-        _tableViewScore = [[UITableView alloc] initWithFrame:CGRectMake(778, 0, 191, 885) style:UITableViewStylePlain];
-    }
+    _tableViewScore = [[UITableView alloc] initWithFrame:tableviewscore];
     _tableViewScore.delegate = self;
     _tableViewScore.dataSource = self;
     _tableViewScore.tag = 2;
@@ -112,59 +152,13 @@
     [_tableViewScore setContentSize:scrollableSize];
     [tableHolder addSubview:_tableViewScore];
     
-    NSMutableParagraphStyle *style =  [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
-    style.alignment = NSTextAlignmentCenter;
-    
-    NSAttributedString *attrString = [[NSAttributedString alloc] initWithString:@"LEADERBOARD" attributes:@{ NSParagraphStyleAttributeName : style, NSForegroundColorAttributeName : [UIColor colorWithRed:156.0f/255.0f green:214.0f/255.0f blue:215.0f/255.0f alpha:1.0f], NSFontAttributeName : [UIFont fontWithName:@"HelveticaNeue-Bold" size:20.0]}];
-    
-    if([screenWidth intValue] == 320) {
-        leaderboardtit = [[UILabel alloc] initWithFrame:CGRectMake(0, 20, 320, 60)];
-    }
-    else if([screenWidth intValue] == 375) {
-        leaderboardtit = [[UILabel alloc] initWithFrame:CGRectMake(0, 20, 375, 60)];
-    }
-    else if([screenWidth intValue] == 414) {
-        leaderboardtit = [[UILabel alloc] initWithFrame:CGRectMake(0, 22, 414, 80)];
-    }
-    else if([screenWidth intValue] == 768) {
-        leaderboardtit = [[UILabel alloc] initWithFrame:CGRectMake(0, 30, 768, 110.5)];
-        attrString = [[NSAttributedString alloc] initWithString:@"LEADERBOARD" attributes:@{ NSParagraphStyleAttributeName : style, NSForegroundColorAttributeName : [UIColor colorWithRed:156.0f/255.0f green:214.0f/255.0f blue:215.0f/255.0f alpha:1.0f], NSFontAttributeName : [UIFont fontWithName:@"HelveticaNeue-Bold" size:48.0]}];
-
-    }
-    else if([screenWidth intValue] == 1024) {
-        leaderboardtit = [[UILabel alloc] initWithFrame:CGRectMake(0, 20, 1024, 200)];
-        attrString = [[NSAttributedString alloc] initWithString:@"LEADERBOARD" attributes:@{ NSParagraphStyleAttributeName : style, NSForegroundColorAttributeName : [UIColor colorWithRed:156.0f/255.0f green:214.0f/255.0f blue:215.0f/255.0f alpha:1.0f], NSFontAttributeName : [UIFont fontWithName:@"HelveticaNeue-Bold" size:72.0]}];
-    }
+    leaderboardtit = [[UILabel alloc] initWithFrame:leaderboardtitrect];
     leaderboardtit.backgroundColor = [UIColor colorWithRed:218.0f/255.0f green:247.0f/255.0f blue:220.0f/255.0f alpha:1.0f];
     leaderboardtit.numberOfLines = 0;
     leaderboardtit.attributedText = attrString;
     [self.view addSubview:leaderboardtit];
     
-    if([screenWidth intValue] == 320) {
-        username = [[UILabel alloc] initWithFrame:CGRectMake(10, 90, 140, 20)];
-        username.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:14.0];
-
-    }
-    else if([screenWidth intValue] == 375) {
-        username = [[UILabel alloc] initWithFrame:CGRectMake(10, 105, 140, 20)];
-        username.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:14.0];
-
-    }
-    else if([screenWidth intValue] == 414) {
-        username = [[UILabel alloc] initWithFrame:CGRectMake(10, 116, 154, 22)];
-        username.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:14.0];
-
-    }
-    else if([screenWidth intValue] == 768) {
-        username = [[UILabel alloc] initWithFrame:CGRectMake(20, 161, 287, 30)];
-        username.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:20.0];
-        
-    }
-    else if([screenWidth intValue] == 1024) {
-        username = [[UILabel alloc] initWithFrame:CGRectMake(27, 215, 382, 73)];
-        username.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:36.0];
-
-    }
+    [username setFrame:userrect];
     username.backgroundColor = [UIColor clearColor];
     username.textColor = [UIColor colorWithRed:218.0f/255.0f green:247.0f/255.0f blue:220.0f/255.0f alpha:1.0f];
     NSDictionary *underlineAttribute = @{NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle)};
@@ -173,26 +167,7 @@
     username.textAlignment = NSTextAlignmentLeft;
     [self.view addSubview:username];
     
-    if([screenWidth intValue] == 320) {
-        matches = [[UILabel alloc] initWithFrame:CGRectMake(170, 90, 140, 20)];
-        matches.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:14.0];
-    }
-    else if([screenWidth intValue] == 375) {
-        matches = [[UILabel alloc] initWithFrame:CGRectMake(224, 105, 140, 20)];
-        matches.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:14.0];
-    }
-    else if([screenWidth intValue] == 414) {
-        matches = [[UILabel alloc] initWithFrame:CGRectMake(247, 116, 154, 22)];
-        matches.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:14.0];
-    }
-    else if([screenWidth intValue] == 768) {
-        matches = [[UILabel alloc] initWithFrame:CGRectMake(459, 161, 287, 30)];
-        matches.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:20.0];
-    }
-    else if([screenWidth intValue] == 1024) {
-        matches = [[UILabel alloc] initWithFrame:CGRectMake(612, 215, 382, 73)];
-        matches.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:36.0];
-    }
+    [matches setFrame:matchesrect];
     matches.backgroundColor = [UIColor clearColor];
     NSDictionary *underlineAttribute2 = @{NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle)};
     matches.attributedText = [[NSAttributedString alloc] initWithString:@"MATCHES"
@@ -200,7 +175,6 @@
     matches.textColor = [UIColor colorWithRed:218.0f/255.0f green:247.0f/255.0f blue:220.0f/255.0f alpha:1.0f];
     matches.textAlignment = NSTextAlignmentRight;
     [self.view addSubview:matches];
-    
     
     [_tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"SimpleTableItem"];
     [_tableViewScore registerClass:[UITableViewCell class] forCellReuseIdentifier:@"SimpleTableItem"];
@@ -211,7 +185,6 @@
             if (!error) {
                 entries = [NSMutableArray new];
                 for (PFObject *object in objects) {
-                    NSLog(@"%@", object.objectId);
                     [tableData addObject:[object valueForKey:@"username"]];
                     [matchesForUser addObject:[object valueForKey:@"matches"]];
                     
@@ -236,30 +209,26 @@
     }];
     
     if([screenWidth intValue] == 320) {
-        backToMap = [[UIButton alloc] initWithFrame:CGRectMake(10, 498, 300, 60)];
-        backToMap.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:20.0];
+       
 
     }
     else if([screenWidth intValue] == 375) {
-        backToMap = [[UIButton alloc] initWithFrame:CGRectMake(10, 585, 355, 72)];
-        backToMap.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:20.0];
+        
 
     }
     else if([screenWidth intValue] == 414) {
-        backToMap = [[UIButton alloc] initWithFrame:CGRectMake(10, 645.5, 394, 80)];
-        backToMap.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:20.0];
+        
 
     }
     else if([screenWidth intValue] == 768) {
-        backToMap = [[UIButton alloc] initWithFrame:CGRectMake(20, 898, 727, 110.5)];
-        backToMap.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:42.0];
+        
         
     }
     else if([screenWidth intValue] == 1024) {
-        backToMap = [[UIButton alloc] initWithFrame:CGRectMake(27, 1198, 969, 147)];
-        backToMap.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:54.0];
+        
 
     }
+    [backToMap setFrame:backtomaprect];
     backToMap.backgroundColor = [UIColor colorWithRed:218.0f/255.0f green:247.0f/255.0f blue:220.0f/255.0f alpha:1.0f];
     [backToMap setTitleColor:[UIColor colorWithRed:156.0f/255.0f green:214.0f/255.0f blue:215.0f/255.0f alpha:1.0f] forState:UIControlStateNormal];
     [backToMap addTarget:self action:@selector(dismiss) forControlEvents:UIControlEventTouchUpInside];
@@ -304,7 +273,6 @@
             cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:32.0];
         }
         else if([screenWidth intValue] == 768) {
-            NSLog(@"entered 768 block");
             contentV = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 607, 44)];
             contentV.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:16.0];
             cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:16.0];

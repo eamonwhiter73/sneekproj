@@ -18,7 +18,7 @@
 @property NSMutableDictionary *completionHandlerDictionary;
 @property (strong, nonatomic) AFHTTPSessionManager *manager;
 
--(NSString *) randomStringWithLength: (int) len;
+- (NSString *)randomStringWithLength:(int)len;
 - (void)dropSneek;
 - (void)openCamera;
 

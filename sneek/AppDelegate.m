@@ -22,44 +22,31 @@
 
 -(void)userNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(UNNotificationPresentationOptions options))completionHandler{
     
-    NSLog(@"Userinfo %@",notification.request.content.userInfo);
-    
     completionHandler(UNNotificationPresentationOptionAlert);
 }
 
 -(void)userNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void(^)())completionHandler{
-    
-    NSLog(@"Userinfo %@",response.notification.request.content.userInfo);
-    
+    //
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     self.window = [[UIWindow alloc]initWithFrame:[[UIScreen mainScreen]bounds]];
     
-    // [Optional] Power your app with Local Datastore. For more info, go to
-    // https://parse.com/docs/ios_guide#localdatastore/iOS
     [Parse enableLocalDatastore];
     
-    // Initialize Parse.
     [Parse setApplicationId:@"MDgESuvjvz1K7l302i90N40A0EZDbwSKzb8k3QzL"
                   clientKey:@"pC3lhDsBTukDfJO8uR2hS9ZFZGpgQIIOjj05dP4A"];
     
-    // [Optional] Track statistics around application opens.
     [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
     
-    //if(SYSTEM_VERSION_GRATERTHAN_OR_EQUALTO(@"10.0")){
     UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
     center.delegate = self;
     
     [center getNotificationSettingsWithCompletionHandler:^(UNNotificationSettings * _Nonnull settings) {
-        NSLog(@"%@", [settings description]);
-        NSLog(@"************");
-        NSLog(@"%ld", (long)[settings authorizationStatus]);
         
         if([settings authorizationStatus] == UNAuthorizationStatusNotDetermined) {
             [center requestAuthorizationWithOptions:(UNAuthorizationOptionSound | UNAuthorizationOptionAlert | UNAuthorizationOptionBadge) completionHandler:^(BOOL granted, NSError * _Nullable error){
                 if( !error ){
-                    NSLog(@"in unuser***************");
                     [[UIApplication sharedApplication] registerForRemoteNotifications];
                 }
                 else {
@@ -67,21 +54,12 @@
                 }
             }];
         }
-        else {
-            //
-        }
+
     }];
 
-    
-    
-    // ...
-    
-    // Override point for customization after application launch.
     [GMSServices provideAPIKey:@"AIzaSyA9gyzAzIjHmwfoLc_V2FCXaeS-SMjclCA"];
     
     NSUserDefaults *userdefaults = [NSUserDefaults standardUserDefaults];
-    
-    NSLog(@"app launching");
     
     _locationMgr = [[CLLocationManager alloc] init];
     [_locationMgr setDelegate:self];
@@ -91,25 +69,19 @@
     
     CLAuthorizationStatus authorizationStatus= [CLLocationManager authorizationStatus];
     
-    NSLog(@"launching with no authorization to always use location - requesting authorization");
     if([_locationMgr respondsToSelector:@selector(requestAlwaysAuthorization)]) {
         [_locationMgr requestAlwaysAuthorization];
     }
 
     if([launchOptions valueForKey:UIApplicationLaunchOptionsLocationKey] != nil) {
-        NSLog(@"relaunching because of significant location change - restarting SLC");
         [_locationMgr startMonitoringSignificantLocationChanges];
     }
-    else if (authorizationStatus == kCLAuthorizationStatusAuthorizedAlways) {
-        NSLog(@"launching with authorization to always use location - starting SLC");
+    
+    if (authorizationStatus == kCLAuthorizationStatusAuthorizedAlways) {
         [_locationMgr startMonitoringSignificantLocationChanges];
-    }
-    else {
-        //
     }
     
     if([userdefaults objectForKey:@"pfuser"] == nil) {
-        NSLog(@"in delegate signup");
         SignUpController *signup = [[SignUpController alloc] init];
         [self.window setRootViewController:signup];
     }
@@ -124,8 +96,7 @@
 
 - (void)startSignificantChangeUpdates
 {
-    // Create the location manager if this object does not
-    // already have one.
+    
     if (nil == _locationMgr) {
         _locationMgr = [[CLLocationManager alloc] init];
         _locationMgr.delegate = self;
@@ -135,45 +106,30 @@
     
     [_locationMgr startMonitoringSignificantLocationChanges];
     
-    NSLog(@"startsignificantchangeup*********");
 }
 
 -(void)locationManger:(CLLocationManager *)manager didFailWithError:(NSError *)error {
     NSLog(@"didFailWithError: %@", error);
 }
 
-// Delegate method from the CLLocationManagerDelegate protocol.
 - (void)locationManager:(CLLocationManager *)manager
       didUpdateLocations:(NSArray *)locations {
     
     NSUserDefaults *userdefaults = [NSUserDefaults standardUserDefaults];
     
-    // If it's a relatively recent event, turn off updates to save power.
     CLLocation* location = [locations lastObject];
     NSDate* eventDate = location.timestamp;
     NSTimeInterval howRecent = [eventDate timeIntervalSinceNow];
     if (fabs(howRecent) < 15.0) {
-        // If the event is recent, do something with it.
-        NSLog(@"latitude %+.6f, longitude %+.6f\n",
-              location.coordinate.latitude,
-              location.coordinate.longitude);
         
-        // User's location
         PFGeoPoint *userGeoPoint = [PFGeoPoint geoPointWithLatitude:location.coordinate.latitude longitude:location.coordinate.longitude];
-        // Create a query for places
         PFQuery *querygeo = [PFQuery queryWithClassName:@"MapPoints"];
-        // Interested in locations near user.
         [querygeo whereKey:@"location" nearGeoPoint:userGeoPoint withinMiles:0.155343];
-        // Limit what could be a lot of points.
         querygeo.limit = 10;
-        // Final list of objects
         
         [querygeo findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
             
-            if (!objects || !objects.count){
-                //
-            }
-            else {
+            if (objects || objects.count){
                 PFQuery *sosQuery = [PFUser query];
                 [sosQuery whereKey:@"username" equalTo:[userdefaults objectForKey:@"pfuser"]];
                 sosQuery.limit = 1;
@@ -189,8 +145,6 @@
 
 
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
-    // Store the deviceToken in the current installation and save it to Parse.
-    NSLog(@"didregisterfor***********");
     PFInstallation *currentInstallation = [PFInstallation currentInstallation];
     [currentInstallation setDeviceTokenFromData:deviceToken];
     currentInstallation.channels = @[ @"global" ];
