@@ -29,6 +29,7 @@
 		DD5537A01C06A3A1002B52DD /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD55379F1C06A3A1002B52DD /* Accounts.framework */; };
 		DD5537A21C06A3A7002B52DD /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD5537A11C06A3A7002B52DD /* Social.framework */; };
 		DD68D60E1D961FC5007B5E36 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD68D60D1D961FC4007B5E36 /* UserNotifications.framework */; };
+		DD78FD251DC00AE2000BEA93 /* GroupController.m in Sources */ = {isa = PBXBuildFile; fileRef = DD78FD241DC00AE2000BEA93 /* GroupController.m */; };
 		DD8D199E1C26E84F000E7418 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD8D199C1C26E84F000E7418 /* Bolts.framework */; };
 		DD8D199F1C26E84F000E7418 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD8D199D1C26E84F000E7418 /* Parse.framework */; };
 		DD8D19A21C28C267000E7418 /* LeaderboardController.m in Sources */ = {isa = PBXBuildFile; fileRef = DD8D19A11C28C267000E7418 /* LeaderboardController.m */; };
@@ -106,6 +107,8 @@
 		DD55379F1C06A3A1002B52DD /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		DD5537A11C06A3A7002B52DD /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		DD68D60D1D961FC4007B5E36 /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
+		DD78FD231DC00AC2000BEA93 /* GroupController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GroupController.h; sourceTree = "<group>"; };
+		DD78FD241DC00AE2000BEA93 /* GroupController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroupController.m; sourceTree = "<group>"; };
 		DD8D199C1C26E84F000E7418 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
 		DD8D199D1C26E84F000E7418 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
 		DD8D19A01C28C257000E7418 /* LeaderboardController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeaderboardController.h; sourceTree = "<group>"; };
@@ -264,6 +267,8 @@
 				DD55377F1C068A2A002B52DD /* Images.xcassets */,
 				DD8D19A01C28C257000E7418 /* LeaderboardController.h */,
 				DD8D19A11C28C267000E7418 /* LeaderboardController.m */,
+				DD78FD231DC00AC2000BEA93 /* GroupController.h */,
+				DD78FD241DC00AE2000BEA93 /* GroupController.m */,
 				DDC6395B1D7922A100F765DF /* LaunchScreenNew.storyboard */,
 				DDD0501D1D8204C300056C33 /* Tutorial.h */,
 				DDD0501E1D82051300056C33 /* Tutorial.m */,
@@ -461,6 +466,7 @@
 				DD3001001C067A95002E43C1 /* ViewController.m in Sources */,
 				DD3001301C0683AA002E43C1 /* SignUpController.m in Sources */,
 				DDA63C091D63BC5C00A9E878 /* AFURLResponseSerialization.m in Sources */,
+				DD78FD251DC00AE2000BEA93 /* GroupController.m in Sources */,
 				DD8D19A21C28C267000E7418 /* LeaderboardController.m in Sources */,
 				DD3000FD1C067A95002E43C1 /* AppDelegate.m in Sources */,
 				DD1F1CB41D6647FF00D55484 /* main.m in Sources */,
